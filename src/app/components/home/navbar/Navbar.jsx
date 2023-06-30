@@ -39,25 +39,25 @@ const titleMenu = [
     title: "Inbody",
     logo: <FaUsers />,
     color: "orange",
-    href: "/",
+    href: "/inbody",
   },
   {
     title: "Ưu đãi",
     logo: <FaTags />,
     color: "violet",
-    href: "/",
+    href: "/preference",
   },
   {
     title: "PT",
     logo: <FaUserPen />,
     color: "black",
-    href: "/",
+    href: "/personaltrainer",
   },
   {
     title: "Hợp đồng",
     logo: <FaFileCircleCheck />,
     color: "#16FF00",
-    href: "/",
+    href: "/contract",
   },
 ];
 

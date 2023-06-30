@@ -46,3 +46,40 @@ export const getContract = async () => {
   });
   return data.data;
 };
+
+export const postFeedback = async (values) => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "POST",
+    url: "/api/gym-loyalty/member/ticket",
+    data: values,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.message;
+};
+
+export const getFeedback = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/ticket",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getPersonalTrainer = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/list-pt?strSearch=",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};

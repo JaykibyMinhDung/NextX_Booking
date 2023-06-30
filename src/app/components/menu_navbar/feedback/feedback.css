@@ -1,3 +1,6 @@
+.feedback {
+  position: relative;
+}
 .feedback__header {
   position: relative;
   display: flex;
@@ -8,10 +11,60 @@
 .feedback__add {
   width: fit-content;
   color: rgb(18, 180, 18);
-  position: absolute;
+  background-color: white;
+  position: fixed;
   bottom: 5%;
   right: 10%;
   font-size: 340%;
   border-radius: 50%;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.247);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.377);
+}
+.modal__formFeedback {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.modal__formFeedback h2 {
+  font-size: large;
+  font-weight: 600;
+}
+
+.modal__formFeedback--main input {
+  border: thin solid rgb(196, 196, 196);
+  outline: none;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.modal__formFeedback--main input:focus {
+  /* outline: none; */
+  background-color: rgba(0, 128, 0, 0.116);
+  border: thin solid green;
+}
+
+.modal__formFeedback--main textarea {
+  border: thin solid rgb(196, 196, 196);
+  outline: none;
+  width: 100%;
+  height: 200px;
+  padding: 0.5rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+.modal__formFeedback--main textarea:focus {
+  /* outline: none; */
+  background-color: rgba(0, 128, 0, 0.116);
+  border: thin solid green;
+}
+.btn {
+  background-color: rgb(18, 180, 18);
+  width: 100%;
+  padding: 0.4rem;
+  font-weight: 600;
+  font-size: larger;
+  color: white;
+  border-radius: 20px;
 }

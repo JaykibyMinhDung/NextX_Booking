@@ -1,4 +1,5 @@
 .search__header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,4 +32,16 @@
 }
 .search__main svg {
   font-size: xx-large;
+}
+
+.location {
+  position: absolute;
+  top: 10vh;
+  right: 0;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.location p {
+  margin-left: 1rem;
 }
