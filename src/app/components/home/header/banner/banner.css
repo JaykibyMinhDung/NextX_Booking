@@ -1,0 +1,56 @@
+.banner__background {
+  position: relative;
+  background-color: rgb(214, 214, 214);
+  background-image: linear-gradient(
+    to right,
+    rgba(214, 214, 214, 0.541),
+    rgba(97, 97, 97, 0.384)
+  );
+  color: white;
+  font-size: 90%;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1rem;
+}
+.banner__align--QRcode {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* .banner__align--QRcode div {
+  width: 100%;
+} */
+.banner__title--calender {
+  display: flex;
+  background-color: rgb(61, 61, 61);
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 40%;
+  padding: 10px;
+  height: fit-content;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.banner__title--calender i {
+  position: absolute;
+  top: 33%;
+  left: 5%;
+}
+.banner__title--calender div {
+  margin-left: 20%;
+}
+.QR__code--styled {
+  /* position: relative;
+  right: 0; */
+  width: 100%;
+}
+.banner__card--infor {
+  font-weight: 700;
+}
+.banner__information--staff {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,55 @@
+/* .notification__header header {
+  position: relative;
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.418);
+}
+.notification__header header p {
+  position: absolute;
+  top: 0;
+  left: 38%;
+  margin-top: 0.5rem;
+  font-size: large;
+  font-weight: 660;
+} */
+
+.notification__header main > div {
+  margin-left: 0.6rem;
+}
+
+.notification__main {
+  display: flex;
+  align-items: center;
+  font-size: small;
+  border: 1px solid rgba(182, 182, 182, 0.575);
+  border-radius: 10px;
+  margin-top: 0.4rem;
+  /* margin-left: 1rem; */
+  padding: 0.6rem;
+  width: 90vw;
+  height: fit-content;
+}
+
+.notification__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  color: white;
+  width: 40px;
+  height: 40px;
+  margin-left: 1rem;
+  border-radius: 50%;
+}
+
+.notification__text {
+  width: 70%;
+  margin-left: 1rem;
+}
+.notification__time {
+  display: flex;
+  align-items: center;
+}
+.notification__time p {
+  margin-left: 10px;
+}

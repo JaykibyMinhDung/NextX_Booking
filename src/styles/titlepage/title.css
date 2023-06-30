@@ -1,0 +1,24 @@
+.title__headers header {
+  position: relative;
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.418);
+}
+.title__headers header p {
+  position: absolute;
+  top: 0;
+  left: 36.5%;
+  margin-top: 0.5rem;
+  font-size: large;
+  font-weight: 660;
+}
+.title__headers main > div {
+  margin-left: 0.6rem;
+}
+.title__icon {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  font-size: larger;
+  margin-top: 0.75rem;
+}
