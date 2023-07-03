@@ -18,6 +18,7 @@ import Inbody from "./app/components/menu_navbar/inbody/Inbody";
 import Preference from "./app/components/menu_navbar/preference/Preference";
 import Contract from "./app/components/menu_navbar/contract/contract";
 import Branch from "./app/components/menu_navbar/personaltrainer/Branch";
+import DetailContracts from "./app/components/menu_navbar/contract/detail/DetailContracts";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/inbody" element={<Inbody />} />
           <Route path="/preference" element={<Preference />} />
           <Route path="/contract" element={<Contract />} />
+          <Route path="/contract/:id" element={<DetailContracts />} />
           <Route path="/class" element={<ClassLoyal />} />
           {/* test */}
           <Route path="/style" element={<CardPage />} />

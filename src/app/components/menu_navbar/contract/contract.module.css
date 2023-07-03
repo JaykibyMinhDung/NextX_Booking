@@ -1,0 +1,52 @@
+.contracts__header {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+.contracts__totalPrice {
+  display: flex;
+  align-items: center;
+}
+.contracts__totalPrice b {
+  margin-left: 0.4rem;
+  margin-right: 0.3rem;
+}
+.card__frame h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.card__frame {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* padding: 1rem; */
+  border-radius: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.473);
+  margin: 1rem 0.5rem;
+}
+.card__mainInfor {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.btn__contracts {
+  width: 90%;
+  padding: 0.4rem;
+  margin-right: 1rem;
+  background-color: green;
+  color: white;
+  font-size: small;
+  border-radius: 20px;
+  margin: 0.5rem;
+}

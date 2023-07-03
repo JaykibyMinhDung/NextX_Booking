@@ -27,7 +27,7 @@ const Personaltrainer = () => {
                 <div className="personal__card--infor">
                   <img
                     src={e.avatar ? e.avatar : avatar}
-                    width={"20%"}
+                    // width={"50%"}
                     alt=""
                   />
                   <div>

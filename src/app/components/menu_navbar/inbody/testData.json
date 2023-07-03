@@ -1,0 +1,73 @@
+{
+  "data": [
+    {
+      "id": 800,
+      "created_date": "2023-05-06",
+      "muscle_mass": "7.00",
+      "body_fat_mass": "8.00",
+      "weight": "9.00",
+      "protein": "11.00",
+      "mineral": "10.00",
+      "tbw": "12.00",
+      "size_1": "13.00",
+      "size_2": "14.00",
+      "size_3": "15.00",
+      "description": "",
+      "order": 3,
+      "member_id": 769549,
+      "attachment": null
+    },
+    {
+      "id": 798,
+      "created_date": "2023-05-02",
+      "muscle_mass": "4.00",
+      "body_fat_mass": "5.00",
+      "weight": "6.00",
+      "protein": "8.00",
+      "mineral": "7.00",
+      "tbw": "9.00",
+      "size_1": "10.00",
+      "size_2": "11.00",
+      "size_3": "12.00",
+      "description": "",
+      "order": 2,
+      "member_id": 769549,
+      "attachment": null
+    },
+    {
+      "id": 797,
+      "created_date": "2023-05-01",
+      "muscle_mass": "9.00",
+      "body_fat_mass": "12.00",
+      "weight": "13.00",
+      "protein": "15.00",
+      "mineral": "14.00",
+      "tbw": "16.00",
+      "size_1": "17.00",
+      "size_2": "18.00",
+      "size_3": "19.00",
+      "description": "",
+      "order": 1,
+      "member_id": 769549,
+      "attachment": null
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 3,
+      "count": 3,
+      "per_page": 15,
+      "current_page": 1,
+      "total_pages": 1,
+      "links": []
+    },
+    "status_code": 0,
+    "message": "Successfully"
+  },
+  "recordsTotal": 3,
+  "recordsFiltered": 3,
+  "request": {
+    "page": "1",
+    "pageLimit": "15"
+  }
+}

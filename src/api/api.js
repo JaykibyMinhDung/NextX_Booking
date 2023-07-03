@@ -72,6 +72,18 @@ export const getFeedback = async () => {
   return data.data;
 };
 
+export const getInbody = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/inbody?page=1&pageLimit=15",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
 export const getPersonalTrainer = async () => {
   const tokenGYM = await getToken();
   const { data } = await connect({
