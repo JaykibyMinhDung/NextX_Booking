@@ -23,7 +23,7 @@ const Personaltrainer = () => {
         {data &&
           data.map((e) => (
             <>
-              <div className="personal__card">
+              <div key={e.code} className="personal__card">
                 <div className="personal__card--infor">
                   <img
                     src={e.avatar ? e.avatar : avatar}

@@ -84,6 +84,32 @@ export const getInbody = async () => {
   return data.data;
 };
 
+export const getBranch = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    // url: "/api/gym-loyalty/member/tableprice?order_type=2&class_id=61&employee_id",
+    url: "/api/gym-loyalty/member/tableprice",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data;
+};
+
+export const getPreference = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    // url: "/api/gym-loyalty/member/tableprice?order_type=2&class_id=61&employee_id",
+    url: "/api/gym-loyalty/member/voucher-enable",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
 export const getPersonalTrainer = async () => {
   const tokenGYM = await getToken();
   const { data } = await connect({

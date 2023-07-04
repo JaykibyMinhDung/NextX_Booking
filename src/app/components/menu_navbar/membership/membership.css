@@ -3,3 +3,82 @@
   font-size: large;
   font-weight: 600;
 }
+.branch__membership--card {
+  position: relative;
+  background-color: rgba(2, 109, 2, 0.815);
+  color: white;
+  padding: 1rem;
+  margin: 2rem 0.7rem;
+  border-radius: 20px;
+}
+
+.branch__membership--cardnormal {
+  position: relative;
+  width: 42%;
+  height: 20vh;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 20px;
+}
+.btn__resgistration {
+  position: absolute;
+  bottom: 1rem;
+  right: 5%;
+  color: black;
+  background-color: rgb(103, 255, 103);
+  background-image: linear-gradient(
+    to right,
+    rgb(103, 255, 103),
+    rgb(225, 255, 225)
+  );
+  border-radius: 20px;
+  padding: 5px;
+  width: 30%;
+}
+.btn__resgistration2 {
+  position: absolute;
+  bottom: 1rem;
+  right: 5%;
+  color: rgb(255, 255, 255);
+  background-color: rgba(2, 109, 2, 0.815);
+  border-radius: 20px;
+  padding: 5px;
+  width: 60%;
+}
+.branch__membership--unit {
+  position: absolute;
+  top: 0%;
+  left: 100%;
+  background-color: white;
+  color: black;
+  font-size: small;
+  font-weight: 550;
+  border-radius: 5px;
+  padding: 0.3rem;
+}
+.branch__membership--unitnormal {
+  position: absolute;
+  top: 10%;
+  left: 70%;
+  color: rgb(255, 255, 255);
+  background-color: white;
+  background-image: linear-gradient(
+    to right,
+    rgb(0, 109, 0),
+    rgb(0, 199, 0),
+    rgb(214, 255, 214)
+  );
+  font-size: small;
+  font-weight: 550;
+  border-radius: 10px;
+  padding: 0.4rem;
+  /* width: 20%; */
+  text-align: center;
+}
+
+@media (max-width: 280px) {
+  .branch__membership--cardnormal {
+    width: 100%;
+  }
+}

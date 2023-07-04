@@ -8,7 +8,11 @@ const TitlePage = (props) => {
   const navigate = useNavigate();
 
   const backHome = () => {
-    navigate("/");
+    if (!dataParent.navigateBack) {
+      navigate("/");
+    } else {
+      navigate(dataParent.navigateBack);
+    }
   };
   return (
     <div className="title__headers">

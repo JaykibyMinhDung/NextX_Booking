@@ -1,7 +1,7 @@
 // import React from "react";
 
 const ClassLoyal = () => {
-  return <div>ClassLoyal</div>;
+  return <div></div>;
 };
 
 export default ClassLoyal;

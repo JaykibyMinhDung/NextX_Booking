@@ -2,7 +2,7 @@
 .detail__backgroundimage {
   width: 93%;
   margin-top: 5rem;
-  margin-left: 1rem;
+  margin-left: 0.8rem;
   border-radius: 30px;
   background-color: rgb(228, 228, 228);
 }
@@ -13,11 +13,11 @@
   display: none;
 }
 .detail__backgroundimage div img {
+  border-radius: 40px;
+  padding: 1rem;
   width: 100%;
   height: auto;
-  border-radius: 30px;
   object-fit: cover;
-  /* max-height: 30rem; */
 }
 .detail__backgroundimage div {
   background-color: rgb(255, 255, 255);
