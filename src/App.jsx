@@ -13,7 +13,6 @@ import Membership from "./app/components/menu_navbar/membership/Membership";
 import Extend from "./app/components/menu_navbar/extend_package/Extend";
 import Reserve from "./app/components/menu_navbar/reserve/Reserve";
 import Feedback from "./app/components/menu_navbar/feedback/Feedback";
-import CardPage from "./styles/cardPage/CardPage";
 import Personaltrainer from "./app/components/menu_navbar/personaltrainer/Personaltrainer";
 import Inbody from "./app/components/menu_navbar/inbody/Inbody";
 import Preference from "./app/components/menu_navbar/preference/Preference";
@@ -28,6 +27,7 @@ import History from "./app/page/History";
 import User from "./app/page/User";
 import NotFound from "./errors/404";
 import BranchMember from "./app/components/menu_navbar/membership/branchMember";
+import TestStyle from "../tests/TestStyle";
 // import Booking from "./app/page/Booking"
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
           <Route path="/account" element={<User />} />
 
           {/* test */}
-          <Route path="/style" element={<CardPage />} />
+          <Route path="/style" element={<TestStyle />} />
         </Routes>
       </BrowserRouter>
     </>

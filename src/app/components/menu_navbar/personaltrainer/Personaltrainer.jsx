@@ -33,7 +33,25 @@ const Personaltrainer = () => {
                   <div>
                     <h2 style={{ fontWeight: 700 }}>{e.full_name}</h2>
                     <p>{e.branch_name}</p>
-                    <p>{e.pt_rating ? e.pt_rating : 0} sao</p>
+                    <ul className="stars">
+                      <li>
+                        <i className="fa fa-star"></i>
+                      </li>
+                      <li>
+                        <i className="fa fa-star"></i>
+                      </li>
+                      <li>
+                        <i className="fa fa-star"></i>
+                      </li>
+                      <li>
+                        <i className="fa fa-star"></i>
+                      </li>
+                      <li>
+                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                      </li>
+                    </ul>
+                    {/* <p>{e.pt_rating ? e.pt_rating : 0} sao</p> */}
+                    <p>(64 reviews)</p>
                   </div>
                 </div>
                 <button>Đăng kí</button>

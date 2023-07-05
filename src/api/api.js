@@ -121,3 +121,64 @@ export const getPersonalTrainer = async () => {
   });
   return data.data;
 };
+
+export const getClass = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    // url: "/api/gym-loyalty/member/all-scheduler-booking-class",
+    url: "/api/gym-loyalty/member/all-scheduler-booking-class",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getReserve = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/order-freeze",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getExtend = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/order-ext",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getBooking = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/booking-class-scheduler-booking",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getHistory = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/scheduler?pageLimit=10&page={{page}}&employee_id=24",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};

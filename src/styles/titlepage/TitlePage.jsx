@@ -21,7 +21,17 @@ const TitlePage = (props) => {
           <FaArrowLeft />
         </div>
         <div>
-          <p>{dataParent.title}</p>
+          <p
+            className={
+              dataParent.title.length < 8 && dataParent.title.length > 4
+                ? "ml-6"
+                : dataParent.title.length < 4 && "ml-10"
+              // ? "ml-10"
+              // : ""
+            }
+          >
+            {dataParent.title}
+          </p>
           {dataParent?.icon && (
             <div className="title__icon">{dataParent.icon}</div>
           )}

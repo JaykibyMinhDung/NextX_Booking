@@ -1,0 +1,107 @@
+.card__form {
+  display: flex;
+  margin: 2rem 1rem;
+}
+.card__preference {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 200px;
+  height: 6rem;
+  border-radius: 20px;
+  font-weight: 600;
+  /* background: #333; */
+  background: #00d447;
+  /* background-color: rgb(0, 161, 100); */
+  background-image: linear-gradient(
+    to bottom,
+    green,
+    rgb(0, 231, 0),
+    to right,
+    aqua
+  );
+}
+.btn__prefer {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background-color: rgb(0, 161, 100);
+  color: white;
+  border-radius: 10px;
+  padding: 0.3rem;
+}
+
+/* ticket */
+/* div {
+    background: #333;
+    height: 180px;
+    position: relative;
+    width: 500px;
+  } */
+
+.card__preference:before {
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 200px 0 0 0 #fff, 0 6.6rem 0 0 #fff, 200px 6.6rem 0 0 #fff,
+    0 30px 0 -21px #fff, 0 40px 0 -21px #fff, 0 50px 0 -21px #fff,
+    0 60px 0 -21px #fff, 0 70px 0 -21px #fff, 0 80px 0 -21px #fff,
+    200px 30px 0 -21px #fff, 200px 40px 0 -21px #fff, 200px 50px 0 -21px #fff,
+    200px 60px 0 -21px #fff, 200px 70px 0 -21px #fff, 200px 80px 0 -21px #fff;
+  content: "";
+  display: block;
+  height: 48px;
+  left: -25px;
+  position: absolute;
+  top: -25px;
+  width: 50px;
+}
+
+.card__coupon {
+  border-radius: 20px;
+  /* border: 3px solid #aaa; */
+  border: 3px solid #ffffff;
+  color: #fff;
+  display: inline-block;
+  font-size: 30px;
+  /* left: 0; */
+  left: 50%;
+  line-height: 2;
+  padding: 0 50px;
+  position: absolute;
+  text-transform: uppercase;
+  top: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  -moz-transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.card__coupon:before,
+.card__coupon:after {
+  /* background: #333;
+  color: #aaa; */
+  background: #00d447;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 13px;
+  left: 50%;
+  padding: 0 8px;
+  position: absolute;
+}
+
+.card__coupon:before {
+  content: "Ticketing";
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  top: 0;
+}
+
+.card__coupon:after {
+  bottom: 0;
+  content: "Agency";
+  -webkit-transform: translateX(-50%) translateY(50%);
+  -moz-transform: translateX(-50%) translateY(50%);
+  transform: translateX(-50%) translateY(50%);
+}

@@ -1,0 +1,11 @@
+.header__frame {
+  display: flex;
+  align-items: center;
+  margin: 2rem 1rem;
+}
+.header__registration {
+  position: absolute;
+  top: -25%;
+  right: 20%;
+  color: red;
+}
