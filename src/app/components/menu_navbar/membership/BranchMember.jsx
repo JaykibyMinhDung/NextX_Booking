@@ -55,8 +55,8 @@ const BranchMember = () => {
             <div>
               <p className="branch__membership--unitnormal">VNĐ</p>
               <p
-                className="mb-10 font-semibold text-green-500"
-                style={{ fontSize: "24px" }}
+                className="mb-10 font-semibold text-green-500 branch__price"
+                // style={{ fontSize: "24px" }}
               >
                 {e.total_price}
               </p>

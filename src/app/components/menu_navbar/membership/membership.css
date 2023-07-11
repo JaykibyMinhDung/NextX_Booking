@@ -67,7 +67,7 @@
     to right,
     rgb(0, 109, 0),
     rgb(0, 199, 0),
-    rgb(214, 255, 214)
+    rgb(0, 250, 0)
   );
   font-size: small;
   font-weight: 550;
@@ -76,9 +76,16 @@
   /* width: 20%; */
   text-align: center;
 }
-
+.branch__price {
+  font-size: 20px;
+}
 @media (max-width: 280px) {
   .branch__membership--cardnormal {
     width: 100%;
+  }
+}
+@media (max-width: 380px) {
+  .branch__price {
+    font-size: 17px;
   }
 }

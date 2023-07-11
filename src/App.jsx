@@ -27,8 +27,10 @@ import History from "./app/page/History";
 import User from "./app/page/User";
 import NotFound from "./errors/404";
 import BranchMember from "./app/components/menu_navbar/membership/branchMember";
-import TestStyle from "../tests/TestStyle";
+// import TestStyle from "../tests/TestStyle";
 import ButtonChange from "./styles/ButtonChange/ButtonChange";
+import Login from "./authentication/login/Login";
+import Register from "./authentication/register/Register";
 // import Booking from "./app/page/Booking"
 
 function App() {
@@ -38,6 +40,10 @@ function App() {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
+
+          {/* Authentication */}
+          <Route path="/signin" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* header */}
           <Route path="/notification" element={<Notification />} />
