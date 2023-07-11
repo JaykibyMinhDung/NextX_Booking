@@ -28,6 +28,7 @@ import User from "./app/page/User";
 import NotFound from "./errors/404";
 import BranchMember from "./app/components/menu_navbar/membership/branchMember";
 import TestStyle from "../tests/TestStyle";
+import ButtonChange from "./styles/ButtonChange/ButtonChange";
 // import Booking from "./app/page/Booking"
 
 function App() {
@@ -61,7 +62,7 @@ function App() {
           <Route path="/account" element={<User />} />
 
           {/* test */}
-          <Route path="/style" element={<TestStyle />} />
+          <Route path="/style" element={<ButtonChange />} />
         </Routes>
       </BrowserRouter>
     </>

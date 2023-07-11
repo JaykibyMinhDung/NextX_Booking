@@ -10,4 +10,11 @@ export const GET_BRANCH = "branch";
 export const GET_EXTEND = "extend";
 export const GET_RESERVE = "reserve";
 export const GET_PREFERENCE = "preference";
+export const POST_PREFERENCE = "savepreference";
+export const GET_USERPREFERENCE = "Localpreference";
 export const GET_PT = "PT";
+export const GET_CHECKIN = "checkin";
+export const GET_TIMETABLES = "timetable";
+export const GET_HISTORYBOOKING = "historybooking";
+
+// word[0].toUpperCase() + word.substr(1) _ Viêt hoa chữ cái đầu

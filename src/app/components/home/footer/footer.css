@@ -102,17 +102,17 @@ footer {
     padding: 5px;
   }
   .footer__center--booking {
-    right: 40.7%;
+    right: 40.8%;
     bottom: 50%;
     z-index: 10;
     width: 18%;
-    height: 10vh;
+    height: 9.4vh;
   }
   .footer__icon--boking {
     width: 80%;
-    height: 8vh;
+    height: 7.5vh;
     margin-top: 1vh;
-    margin-left: 6px;
+    margin-left: 6.8px;
   }
 }
 @media (max-width: 280px) {

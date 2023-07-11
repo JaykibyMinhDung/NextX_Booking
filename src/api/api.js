@@ -110,6 +110,31 @@ export const getPreference = async () => {
   return data.data;
 };
 
+export const postPreference = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "POST",
+    // url: "/api/gym-loyalty/member/voucher-enable",
+    url: "/api/gym-loyalty/member/release-voucher",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getUserPreference = async () => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: "/api/gym-loyalty/member/voucher-saved?branches[]=1",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
 export const getPersonalTrainer = async () => {
   const tokenGYM = await getToken();
   const { data } = await connect({
@@ -175,7 +200,50 @@ export const getHistory = async () => {
   const tokenGYM = await getToken();
   const { data } = await connect({
     method: "GET",
-    url: "/api/gym-loyalty/member/scheduler?pageLimit=10&page={{page}}&employee_id=24",
+    // url: "/api/gym-loyalty/member/scheduler?pageLimit=10&page={{page}}&employee_id=24",
+    // url: "/api/gym-loyalty/member/scheduler?pageLimit=10&page={{page}}",
+    url: "/api/gym-loyalty/member/register-order",
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getCheckin = async (order_id) => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    // url: "/api/gym-loyalty/member/checkin-checkout",
+    url: `api/checkin-checkout/daily?page=1&pageLimit=15&search[gym_daily.order_id]=${order_id}`,
+
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getTimeTables = async (id) => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    url: `/api/order/order/${id}`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getLogContractBooking = async (id) => {
+  const tokenGYM = await getToken();
+  const { data } = await connect({
+    method: "GET",
+    // url: "/api/gym-loyalty/member/register-order",
+    url: `/api/gym-loyalty/member/scheduler?pageLimit=15&page={{page}}${
+      id ? `&employee_id=${id}` : ""
+    }`,
     headers: {
       Authorization: "Bearer " + tokenGYM.token,
     },

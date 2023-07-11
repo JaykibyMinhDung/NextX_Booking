@@ -28,9 +28,9 @@ const Class = () => {
         </div>
       </div>
       <HeaderClass />
-      {data.map((e) => (
+      {data.map((e, index) => (
         <ClassLoyal
-          key={e.books.employee_id}
+          key={index}
           hour={e.time}
           nameclass={e.books.class_name}
           branch={e.books.branch_name}

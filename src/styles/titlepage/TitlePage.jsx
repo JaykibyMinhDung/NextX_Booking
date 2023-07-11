@@ -14,6 +14,7 @@ const TitlePage = (props) => {
       navigate(dataParent.navigateBack);
     }
   };
+  console.log(dataParent.title.length);
   return (
     <div className="title__headers">
       <header style={{ marginBottom: "1.5rem" }}>
@@ -23,9 +24,9 @@ const TitlePage = (props) => {
         <div>
           <p
             className={
-              dataParent.title.length < 8 && dataParent.title.length > 4
-                ? "ml-6"
-                : dataParent.title.length < 4 && "ml-10"
+              dataParent.title.length < 14 && dataParent.title.length > 4
+                ? "ml-12"
+                : dataParent.title.length < 4 && "ml-16"
               // ? "ml-10"
               // : ""
             }

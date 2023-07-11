@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 // export default {
-module.exports = {
+export default {
   content: ["./src/**/*.{jsx,ts,js}"],
   theme: {
     extend: {
@@ -15,7 +15,9 @@ module.exports = {
         "37%": "37%",
         "35%": "35%",
         "40%": "40%",
-        "90%": "88%",
+        "88%": "88%",
+        "90%": "90%",
+        "100%": "100%",
         "10vh": "10vh",
         "20vh": "20vh",
         "12vh": "12vh",
