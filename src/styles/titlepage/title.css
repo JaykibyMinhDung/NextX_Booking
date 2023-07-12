@@ -1,3 +1,10 @@
+.title__headers {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: white;
+}
 .title__headers header {
   position: relative;
   padding: 1rem;

@@ -18,7 +18,7 @@ const Class = () => {
   return (
     <div>
       <TitlePage title={"Lớp học"} icon={null} />
-      <div className="flex items-center justify-between mx-4 mb-3 bg-slate-100 p-3 rounded-2xl">
+      <div className="flex items-center justify-between mx-4 mt-16 mb-3 bg-slate-100 p-3 rounded-2xl">
         <div className="flex items-center">
           <FaMapMarkerAlt />
           <p className="ml-3">Chi nhánh</p>

@@ -10,7 +10,7 @@ const Notification = () => {
   return (
     <div className={style.notification__header}>
       <TitlePage title={"Thông báo"} />
-      <main>
+      <main className="mt-16">
         <div>
           <p>Tất cả thông báo</p>
         </div>

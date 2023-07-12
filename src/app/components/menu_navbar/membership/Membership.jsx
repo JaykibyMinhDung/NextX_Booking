@@ -22,7 +22,7 @@ const Membership = () => {
   return (
     <div>
       <TitlePage title={"Membership"} />
-      <div className="membership__titlemain">
+      <div className="membership__titlemain mt-16">
         <p style={{ textAlign: "center" }}>Chọn chi nhánh</p>
       </div>
       <BarPage

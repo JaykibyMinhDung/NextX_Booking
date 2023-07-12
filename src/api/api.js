@@ -4,23 +4,20 @@ const usename = "nextvision";
 
 const password = "1a2s3dA!@#";
 
-const tenant_code = "demox";
+// const tenant_code = "demox";
 
-const usenameToken = "0902243822";
+// const usenameToken = "0902243822";
 
-const passwordToken = "123456";
+// const passwordToken = "123456";
 
-export const getToken = async () => {
+export const getToken = async (values) => {
   const { data } = await connect({
     method: "POST",
     url: "/api/gym-loyalty/login",
-    data: {
-      tenant_code: tenant_code,
-      username: usenameToken,
-      password: passwordToken,
-    },
+    data: values,
   });
-  return data.data;
+  localStorage.setItem("tenant_packs", data);
+  return data;
 };
 
 export const getBanner = async () => {
@@ -35,8 +32,21 @@ export const getBanner = async () => {
   return data.data;
 };
 
+// if (!localStorage.getItem("tenant_packs")) {
+
+// }
+
+// Đăng xuất được 1 lần và không chuyển hướng khi đăng xuát được. Cần fix lại
+const tokenData = JSON.parse(localStorage.getItem("tenant_packs"));
+const tokenGYM = tokenData ? tokenData.data : "";
+console.log(tokenData);
+
 export const getContract = async () => {
-  const tokenGYM = await getToken();
+  // const tokenData2 = JSON.parse(localStorage.getItem("tenant_packs"));
+  // const tokenGYMM = tokenData2.data;
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/order",
@@ -48,7 +58,10 @@ export const getContract = async () => {
 };
 
 export const postFeedback = async (values) => {
-  const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  // const tokenGYM = await getToken();
   const { data } = await connect({
     method: "POST",
     url: "/api/gym-loyalty/member/ticket",
@@ -61,7 +74,10 @@ export const postFeedback = async (values) => {
 };
 
 export const getFeedback = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/ticket",
@@ -73,7 +89,10 @@ export const getFeedback = async () => {
 };
 
 export const getInbody = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/inbody?page=1&pageLimit=15",
@@ -85,7 +104,10 @@ export const getInbody = async () => {
 };
 
 export const getBranch = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/tableprice?order_type=2&class_id=61&employee_id",
@@ -98,7 +120,10 @@ export const getBranch = async () => {
 };
 
 export const getPreference = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/tableprice?order_type=2&class_id=61&employee_id",
@@ -111,7 +136,10 @@ export const getPreference = async () => {
 };
 
 export const postPreference = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "POST",
     // url: "/api/gym-loyalty/member/voucher-enable",
@@ -124,7 +152,10 @@ export const postPreference = async () => {
 };
 
 export const getUserPreference = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/voucher-saved?branches[]=1",
@@ -136,7 +167,10 @@ export const getUserPreference = async () => {
 };
 
 export const getPersonalTrainer = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/list-pt?strSearch=",
@@ -148,7 +182,10 @@ export const getPersonalTrainer = async () => {
 };
 
 export const getClass = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/all-scheduler-booking-class",
@@ -161,7 +198,10 @@ export const getClass = async () => {
 };
 
 export const getReserve = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/order-freeze",
@@ -173,7 +213,10 @@ export const getReserve = async () => {
 };
 
 export const getExtend = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/order-ext",
@@ -185,7 +228,10 @@ export const getExtend = async () => {
 };
 
 export const getBooking = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: "/api/gym-loyalty/member/booking-class-scheduler-booking",
@@ -197,7 +243,10 @@ export const getBooking = async () => {
 };
 
 export const getHistory = async () => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/scheduler?pageLimit=10&page={{page}}&employee_id=24",
@@ -211,7 +260,10 @@ export const getHistory = async () => {
 };
 
 export const getCheckin = async (order_id) => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/checkin-checkout",
@@ -225,7 +277,10 @@ export const getCheckin = async (order_id) => {
 };
 
 export const getTimeTables = async (id) => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     url: `/api/order/order/${id}`,
@@ -237,7 +292,10 @@ export const getTimeTables = async (id) => {
 };
 
 export const getLogContractBooking = async (id) => {
-  const tokenGYM = await getToken();
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/register-order",

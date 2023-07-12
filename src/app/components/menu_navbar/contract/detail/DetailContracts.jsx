@@ -50,7 +50,13 @@ const DetailContracts = () => {
             </div>
             <div className="flex items-center mb-1 mt-1">
               <FaPhoneAlt />
-              <p className="ml-2">{data.member_tel}</p>
+              <p className="ml-2">
+                {data.member_tel ? (
+                  data.member_tel
+                ) : (
+                  <em className="text-red-500">Chưa có điện thoại</em>
+                )}
+              </p>
             </div>
             <div className="flex items-center mb-1 mt-1">
               <FaMapMarkerAlt />
@@ -185,6 +191,7 @@ const DetailContracts = () => {
                 width: "8rem",
                 textAlign: "center",
                 margin: "0.1rem",
+                marginTop: "3.8rem",
               }}
             >
               {e}

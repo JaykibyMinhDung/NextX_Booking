@@ -11,6 +11,7 @@ import { FaHourglassHalf } from "react-icons/fa";
 import ButtonChange from "../../../../styles/ButtonChange/ButtonChange";
 
 import "./feature.css";
+import { useNavigate } from "react-router-dom";
 
 const arrListFeature = [
   {
@@ -52,7 +53,7 @@ const arrListFeature = [
   {
     id: "7a",
     icon: <FaSignOutAlt />,
-    text: "Lịch sử checkin",
+    text: "Đăng xuất",
     isExpand: true,
   },
   {
@@ -63,12 +64,27 @@ const arrListFeature = [
   },
 ];
 
-const Feature = () => {
+const Feature = (props) => {
+  const parentData = props;
+  const navigate = useNavigate();
+  const featureClickHandle = (text) => {
+    if (text === "Đăng xuất") {
+      parentData.logout();
+      setTimeout(() => {
+        console.log("cancel");
+        return navigate("/");
+      }, 3000);
+      // return ;
+    }
+  };
   return (
     <React.Fragment>
       {arrListFeature.map((e) => (
         <div key={e.id}>
-          <div className="feature__form">
+          <div
+            onClick={() => featureClickHandle(e.text)}
+            className="feature__form"
+          >
             {e.icon}
             <h3 style={{ marginLeft: e.isExpand ? "" : "2rem" }}>{e.text}</h3>
             {e.isExpand ? <FaAngleRight /> : <ButtonChange />}

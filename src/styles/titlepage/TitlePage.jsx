@@ -17,7 +17,9 @@ const TitlePage = (props) => {
   console.log(dataParent.title.length);
   return (
     <div className="title__headers">
-      <header style={{ marginBottom: "1.5rem" }}>
+      <header
+      // style={{ marginBottom: "1.5rem" }}
+      >
         <div onClick={backHome}>
           <FaArrowLeft />
         </div>

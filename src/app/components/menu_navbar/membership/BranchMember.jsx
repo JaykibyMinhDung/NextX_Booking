@@ -4,17 +4,23 @@ import TitlePage from "../../../../styles/titlepage/TitlePage";
 // import BarPage from "../../../../styles/barPage/BarPage";text-base
 // import { FaMapMarkerAlt } from "react-icons/fa";
 import "./membership.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const BranchMember = () => {
   // const dataParent = props
-
+  const navigate = useNavigate();
   const location = useLocation();
+  // const ResgiterMember = () => {
+
+  // }
+  const CartHandle = () => {
+    navigate("/membership/:branch/payment");
+  };
   const filterData = location.state.data.filter(
     (e) => e.branches[0].name === location.state.titleBranch
   );
   const items = filterData.shift();
-  console.log(filterData);
+  // console.log(filterData);
   return (
     <div className="bg-gray-100 h-screen">
       <TitlePage
@@ -22,7 +28,9 @@ const BranchMember = () => {
         icon={null}
         navigateBack={"/membership"}
       />
-      <div className="text-center font-bold mb-4 text-base">GÓI THÀNH VIÊN</div>
+      <div className="text-center font-bold mb-4 mt-16 text-base">
+        GÓI THÀNH VIÊN
+      </div>
       {items && (
         <div>
           <div className="branch__membership--card">
@@ -61,7 +69,9 @@ const BranchMember = () => {
                 {e.total_price}
               </p>
             </div>
-            <button className="btn__resgistration2">Đăng kí</button>
+            <button onClick={CartHandle} className="btn__resgistration2">
+              Đăng kí
+            </button>
           </div>
         ))}
       </div>

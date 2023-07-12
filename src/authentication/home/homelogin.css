@@ -1,0 +1,15 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 50px;
+  border-radius: 60px;
+  color: white;
+  background-color: green;
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+  font-size: larger;
+  font-weight: 600;
+}

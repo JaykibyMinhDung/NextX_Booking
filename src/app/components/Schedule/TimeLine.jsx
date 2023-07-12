@@ -4,7 +4,7 @@ import defaultImage from "../../../assets/avatar.jpg";
 
 const TimeLine = () => {
   return (
-    <div className="timeline">
+    <div className="timeline mt-16">
       <div className="containers left">
         <div className="content">
           <h2>1. Chọn chi nhánh</h2>

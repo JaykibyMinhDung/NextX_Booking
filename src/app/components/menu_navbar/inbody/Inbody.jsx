@@ -14,16 +14,18 @@ const Inbody = () => {
   return (
     <div>
       <TitlePage title={"Inbody"} />
-      {data.map((e) => (
-        <CardInbody
-          key={e.member_id}
-          date={e.created_date}
-          time={e.order}
-          muscle={e.muscle_mass}
-          fat={e.body_fat_mass}
-          weight={e.weight}
-        />
-      ))}
+      <div className="mt-16">
+        {data.map((e) => (
+          <CardInbody
+            key={e.member_id}
+            date={e.created_date}
+            time={e.order}
+            muscle={e.muscle_mass}
+            fat={e.body_fat_mass}
+            weight={e.weight}
+          />
+        ))}
+      </div>
     </div>
   );
 };

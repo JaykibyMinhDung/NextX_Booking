@@ -17,9 +17,11 @@ const History = () => {
   return (
     <div>
       <TitlePage title={"Lịch sử"} />
-      {data.map((e) => (
-        <CardHistory key={e.id} data={e} />
-      ))}
+      <div className="mt-16">
+        {data.map((e) => (
+          <CardHistory key={e.id} data={e} />
+        ))}
+      </div>
       <Footer />
     </div>
   );

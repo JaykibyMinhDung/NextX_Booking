@@ -5,22 +5,32 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaIdCard } from "react-icons/fa";
 
 const Setting = () => {
+  const data = JSON.parse(localStorage.getItem("tenant_packs"));
+  const User = data.data.user;
   return (
     <React.Fragment>
-      <div className="flex items-center leading-7">
-        <img style={{ width: 100 }} src={defaultImg} alt="" />
+      <div className="flex items-center mt-16 leading-7">
+        <img
+          style={{ width: 100 }}
+          src={User.picture ? User.picture : defaultImg}
+          alt=""
+        />
         <div>
           <div className="flex items-center">
             <FaIdCard />
-            <p className="font-bold ml-4">Vũ Tuấn Anh</p>
+            <p className="font-bold ml-4">{User.name}</p>
           </div>
           <div className="flex items-center">
             <FaEnvelope />
-            <p className="ml-4">bvụdsbvdsjkvjk</p>
+            <p className="ml-4">
+              {User.email ? User.email : <em>Chưa có email</em>}
+            </p>
           </div>
           <div className="flex items-center">
             <FaPhoneAlt />
-            <p className="ml-4">0902243822</p>
+            <p className="ml-4">
+              {User.tel ? User.tel : <em>Chưa có điện thoại</em>}
+            </p>
           </div>
         </div>
       </div>

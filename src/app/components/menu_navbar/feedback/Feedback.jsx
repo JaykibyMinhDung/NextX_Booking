@@ -29,14 +29,16 @@ const Feedback = () => {
       {data && data.length > 1 ? (
         <div className="feedback">
           <TitlePage title={"Góp ý, Khiếu nại"} icon={null} />
-          {data.map((e) => (
-            <CardPage
-              key={e.id}
-              created_at={e.created_at}
-              subject={e.subject}
-              content={e.content}
-            />
-          ))}
+          <div className="mt-16">
+            {data.map((e) => (
+              <CardPage
+                key={e.id}
+                created_at={e.created_at}
+                subject={e.subject}
+                content={e.content}
+              />
+            ))}
+          </div>
           <div onClick={showModalHandle} className="feedback__add">
             <FaPlusCircle />
           </div>
@@ -44,7 +46,7 @@ const Feedback = () => {
       ) : (
         <>
           <TitlePage title={"Góp ý, Khiếu nại"} icon={null} />
-          <div style={{ margin: "1rem" }}>
+          <div style={{ margin: "1rem", marginTop: "4rem" }}>
             <img
               src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
               alt=""

@@ -14,6 +14,9 @@ const Advertising = () => {
     return <div>Loadding...</div>;
   }
 
+  const hrefNextX = (link) => {
+    window.location.assign(link);
+  };
   // console.log(data);
   return (
     <nav>
@@ -30,6 +33,7 @@ const Advertising = () => {
                 data.map((slideImage, index) => (
                   <div key={index} className="relative">
                     <img
+                      onClick={() => hrefNextX(slideImage.link)}
                       src={
                         slideImage.picture ? slideImage.picture : DefaultImage
                       }
