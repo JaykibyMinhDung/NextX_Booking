@@ -1,4 +1,5 @@
 import connect from "../util/queryUrl";
+// import { useRecoilValue } from "recoil";
 
 const usename = "nextvision";
 
@@ -16,7 +17,7 @@ export const getToken = async (values) => {
     url: "/api/gym-loyalty/login",
     data: values,
   });
-  localStorage.setItem("tenant_packs", data);
+  // localStorage.setItem("tenant_packs", data);
   return data;
 };
 
@@ -37,13 +38,20 @@ export const getBanner = async () => {
 // }
 
 // Đăng xuất được 1 lần và không chuyển hướng khi đăng xuát được. Cần fix lại
+// const test = () => {
+//   setTimeout(() => {
 const tokenData = JSON.parse(localStorage.getItem("tenant_packs"));
 const tokenGYM = tokenData ? tokenData.data : "";
 console.log(tokenData);
+//     return tokenGYM;
+//   }, 2000);
+// };
+
+// GET API
 
 export const getContract = async () => {
   // const tokenData2 = JSON.parse(localStorage.getItem("tenant_packs"));
-  // const tokenGYMM = tokenData2.data;
+  // const testM = tokenData2.data;
   if (!tokenGYM) {
     return { error: "Please login" };
   }
@@ -103,7 +111,12 @@ export const getInbody = async () => {
   return data.data;
 };
 
-export const getBranch = async () => {
+export const getBranch = async (
+  branch_id,
+  order_type,
+  class_id,
+  employee_id
+) => {
   // const tokenGYM = await getToken();
   if (!tokenGYM) {
     return { error: "Please login" };
@@ -111,7 +124,11 @@ export const getBranch = async () => {
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/tableprice?order_type=2&class_id=61&employee_id",
-    url: "/api/gym-loyalty/member/tableprice",
+    url: `/api/gym-loyalty/member/tableprice${
+      branch_id ? "?branches[]=" + branch_id : ""
+    } ${order_type ? "&order_type=" + order_type : ""} ${
+      class_id ? "&class_id=" + class_id : ""
+    }${employee_id ? "&employee_id=" + employee_id : ""}`,
     headers: {
       Authorization: "Bearer " + tokenGYM.token,
     },
@@ -181,7 +198,7 @@ export const getPersonalTrainer = async () => {
   return data.data;
 };
 
-export const getClass = async () => {
+export const getClass = async (date) => {
   // const tokenGYM = await getToken();
   if (!tokenGYM) {
     return { error: "Please login" };
@@ -189,7 +206,9 @@ export const getClass = async () => {
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/all-scheduler-booking-class",
-    url: "/api/gym-loyalty/member/all-scheduler-booking-class",
+    url: `/api/gym-loyalty/member/all-scheduler-booking-class${
+      date ? "?begin_date=" + date : ""
+    }`,
     headers: {
       Authorization: "Bearer " + tokenGYM.token,
     },
@@ -305,6 +324,144 @@ export const getLogContractBooking = async (id) => {
     headers: {
       Authorization: "Bearer " + tokenGYM.token,
     },
+  });
+  return data.data;
+};
+
+// Booking PT schedule
+
+export const getBookingPTContract = async (id) => {
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  const { data } = await connect({
+    method: "GET",
+    url: `/api/gym-loyalty/member/order-to-book-pt${
+      id ? "?branch_checkin_id=" + id : ""
+    }`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getBookingPTBranch = async () => {
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  const { data } = await connect({
+    method: "GET",
+    url: `api/gym-loyalty/member/list-branch`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getBookingPTListPT = async (idOrder, idBranch) => {
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  const { data } = await connect({
+    method: "GET",
+    url: `/api/gym-loyalty/member/list-pt-order${
+      idOrder ? "?order_id=" + idOrder : ""
+    } ${idBranch ? "&branch_id=" + idBranch : ""}`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getBookingPTServiceExtra = async () => {
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  const { data } = await connect({
+    method: "GET",
+    url: `api/gym-loyalty/member/list-book-pt-task`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+export const getBookingPTScheduleHours = async (
+  employee_id,
+  branch_id,
+  date_time
+) => {
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  const { data } = await connect({
+    method: "GET",
+    url: `/api/gym-loyalty/member/scheduler-pt${
+      employee_id ? "?employee_id=" + employee_id : ""
+    }${branch_id ? "&branch_id=" + branch_id : ""}${
+      date_time ? "&date_time=" + date_time : ""
+    }`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+  });
+  return data.data;
+};
+
+// POST API
+
+// export const postRegisterMember = async () => {
+//   // const tokenGYM = await getToken();
+//   if (!tokenGYM) {
+//     return { error: "Please login" };
+//   }
+//   const { data } = await connect({
+//     method: "POST",
+//     // url: "/api/gym-loyalty/member/register-order",
+//     url: `api/gym-loyalty/member-register`,
+//     headers: {
+//       Authorization: "Bearer " + tokenGYM.token,
+//     },
+//     data: {
+//       full_name: "Nguyễn Văn Linh",
+//         password: "123456@12",
+//         tel: "0902290878",
+//         email: "",
+//         sex: 1,
+//         birthday: "1989-08-21",
+//         address: "số 89, ngõ 32",
+//         branch_id: 1,
+//         province_id: 1,
+//         district_id: 677,
+//         ward_id:2437,
+//         description: "đăng ký dùng thử theo chương trình tết 2022"
+//     }
+//   });
+//   return data.data;
+// };
+
+export const postRegisterMember = async (post) => {
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  const { data } = await connect({
+    method: "POST",
+    // url: "/api/gym-loyalty/member/register-order",
+    url: `api/gym-loyalty/member/register-order`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+    data: post,
   });
   return data.data;
 };

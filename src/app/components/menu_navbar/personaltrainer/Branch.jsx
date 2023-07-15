@@ -9,7 +9,11 @@ const Branch = () => {
   // const navigate = useNavigate()
   return (
     <div>
-      <TitlePage title={"Chọn chi nhánh"} icon={null} />
+      <TitlePage
+        title={"Chọn chi nhánh"}
+        navigateBack={"/personaltrainer"}
+        icon={null}
+      />
       <Search />
       <div>
         <BarPage icon={FaMapMarkerAlt} text={"Chi nhánh chính"} />

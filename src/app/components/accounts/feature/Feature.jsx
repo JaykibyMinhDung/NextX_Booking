@@ -9,9 +9,11 @@ import { FaTrashAlt } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
 import ButtonChange from "../../../../styles/ButtonChange/ButtonChange";
+import { Logout } from "../../../../store/recoil/authenticate";
 
 import "./feature.css";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 
 const arrListFeature = [
   {
@@ -64,16 +66,18 @@ const arrListFeature = [
   },
 ];
 
-const Feature = (props) => {
-  const parentData = props;
+const Feature = () => {
+  // const parentData = props;
   const navigate = useNavigate();
+  const setStateGetOut = useSetRecoilState(Logout);
   const featureClickHandle = (text) => {
     if (text === "Đăng xuất") {
-      parentData.logout();
+      setStateGetOut(false);
+      localStorage.removeItem("tenant_packs");
       setTimeout(() => {
         console.log("cancel");
-        return navigate("/");
-      }, 3000);
+        return navigate("/homelogin");
+      }, 1000);
       // return ;
     }
   };

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const HomeLogin = () => {
   const navigate = useNavigate();
   const navigateLogin = () => {
-    return navigate("/login");
+    return navigate("/");
   };
   return (
     <div>

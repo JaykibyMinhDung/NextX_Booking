@@ -1,20 +1,31 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./title.css";
+import { useSetRecoilState } from "recoil";
+import {
+  BookingClassPayment,
+  receiveMembership,
+  DataPaymentPreference,
+} from "../../store/recoil/store";
 
 const TitlePage = (props) => {
   const dataParent = props;
 
   const navigate = useNavigate();
-
+  const resetBillClass = useSetRecoilState(receiveMembership);
+  const resetBillMembership = useSetRecoilState(BookingClassPayment);
+  const resetReference = useSetRecoilState(DataPaymentPreference);
   const backHome = () => {
+    resetReference("");
+    resetBillClass("");
+    resetBillMembership("");
     if (!dataParent.navigateBack) {
       navigate("/");
     } else {
       navigate(dataParent.navigateBack);
     }
   };
-  console.log(dataParent.title.length);
+  // console.log(dataParent.title.length);
   return (
     <div className="title__headers">
       <header

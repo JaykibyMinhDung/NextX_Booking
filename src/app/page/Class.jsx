@@ -8,9 +8,12 @@ import HeaderClass from "../components/class/header/HeaderClass";
 import { useQuery } from "react-query";
 import { GET_CLASS } from "../../constants/queryKeys";
 import { getClass } from "../../api/api";
+import { useRecoilValue } from "recoil";
+import { updatedDateClass } from "../../store/recoil/store";
 
 const Class = () => {
-  const { data, isLoading } = useQuery([GET_CLASS], () => getClass());
+  const dateClass = useRecoilValue(updatedDateClass);
+  const { data, isLoading } = useQuery([GET_CLASS], () => getClass(dateClass));
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -33,10 +36,17 @@ const Class = () => {
           key={index}
           hour={e.time}
           nameclass={e.books.class_name}
+          startHour={e.books.start}
+          endHour={e.books.end}
+          category={e.books.category_name}
           branch={e.books.branch_name}
+          branch_name={e.books.branch_name}
+          branch_id={e.books.branch_id}
           namePT={e.books.employee_name}
           numbook={e.books.num_booked}
           numTotal={e.books.num_enabled}
+          class_id={e.books.class_id}
+          employee_id={e.books.employee_id}
         />
       ))}
       <Footer />

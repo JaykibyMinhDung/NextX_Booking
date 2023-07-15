@@ -16,5 +16,10 @@ export const GET_PT = "PT";
 export const GET_CHECKIN = "checkin";
 export const GET_TIMETABLES = "timetable";
 export const GET_HISTORYBOOKING = "historybooking";
+export const POST_REGISTERMEMBER = "registermembership";
+
+// Booking PT
+
+export const GET_SCHEDULEHOURS = "SCHEDULEHOURS";
 
 // word[0].toUpperCase() + word.substr(1) _ Viêt hoa chữ cái đầu

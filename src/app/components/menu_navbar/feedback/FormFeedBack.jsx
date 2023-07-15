@@ -47,7 +47,7 @@ const FormFeedBack = (props) => {
             {...register("content", { required: true })}
           />
           {errors.content && <span>This field is required</span>}
-          <button className="btn" type="button" onClick={feedbackhandle}>
+          <button className="btn" onClick={feedbackhandle}>
             Góp ý
           </button>
         </form>

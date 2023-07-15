@@ -5,15 +5,24 @@ import Search from "../../../../styles/search/Search";
 import { useQuery } from "react-query";
 import { getPersonalTrainer } from "../../../../api/api";
 import { GET_PT } from "../../../../constants/queryKeys";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { BookingPTPayment } from "../../../../store/recoil/store";
 
 const Personaltrainer = () => {
   const { data, isLoading } = useQuery([GET_PT], () => getPersonalTrainer());
+  const setDataPaymentPersonalTrainer = useSetRecoilState(BookingPTPayment);
+  const navigate = useNavigate();
   if (isLoading) {
     return <div>loading...</div>;
   }
   console.log(data);
   const avatar =
     "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=";
+  const RegisterHandle = (datapersolnaltrainer, branch) => {
+    setDataPaymentPersonalTrainer(datapersolnaltrainer);
+    navigate(`/membership/${branch}`);
+  };
   return (
     <React.Fragment>
       <TitlePage title={"PT"} />
@@ -54,7 +63,9 @@ const Personaltrainer = () => {
                     <p>(64 reviews)</p>
                   </div>
                 </div>
-                <button>Đăng kí</button>
+                <button onClick={() => RegisterHandle(e, e.branch_name)}>
+                  Đăng kí
+                </button>
               </div>
             </>
           ))}

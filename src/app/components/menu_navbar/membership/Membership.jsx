@@ -7,13 +7,14 @@ import BarPage from "../../../../styles/barPage/BarPage";
 import { useQuery } from "react-query";
 import { GET_BRANCH } from "../../../../constants/queryKeys";
 import { getBranch } from "../../../../api/api";
-// import { useNavigate } from "react-router-dom";
+// import {  } from "react-router-dom";
 
 const Membership = () => {
   // const navigate = useNavigate()
   // const navigateHandle = (branch) => {
   //   navigate(`/membership/${branch}`)
   // }
+
   const { data, isLoading } = useQuery([GET_BRANCH], () => getBranch());
   if (isLoading) {
     return <div>loading...</div>;

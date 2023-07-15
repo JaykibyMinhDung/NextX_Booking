@@ -4,27 +4,76 @@ import TitlePage from "../../../../styles/titlepage/TitlePage";
 // import BarPage from "../../../../styles/barPage/BarPage";text-base
 // import { FaMapMarkerAlt } from "react-icons/fa";
 import "./membership.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useQuery } from "react-query";
+import { GET_BRANCH } from "../../../../constants/queryKeys";
+import { getBranch } from "../../../../api/api";
+
+import {
+  BookingClassPayment,
+  BookingPTPayment,
+  receiveAllmembership,
+  receiveMembership,
+  titleBranchStore,
+} from "../../../../store/recoil/store";
 
 const BranchMember = () => {
+  const { data, isLoading } = useQuery([GET_BRANCH], () => getBranch());
+
   // const dataParent = props
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
+  const allMembershipPackage = useRecoilValue(receiveAllmembership);
+  const nameBranchMembership = useRecoilValue(titleBranchStore); // Tên nhánh
+  const MembershipResgister = useSetRecoilState(receiveMembership);
+  const MembershipBookingClass = useRecoilValue(BookingClassPayment);
+  const MembershipBookingPersonaltrainer = useRecoilValue(BookingPTPayment);
   // const ResgiterMember = () => {
 
   // }
-  const CartHandle = () => {
-    navigate("/membership/:branch/payment");
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
+  if (MembershipBookingPersonaltrainer) {
+    console.log(MembershipBookingPersonaltrainer);
+    console.log(allMembershipPackage);
+    return <h2 className="text-center mt-4">Đang updated</h2>;
+  }
+  const filterData = MembershipBookingClass
+    ? data.data.filter(
+        (e) => e.branches[0].name === MembershipBookingClass.branch_name
+      )
+    : allMembershipPackage
+    ? allMembershipPackage.filter(
+        (e) => e.branches[0].name === nameBranchMembership
+      )
+    : data.data.filter((e) => e.branches[0].name === nameBranchMembership); // Lấy tất cả các gói cùng nhánh
+  const items = filterData.shift(); // Lọc cái đầu
+
+  const CartHandle = (nameMembership) => {
+    const dataMembership = data.data.find((e) => e.name === nameMembership);
+    console.log(nameMembership);
+    MembershipResgister(dataMembership); // Truyền dữ liệu xuống payment
+    navigate(
+      `/membership/${
+        allMembershipPackage
+          ? dataMembership.branches[0].name
+          : MembershipBookingClass.branch_name
+      }/payment`
+    );
   };
-  const filterData = location.state.data.filter(
-    (e) => e.branches[0].name === location.state.titleBranch
-  );
-  const items = filterData.shift();
-  // console.log(filterData);
+  console.log(data.data); // tất cả dữ liệu của các nhánh
+  // console.log(filterData); // lấy dữ liệu đúng với nhánh
   return (
     <div className="bg-gray-100 h-screen">
       <TitlePage
-        title={`${location.state.titleBranch}`}
+        title={`${
+          allMembershipPackage
+            ? nameBranchMembership
+            : MembershipBookingClass.branch_name
+        }`}
         icon={null}
         navigateBack={"/membership"}
       />
@@ -49,7 +98,12 @@ const BranchMember = () => {
                 {items.total_price}
               </p>
             </div>
-            <button className="btn__resgistration">Đăng kí</button>
+            <button
+              onClick={() => CartHandle(items.name)}
+              className="btn__resgistration"
+            >
+              Đăng kí
+            </button>
           </div>
         </div>
       )}
@@ -69,7 +123,10 @@ const BranchMember = () => {
                 {e.total_price}
               </p>
             </div>
-            <button onClick={CartHandle} className="btn__resgistration2">
+            <button
+              onClick={() => CartHandle(e.name)}
+              className="btn__resgistration2"
+            >
               Đăng kí
             </button>
           </div>
