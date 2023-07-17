@@ -5,8 +5,8 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaIdCard } from "react-icons/fa";
 
 const Setting = () => {
-  const data = JSON.parse(localStorage.getItem("tenant_packs"));
-  const User = data.data.user;
+  const data = JSON.parse(localStorage.getItem("me"));
+  const User = data;
   return (
     <React.Fragment>
       <div className="flex items-center mt-16 leading-7">
