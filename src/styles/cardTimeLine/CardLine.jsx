@@ -8,6 +8,7 @@ import {
   DataPopupBookingContract,
   DataPopupBookingPersolnaltrainer,
   DataPaymentVoucher,
+  getExtraServiceBooking,
 } from "../../store/recoil/store";
 
 const CardLine = (props) => {
@@ -19,6 +20,7 @@ const CardLine = (props) => {
   );
   const setValueDiscount = useSetRecoilState(DataPaymentPreference);
   const setValueVoucher = useSetRecoilState(DataPaymentVoucher);
+  const setValueExtraService = useSetRecoilState(getExtraServiceBooking);
   const NavigateDataBooking = () => {
     if (dataParent.data === "Chi nhánh") {
       setValueBookingBranch(dataParent.text);
@@ -35,6 +37,10 @@ const CardLine = (props) => {
     if (dataParent.title === "preference") {
       setValueDiscount(dataParent.discount);
       setValueVoucher(dataParent.data);
+      return dataParent.onClose();
+    }
+    if (dataParent.title === "ExtraServiceBooking") {
+      setValueExtraService(dataParent.text);
       return dataParent.onClose();
     }
   };

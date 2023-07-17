@@ -1,5 +1,6 @@
 import connect from "../util/queryUrl";
 // import { useRecoilValue } from "recoil";
+import { setStoredJwt } from "../util/queryUrl";
 
 const usename = "nextvision";
 
@@ -11,12 +12,23 @@ const password = "1a2s3dA!@#";
 
 // const passwordToken = "123456";
 
+// export const me = async () => {
+//   return isStoredJwt()
+//     ? (await get(createUrl("/api/me")).catch(() => null))?.data // nếu true trả về dữ liệu server gửi về
+//     : null; // Nếu trống không chạy hàm me
+// };
+
+// login
 export const getToken = async (values) => {
   const { data } = await connect({
     method: "POST",
     url: "/api/gym-loyalty/login",
     data: values,
   });
+  if (!data) {
+    return alert("Could not login");
+  }
+  setStoredJwt(data.data.token);
   // localStorage.setItem("tenant_packs", data);
   return data;
 };
@@ -42,7 +54,7 @@ export const getBanner = async () => {
 //   setTimeout(() => {
 const tokenData = JSON.parse(localStorage.getItem("tenant_packs"));
 const tokenGYM = tokenData ? tokenData.data : "";
-console.log(tokenData);
+// console.log(tokenData);
 //     return tokenGYM;
 //   }, 2000);
 // };
@@ -419,35 +431,22 @@ export const getBookingPTScheduleHours = async (
 
 // POST API
 
-// export const postRegisterMember = async () => {
-//   // const tokenGYM = await getToken();
-//   if (!tokenGYM) {
-//     return { error: "Please login" };
-//   }
-//   const { data } = await connect({
-//     method: "POST",
-//     // url: "/api/gym-loyalty/member/register-order",
-//     url: `api/gym-loyalty/member-register`,
-//     headers: {
-//       Authorization: "Bearer " + tokenGYM.token,
-//     },
-//     data: {
-//       full_name: "Nguyễn Văn Linh",
-//         password: "123456@12",
-//         tel: "0902290878",
-//         email: "",
-//         sex: 1,
-//         birthday: "1989-08-21",
-//         address: "số 89, ngõ 32",
-//         branch_id: 1,
-//         province_id: 1,
-//         district_id: 677,
-//         ward_id:2437,
-//         description: "đăng ký dùng thử theo chương trình tết 2022"
-//     }
-//   });
-//   return data.data;
-// };
+export const postBookingPersonalTrainer = async (form) => {
+  // const tokenGYM = await getToken();
+  if (!tokenGYM) {
+    return { error: "Please login" };
+  }
+  const { data } = await connect({
+    method: "POST",
+    // url: "/api/gym-loyalty/member/register-order",
+    url: `/api/gym-loyalty/member/booking-pt`,
+    headers: {
+      Authorization: "Bearer " + tokenGYM.token,
+    },
+    data: form,
+  });
+  return data.message;
+};
 
 export const postRegisterMember = async (post) => {
   // const tokenGYM = await getToken();

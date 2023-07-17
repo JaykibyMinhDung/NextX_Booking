@@ -22,7 +22,6 @@ const Booking = () => {
   const formatmonth = Number(today.getMonth()) + 1;
   const CurrentDay =
     today.getFullYear() + "-" + formatmonth + "-" + today.getDate();
-  console.log(CurrentDay);
   const [stateHoursSwitch, setStateHoursSwitch] = useState([]);
   const [changeBgColorState, setChangeBgColorState] = useRecoilState(
     ChanngeBackGroundColor
@@ -32,7 +31,7 @@ const Booking = () => {
   const [changeBgColorStateSwitch, setChangeBgColorStateSwitch] =
     useRecoilState(ChanngeBackGroundColorButtonDay);
   const { data, isLoading } = useQuery([GET_SCHEDULEHOURS], () =>
-    getBookingPTScheduleHours(26359, 2518, "2023-07-20")
+    getBookingPTScheduleHours(26359, 2518, CurrentDay)
   );
   // let a = [];
   const SwitchHoursWorkout = (startDate, endDate) => {
@@ -48,6 +47,7 @@ const Booking = () => {
   // };
   const SubmitHandlePayment = (start_time, full_time) => {
     console.log(totalDataFormBooking);
+    // console.log(totalDataFormBooking);
     setChangeBgColorState(start_time);
     navigate("/booking/resgiterbooking", { state: full_time });
   };

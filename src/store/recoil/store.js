@@ -62,3 +62,7 @@ export const getFormBookingPT = atom({
   key: "FormResgiterBooking",
   default: null,
 });
+export const getExtraServiceBooking = atom({
+  key: "ExtraBooking",
+  default: null,
+});

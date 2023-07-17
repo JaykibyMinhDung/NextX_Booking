@@ -17,6 +17,8 @@ export const GET_CHECKIN = "checkin";
 export const GET_TIMETABLES = "timetable";
 export const GET_HISTORYBOOKING = "historybooking";
 export const POST_REGISTERMEMBER = "registermembership";
+export const GET_EXTRASERVICE = "ServiceBooking";
+export const POST_BOOKINGPERSONALTRAINER = "Bookingtrainer";
 
 // Booking PT
 

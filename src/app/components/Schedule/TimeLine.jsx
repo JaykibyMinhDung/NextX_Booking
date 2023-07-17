@@ -1,7 +1,7 @@
 // import React from "react";
 import "./timeline.css";
 import defaultImage from "../../../assets/avatar.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from "../../../styles/modal/Modal";
 import OptionBookingPT from "./OptionBookingPT";
 import { getBookingPTBranch } from "../../../api/api";
@@ -28,7 +28,7 @@ const TimeLine = (props) => {
   const takeValueBookingPersonaltrainer = useRecoilValue(
     DataPopupBookingPersolnaltrainer
   );
-  // console.log(takeValueBookingBranch);
+  // console.log(takeValueBookingPersonaltrainer);
   const month = Number(new Date().getMonth()) + 1;
   const today =
     new Date().getDate() + "-" + month + "-" + new Date().getFullYear();
@@ -43,13 +43,6 @@ const TimeLine = (props) => {
   );
   const showModalHandle = (ensign) => {
     document.body.style.overflow = "hidden";
-    dataParent.setForm({
-      branch: takeValueBookingBranch ? takeValueBookingBranch : null,
-      contract: takeValueBookingContract ? takeValueBookingContract : null,
-      PT: takeValueBookingPersonaltrainer
-        ? takeValueBookingPersonaltrainer
-        : null,
-    });
     setShowPopup(true);
     if (ensign === "branch") {
       return setChooseOptionBookingPT(data1.data);
@@ -66,8 +59,23 @@ const TimeLine = (props) => {
   };
   const hiddenModalHandle = () => {
     document.body.style.overflow = "auto";
+
     return setShowPopup(false);
   };
+  useEffect(() => {
+    console.log(takeValueBookingPersonaltrainer);
+    dataParent.setForm({
+      branch: takeValueBookingBranch ? takeValueBookingBranch : null,
+      contract: takeValueBookingContract ? takeValueBookingContract : null,
+      PersonalTrainers: takeValueBookingPersonaltrainer
+        ? takeValueBookingPersonaltrainer
+        : null,
+    });
+  }, [
+    takeValueBookingBranch,
+    takeValueBookingContract,
+    takeValueBookingPersonaltrainer,
+  ]);
   return (
     <div className="timeline mt-16">
       <div className="containers left">

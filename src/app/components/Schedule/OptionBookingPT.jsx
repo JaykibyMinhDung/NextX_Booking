@@ -3,12 +3,12 @@ import CardLine from "../../../styles/cardTimeLine/CardLine";
 
 const OptionBookingPT = (props) => {
   const option = props;
-  console.log(option.chooseOption);
+  // console.log(option.chooseOption);
   return (
     <div>
-      {option.chooseOption.map((e) => (
+      {option.chooseOption.map((e, index) => (
         <CardLine
-          key={e.id}
+          key={index}
           text={
             e.name
               ? e.name

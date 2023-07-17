@@ -37,20 +37,25 @@ import HomeLogin from "./authentication/home/HomeLogin";
 import { getToken } from "./api/api";
 import Payment from "./app/components/payment/Payment";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { Logout } from "./store/recoil/authenticate";
+import {
+  useRecoilState,
+  //  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
+import { Logout, isLogin } from "./store/recoil/authenticate";
 import FormResgisterBooking from "./app/components/Schedule/FormResgisterBooking";
 // import { useForm } from "react-hook-form";
 // import { useNavigate } from "react-router-dom";
 
 function App() {
-  const getStateLogOut = useRecoilValue(Logout);
-  const [isAuth, setisAuth] = useState(getStateLogOut);
+  // const getStateLogOut = useRecoilValue(Logout);
+  // const [isAuth, setisAuth] = useState(getStateLogOut);
+  const [isAuth, setIsAuth] = useRecoilState(isLogin);
   const [isLoading, setisLoading] = useState(false);
   // const navigate = useNavigate();
 
   const setStateGetOut = useSetRecoilState(Logout);
-  const authRoute = JSON.parse(localStorage.getItem("tenant_packs"));
+  // const authRoute = JSON.parse(localStorage.getItem("tenant_packs"));
   // const logout = () => {
   //   localStorage.removeItem("tenant_packs");
   //   setisAuth(null);
@@ -63,11 +68,12 @@ function App() {
     console.log(values);
     getToken(values)
       .then((results) => {
-        return localStorage.setItem("tenant_packs", JSON.stringify(results));
+        // return localStorage.setItem("tenant_packs", JSON.stringify(results));
+        setIsAuth(results);
       })
       .then(() => {
         setStateGetOut(true);
-        setisAuth(JSON.parse(localStorage.getItem("tenant_packs")));
+        // setIsAuth(JSON.parse(localStorage.getItem("tenant_packs")));
         setisLoading(false);
       })
       // .then(() => {
@@ -76,16 +82,20 @@ function App() {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-    const authRoute = JSON.parse(localStorage.getItem("tenant_packs"));
-    if (authRoute) {
-      return setisAuth(true);
+    async function getUser() {
+      const result = await getToken();
+      setIsAuth(result);
     }
-    // Cái này cũng đang không lâys được dư liệu từ local, kiểm tra lại
-    if (!authRoute) {
-      return setisAuth(null);
-    }
+    getUser();
+    // if (authRoute) {
+    //   return setIsAuth(true);
+    // }
+    // // Cái này cũng đang không lâys được dư liệu từ local, kiểm tra lại
+    // if (!authRoute) {
+    //   return setIsAuth(null);
+    // }
     console.log(isAuth);
-  }, [authRoute]);
+  }, []);
 
   if (isLoading) {
     return <div className="text-center font-semibold text-3xl">loading...</div>;
@@ -95,7 +105,7 @@ function App() {
       <BrowserRouter>
         {/* {isAuth || authRoute ? ( */}
         <Routes>
-          {authRoute && !isLoading ? (
+          {isAuth ? (
             <>
               <Route path="*" element={<NotFound />} />
               <Route path="/" element={<Home />} />
