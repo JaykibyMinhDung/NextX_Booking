@@ -25,12 +25,23 @@ export const getToken = async (values) => {
     url: "/api/gym-loyalty/login",
     data: values,
   });
-  if (!data) {
-    return alert("Could not login");
+  // .catch((err) => console.log(err));
+  if (data?.data.length < 1) {
+    return null;
   }
-  setStoredJwt(data.data.token);
+  const results = (await data?.data) ? setStoredJwt(data.data?.token) : null;
+  const token = (await results) === undefined ? data?.data : null;
+  console.log(token);
+  // const navigateHome = await token ? location.assign("/") : null
+  // if (data) {
+  //   return ;
+  // }
+  // if (!data) {
+  //  return null
+  // }
+  // return alert("Could not login");
   // localStorage.setItem("tenant_packs", data);
-  return data;
+  return token;
 };
 
 export const getBanner = async () => {
@@ -54,7 +65,7 @@ export const getBanner = async () => {
 //   setTimeout(() => {
 const tokenData = JSON.parse(localStorage.getItem("tenant_packs"));
 const tokenGYM = tokenData ? tokenData.data : "";
-// console.log(tokenData);
+console.log(tokenData);
 //     return tokenGYM;
 //   }, 2000);
 // };

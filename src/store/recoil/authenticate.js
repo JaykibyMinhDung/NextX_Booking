@@ -1,6 +1,7 @@
 import { atom } from "recoil";
-export const isStoredJwt = () => Boolean(localStorage.getItem("tenant_packs")); // Lấy token từ local, xác nhận có token ở local không
-console.log(isStoredJwt);
+export const isStoredJwt = () =>
+  Boolean(JSON.parse(localStorage.getItem("tenant_packs"))); // Lấy token từ local, xác nhận có token ở local không
+console.log(isStoredJwt());
 
 export const token = atom({
   key: "auth_token",

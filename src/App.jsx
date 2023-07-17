@@ -49,7 +49,7 @@ import FormResgisterBooking from "./app/components/Schedule/FormResgisterBooking
 
 function App() {
   // const getStateLogOut = useRecoilValue(Logout);
-  // const [isAuth, setisAuth] = useState(getStateLogOut);
+  // const [isAuth, setisAuth] = useState(false);
   const [isAuth, setIsAuth] = useRecoilState(isLogin);
   const [isLoading, setisLoading] = useState(false);
   // const navigate = useNavigate();
@@ -70,6 +70,7 @@ function App() {
       .then((results) => {
         // return localStorage.setItem("tenant_packs", JSON.stringify(results));
         setIsAuth(results);
+        console.log(results);
       })
       .then(() => {
         setStateGetOut(true);
@@ -94,8 +95,8 @@ function App() {
     // if (!authRoute) {
     //   return setIsAuth(null);
     // }
-    console.log(isAuth);
-  }, []);
+  }, [setIsAuth]);
+  console.log(isAuth);
 
   if (isLoading) {
     return <div className="text-center font-semibold text-3xl">loading...</div>;
