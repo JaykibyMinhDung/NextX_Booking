@@ -11,7 +11,7 @@ const connect = axios.create({
 connect.interceptors.request.use(
   (config) => {
     const accessToken = JSON.parse(localStorage.getItem("tenant_packs")); // Lấy token từ local
-    console.log(accessToken);
+    // console.log(accessToken);
     config.headers["Authorization"] = `Bearer ${accessToken}`; // set token vào để có thể truy cập vào api
     return config;
   },

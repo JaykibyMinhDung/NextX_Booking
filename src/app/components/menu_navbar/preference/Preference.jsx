@@ -13,8 +13,8 @@ const Preference = () => {
   return (
     <div>
       <TitlePage title={"Ưu đãi"} />
-      <div className="ml-4 mt-16 text-xl font-medium">
-        <span className="text-red-600">{data.length}</span> Ưu đãi
+      <div className="ml-4 mt-16 text-base font-medium">
+        <span className="text-red-500">{data.length}</span> Ưu đãi
       </div>
       {data.map((e) => (
         <CardPreference

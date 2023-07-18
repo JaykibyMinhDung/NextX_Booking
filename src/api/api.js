@@ -31,7 +31,7 @@ export const getToken = async (values) => {
   const results = (await data?.data) ? setStoredJwt(data.data?.token) : null;
   const token = (await results) === undefined ? data?.data : null;
   setUsers(data?.data.user);
-  console.log(token);
+  // console.log(token);
   // const navigateHome = await token ? location.assign("/") : null
   // if (data) {
   //   return ;
@@ -134,12 +134,7 @@ export const getInbody = async () => {
   return data.data;
 };
 
-export const getBranch = async (
-  branch_id,
-  order_type,
-  class_id,
-  employee_id
-) => {
+export const getBranch = async (props) => {
   // const tokenGYM = await getToken();
   // if (!tokenGYM) {
   //   return { error: "Please login" };
@@ -147,11 +142,13 @@ export const getBranch = async (
   const { data } = await connect({
     method: "GET",
     // url: "/api/gym-loyalty/member/tableprice?order_type=2&class_id=61&employee_id",
-    url: `/api/gym-loyalty/member/tableprice${
-      branch_id ? "?branches[]=" + branch_id : ""
-    } ${order_type ? "&order_type=" + order_type : ""} ${
-      class_id ? "&class_id=" + class_id : ""
-    }${employee_id ? "&employee_id=" + employee_id : ""}`,
+    url: `/api/gym-loyalty/member/tableprice?${
+      props.branch_id ? "branches[]=" + props.branch_id : ""
+    }${
+      props.order_type ? "order_type=" + props.order_type : "order_type=" + "0"
+    }${props.class_id ? "class_id=" + props.class_id : ""}${
+      props.employee_id ? "&employee_id=" + props.employee_id : ""
+    }`,
     // headers: {
     //   Authorization: "Bearer " + tokenGYM.token,
     // },
@@ -310,6 +307,20 @@ export const getCheckin = async (order_id) => {
     method: "GET",
     // url: "/api/gym-loyalty/member/checkin-checkout",
     url: `api/checkin-checkout/daily?page=1&pageLimit=15&search[gym_daily.order_id]=${order_id}`,
+
+    // headers: {
+    //   Authorization: "Bearer " + tokenGYM.token,
+    // },
+  });
+  return data.data;
+};
+export const getCheckinPT = async () => {
+  // if (!tokenGYM) {
+  //   return { error: "Please login" };
+  // }
+  const { data } = await connect({
+    method: "GET",
+    url: `api/gym-loyalty/member/checkin-checkout/PT`,
 
     // headers: {
     //   Authorization: "Bearer " + tokenGYM.token,

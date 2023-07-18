@@ -16,7 +16,7 @@ const Personaltrainer = () => {
   if (isLoading) {
     return <div>loading...</div>;
   }
-  console.log(data);
+  // console.log(data);
   const avatar =
     "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=";
   const RegisterHandle = (datapersolnaltrainer, branch) => {
@@ -25,49 +25,47 @@ const Personaltrainer = () => {
   };
   return (
     <React.Fragment>
-      <TitlePage title={"PT"} />
+      <TitlePage title={"PT"} icon={null} />
       <Search location={true} />
       <div className="box">
         <p style={{ marginLeft: "1rem" }}>3 PT</p>
         {data &&
           data.map((e) => (
-            <>
-              <div key={e.code} className="personal__card">
-                <div className="personal__card--infor">
-                  <img
-                    src={e.avatar ? e.avatar : avatar}
-                    // width={"50%"}
-                    alt=""
-                  />
-                  <div>
-                    <h2 style={{ fontWeight: 700 }}>{e.full_name}</h2>
-                    <p>{e.branch_name}</p>
-                    <ul className="stars">
-                      <li>
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                    </ul>
-                    {/* <p>{e.pt_rating ? e.pt_rating : 0} sao</p> */}
-                    <p>(64 reviews)</p>
-                  </div>
+            <div key={e.code} className="personal__card">
+              <div className="personal__card--infor">
+                <img
+                  src={e.avatar ? e.avatar : avatar}
+                  // width={"50%"}
+                  alt=""
+                />
+                <div>
+                  <h2 style={{ fontWeight: 700 }}>{e.full_name}</h2>
+                  <p>{e.branch_name}</p>
+                  <ul className="stars">
+                    <li>
+                      <i className="fa fa-star"></i>
+                    </li>
+                    <li>
+                      <i className="fa fa-star"></i>
+                    </li>
+                    <li>
+                      <i className="fa fa-star"></i>
+                    </li>
+                    <li>
+                      <i className="fa fa-star"></i>
+                    </li>
+                    <li>
+                      <i className="fa fa-star-o" aria-hidden="true"></i>
+                    </li>
+                  </ul>
+                  {/* <p>{e.pt_rating ? e.pt_rating : 0} sao</p> */}
+                  <p>(64 reviews)</p>
                 </div>
-                <button onClick={() => RegisterHandle(e, e.branch_name)}>
-                  Đăng kí
-                </button>
               </div>
-            </>
+              <button onClick={() => RegisterHandle(e, e.branch_name)}>
+                Đăng kí
+              </button>
+            </div>
           ))}
       </div>
     </React.Fragment>

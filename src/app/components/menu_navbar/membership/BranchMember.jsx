@@ -19,8 +19,6 @@ import {
 } from "../../../../store/recoil/store";
 
 const BranchMember = () => {
-  const { data, isLoading } = useQuery([GET_BRANCH], () => getBranch());
-
   // const dataParent = props
   const navigate = useNavigate();
   // const location = useLocation();
@@ -31,25 +29,34 @@ const BranchMember = () => {
   const MembershipBookingPersonaltrainer = useRecoilValue(BookingPTPayment);
   // const ResgiterMember = () => {
 
+  const { data, isLoading } = useQuery([GET_BRANCH], () =>
+    getBranch({
+      branch_id: null,
+      order_type: MembershipBookingPersonaltrainer ? "1" : null,
+      class_id: MembershipBookingClass ? MembershipBookingClass.class_id : null,
+      employee_id: MembershipBookingPersonaltrainer
+        ? MembershipBookingPersonaltrainer.code
+        : null,
+    })
+  );
   // }
   if (isLoading) {
     return <div>loading...</div>;
   }
 
-  if (MembershipBookingPersonaltrainer) {
-    console.log(MembershipBookingPersonaltrainer);
-    console.log(allMembershipPackage);
-    return <h2 className="text-center mt-4">Đang updated</h2>;
-  }
-  const filterData = MembershipBookingClass
-    ? data.data.filter(
-        (e) => e.branches[0].name === MembershipBookingClass.branch_name
-      )
-    : allMembershipPackage
-    ? allMembershipPackage.filter(
-        (e) => e.branches[0].name === nameBranchMembership
-      )
-    : data.data.filter((e) => e.branches[0].name === nameBranchMembership); // Lấy tất cả các gói cùng nhánh
+  console.log(MembershipBookingClass);
+  const filterData =
+    MembershipBookingClass || MembershipBookingPersonaltrainer
+      ? data.data.filter(
+          (e) =>
+            e.branches[0].name === MembershipBookingClass.branch_name ||
+            MembershipBookingPersonaltrainer.branch_name
+        )
+      : allMembershipPackage
+      ? allMembershipPackage.filter(
+          (e) => e.branches[0].name === nameBranchMembership
+        )
+      : data.data.filter((e) => e.branches[0].name === nameBranchMembership); // Lấy tất cả các gói cùng nhánh
   const items = filterData.shift(); // Lọc cái đầu
 
   const CartHandle = (nameMembership) => {
@@ -61,10 +68,12 @@ const BranchMember = () => {
         allMembershipPackage
           ? dataMembership.branches[0].name
           : MembershipBookingClass.branch_name
+          ? MembershipBookingClass.branch_name
+          : MembershipBookingPersonaltrainer.branch_name
       }/payment`
     );
   };
-  console.log(data.data); // tất cả dữ liệu của các nhánh
+  // console.log(data.data); // tất cả dữ liệu của các nhánh
   // console.log(filterData); // lấy dữ liệu đúng với nhánh
   return (
     <div className="bg-gray-100 h-screen">
@@ -73,6 +82,8 @@ const BranchMember = () => {
           allMembershipPackage
             ? nameBranchMembership
             : MembershipBookingClass.branch_name
+            ? MembershipBookingClass.branch_name
+            : MembershipBookingPersonaltrainer.branch_name
         }`}
         icon={null}
         navigateBack={"/membership"}

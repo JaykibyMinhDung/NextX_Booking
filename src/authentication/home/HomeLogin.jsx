@@ -1,6 +1,7 @@
 // import React from "react";
 // import TitlePage from "../../styles/titlepage/TitlePage";
 import Header from "../../app/components/home/header/Header";
+import Advertising from "../../app/components/home/section/advertising";
 import "./homelogin.css";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +14,8 @@ const HomeLogin = () => {
     <div>
       {/* <TitlePage /> */}
       <Header />
-      <p className="text-center font-bold">Đang update banner...</p>
+      {/* <p className="text-center font-bold">Đang update banner...</p> */}
+      <Advertising />
       <div className="flex justify-center">
         <button onClick={navigateLogin} className="login">
           Đăng nhập

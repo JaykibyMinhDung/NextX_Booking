@@ -15,14 +15,21 @@ const Membership = () => {
   //   navigate(`/membership/${branch}`)
   // }
 
-  const { data, isLoading } = useQuery([GET_BRANCH], () => getBranch());
+  const { data, isLoading } = useQuery([GET_BRANCH], () =>
+    getBranch({
+      branch_id: 0,
+      order_type: 0,
+      class_id: null,
+      employee_id: null,
+    })
+  );
   if (isLoading) {
     return <div>loading...</div>;
   }
   // console.log(data);
   return (
     <div>
-      <TitlePage title={"Membership"} />
+      <TitlePage title={"Membership"} icon={null} />
       <div className="membership__titlemain mt-16">
         <p style={{ textAlign: "center" }}>Chọn chi nhánh</p>
       </div>

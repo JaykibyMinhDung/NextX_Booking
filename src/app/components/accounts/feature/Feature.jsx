@@ -81,6 +81,12 @@ const Feature = () => {
       }, 1000);
       // return ;
     }
+    if (text === "Lịch sử checkin") {
+      navigate("/account/checkinpt");
+    }
+    if (text === "Lịch sử giao dịch") {
+      navigate("/account/transaction");
+    }
   };
   return (
     <React.Fragment>
