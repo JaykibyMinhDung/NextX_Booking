@@ -18,6 +18,7 @@ export default {
         "88%": "88%",
         "90%": "90%",
         "100%": "100%",
+        "15vw": "15vw",
         "10vh": "10vh",
         "20vh": "20vh",
         "12vh": "12vh",
@@ -54,6 +55,7 @@ export default {
       },
       screens: {
         "adr-300": "300px",
+        "adr-385": "385px",
         "galaxyFold-280": "280px",
       },
     },

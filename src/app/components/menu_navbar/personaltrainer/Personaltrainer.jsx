@@ -29,6 +29,12 @@ const Personaltrainer = () => {
       <Search location={true} />
       <div className="box">
         <p style={{ marginLeft: "1rem" }}>3 PT</p>
+        {!data && (
+          <img
+            src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
+            alt=""
+          />
+        )}
         {data &&
           data.map((e) => (
             <div key={e.code} className="personal__card">

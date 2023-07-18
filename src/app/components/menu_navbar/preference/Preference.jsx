@@ -16,6 +16,12 @@ const Preference = () => {
       <div className="ml-4 mt-16 text-base font-medium">
         <span className="text-red-500">{data.length}</span> Ưu đãi
       </div>
+      {!data && (
+        <img
+          src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
+          alt=""
+        />
+      )}
       {data.map((e) => (
         <CardPreference
           key={e.id}

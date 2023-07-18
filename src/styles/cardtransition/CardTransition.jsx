@@ -22,13 +22,13 @@ const CardTransaction = (props) => {
 
   const changebgcolorbtn = () => {
     if (dataParent.status === "Đã hủy") {
-      return "bg-red-500 text-white rounded-3xl p-2";
+      return "bg-red-500 text-white rounded-3xl p-2 m-1";
     }
     if (dataParent.status === "Thành công") {
-      return "bg-[#3B9254FF] text-white rounded-3xl p-2";
+      return "bg-[#3B9254FF] text-white rounded-3xl p-2 m-1";
     }
     if (dataParent.status === "Đang chờ duyệt") {
-      return "bg-blue-600 text-white rounded-3xl p-2";
+      return "bg-blue-600 text-white rounded-3xl p-2 m-1";
     }
   };
   return (

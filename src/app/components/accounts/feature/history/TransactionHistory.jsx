@@ -11,7 +11,11 @@ const TransactionHistory = () => {
   console.log(data);
   return (
     <React.Fragment>
-      <TitlePage title={"Lịch sử giao dịch"} icon={null} />
+      <TitlePage
+        title={"Lịch sử giao dịch"}
+        icon={null}
+        navigateBack={"/account"}
+      />
       <Search />
       <div className="ml-3 mt-4">
         <p>

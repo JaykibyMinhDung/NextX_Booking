@@ -21,7 +21,11 @@ const CheckinPTHistory = () => {
   };
   return (
     <div className="mt-16 ">
-      <TitlePage title={"Lịch sử checkin"} icon={null} />
+      <TitlePage
+        title={"Lịch sử checkin"}
+        icon={null}
+        navigateBack={"/account"}
+      />
       <div>
         <div className="text-center">
           <button className="text-center w-4/6 p-2 my-2 text-white bg-[#3B9254FF] rounded-3xl">

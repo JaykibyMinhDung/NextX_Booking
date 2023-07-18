@@ -145,9 +145,11 @@ export const getBranch = async (props) => {
     url: `/api/gym-loyalty/member/tableprice?${
       props.branch_id ? "branches[]=" + props.branch_id : ""
     }${
-      props.order_type ? "order_type=" + props.order_type : "order_type=" + "0"
+      props.order_type
+        ? "order_type=" + props.order_type + "&"
+        : "order_type=" + "0" + "&"
     }${props.class_id ? "class_id=" + props.class_id : ""}${
-      props.employee_id ? "&employee_id=" + props.employee_id : ""
+      props.employee_id ? "employee_id=" + props.employee_id : ""
     }`,
     // headers: {
     //   Authorization: "Bearer " + tokenGYM.token,
@@ -248,7 +250,7 @@ export const getReserve = async () => {
     //   Authorization: "Bearer " + tokenGYM.token,
     // },
   });
-  return data.data;
+  return data;
 };
 
 export const getExtend = async () => {
@@ -263,7 +265,7 @@ export const getExtend = async () => {
     //   Authorization: "Bearer " + tokenGYM.token,
     // },
   });
-  return data.data;
+  return data;
 };
 
 export const getBooking = async () => {

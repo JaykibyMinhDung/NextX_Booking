@@ -5,7 +5,7 @@ import avatarDefau from "../../../assets/avatar.jpg";
 const CardHistory = (props) => {
   const dataParent = props;
   return (
-    <div onClick={dataParent.data.onClick} className={"card__frame"}>
+    <div onClick={dataParent.data.onClick} className={"card__framehis"}>
       <div>
         <img
           className="img_history"

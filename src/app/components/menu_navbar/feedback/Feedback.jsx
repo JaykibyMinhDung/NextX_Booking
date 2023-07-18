@@ -46,6 +46,12 @@ const Feedback = () => {
       ) : (
         <>
           <TitlePage title={"Góp ý, Khiếu nại"} icon={null} />
+          {!data && (
+            <img
+              src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
+              alt=""
+            />
+          )}
           <div style={{ margin: "1rem", marginTop: "4rem" }}>
             <img
               src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"

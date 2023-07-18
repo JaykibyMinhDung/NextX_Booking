@@ -33,6 +33,12 @@ const Membership = () => {
       <div className="membership__titlemain mt-16">
         <p style={{ textAlign: "center" }}>Chọn chi nhánh</p>
       </div>
+      {!data && (
+        <img
+          src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
+          alt=""
+        />
+      )}
       <BarPage
         // onNavigate={navigateHandle}
         coupon={data.data}

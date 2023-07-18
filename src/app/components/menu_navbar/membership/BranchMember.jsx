@@ -32,7 +32,11 @@ const BranchMember = () => {
   const { data, isLoading } = useQuery([GET_BRANCH], () =>
     getBranch({
       branch_id: null,
-      order_type: MembershipBookingPersonaltrainer ? "1" : null,
+      order_type: MembershipBookingPersonaltrainer
+        ? "1"
+        : MembershipBookingClass.category === "Yoga"
+        ? "2"
+        : null,
       class_id: MembershipBookingClass ? MembershipBookingClass.class_id : null,
       employee_id: MembershipBookingPersonaltrainer
         ? MembershipBookingPersonaltrainer.code
@@ -61,7 +65,7 @@ const BranchMember = () => {
 
   const CartHandle = (nameMembership) => {
     const dataMembership = data.data.find((e) => e.name === nameMembership);
-    console.log(nameMembership);
+    // console.log(nameMembership);
     MembershipResgister(dataMembership); // Truyền dữ liệu xuống payment
     navigate(
       `/membership/${
@@ -75,6 +79,7 @@ const BranchMember = () => {
   };
   // console.log(data.data); // tất cả dữ liệu của các nhánh
   // console.log(filterData); // lấy dữ liệu đúng với nhánh
+
   return (
     <div className="bg-gray-100 h-screen">
       <TitlePage
@@ -104,8 +109,19 @@ const BranchMember = () => {
               {items.name}
             </p>
             <div className="relative w-40 mb-16">
-              <p className="branch__membership--unit">VNĐ</p>
-              <p className="mb-10 font-semibold" style={{ fontSize: "40px" }}>
+              <p
+                className={
+                  items.total_price < 1000000
+                    ? "branch__membership--unit6"
+                    : "branch__membership--unit"
+                }
+              >
+                VNĐ
+              </p>
+              <p
+                className={"mb-10 font-semibold"}
+                style={{ fontSize: "40px", letterSpacing: "1px" }}
+              >
                 {items.total_price}
               </p>
             </div>
@@ -118,17 +134,45 @@ const BranchMember = () => {
           </div>
         </div>
       )}
-      {filterData.length < 1 && (
-        <div className="text-center font-bold text-3xl"> Not found data </div>
+      {filterData.length < 1 && !items && (
+        <div className="text-center font-bold text-3xl">
+          <img
+            src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
+            alt=""
+          />
+        </div>
       )}
       <div className="flex justify-evenly flex-wrap w-full response__maxwidth280">
         {filterData.map((e) => (
-          <div key={e.id} className="branch__membership--cardnormal">
-            <p style={{ fontWeight: "700" }}>{e.name}</p>
+          <div
+            key={e.id}
+            className={
+              filterData.length === 1
+                ? `branch__membership--cardnormalMin`
+                : `branch__membership--cardnormal`
+            }
+          >
+            <p className={filterData.length === 1 ? "text-3xl" : "font-bold"}>
+              {e.name}
+            </p>
             <div>
-              <p className="branch__membership--unitnormal">VNĐ</p>
               <p
-                className="mb-10 font-semibold text-green-500 branch__price"
+                className={
+                  filterData.length === 1 && e.total_price < 1000000
+                    ? "branch__membership--unitnormalMin6"
+                    : filterData.length === 1
+                    ? "branch__membership--unitnormalMin"
+                    : "branch__membership--unitnormal"
+                }
+              >
+                VNĐ
+              </p>
+              <p
+                className={
+                  filterData.length === 1
+                    ? "mb-10 font-semibold text-green-500 branch__priceMin"
+                    : "mb-10 font-semibold text-green-500 branch__price"
+                }
                 // style={{ fontSize: "24px" }}
               >
                 {e.total_price}
@@ -136,7 +180,11 @@ const BranchMember = () => {
             </div>
             <button
               onClick={() => CartHandle(e.name)}
-              className="btn__resgistration2"
+              className={
+                filterData.length === 1
+                  ? "btn__resgistration2Min"
+                  : "btn__resgistration2"
+              }
             >
               Đăng kí
             </button>

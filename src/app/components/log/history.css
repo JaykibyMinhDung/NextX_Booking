@@ -16,22 +16,24 @@
   font-weight: 700;
   text-transform: uppercase;
 }
-.card__frame {
+.card__framehis {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  line-height: 2;
+  line-height: 1.5;
   /* padding: 1rem; */
   border-radius: 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.473);
   margin: 1rem 0.5rem;
+  padding: 0.4rem;
 }
 .card__mainInfor {
+  width: 100%;
+  margin-bottom: 0.3rem;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  width: 100%;
 }
 .card__footer--history {
   font-family: "Times New Roman", Times, serif;

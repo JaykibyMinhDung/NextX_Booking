@@ -91,7 +91,7 @@ const Booking = () => {
           <button onClick={() => SwitchHoursWorkout(17, 23)}>Buổi tối</button>
         </div>
       </div>
-      <div className=" flex flex-wrap mx-6 mt-3">
+      <div className=" flex flex-wrap  adr-385:ml-10 ml-6 mt-3">
         {stateHoursSwitch.map((e, index) => (
           <div
             key={index}

@@ -40,7 +40,7 @@ const ClassLoyal = (props) => {
             onClick={() => PaymentHandle()}
             className="flex justify-between items-center "
           >
-            <p className="p-2 rounded-full text-black border-green-800 border-2">
+            <p className="flex justify-center items-center w-15vw h-15vw rounded-full text-black border-green-800 border-2">
               {dataParents.numbook}/{dataParents.numTotal}
             </p>
             <FaPlay />
