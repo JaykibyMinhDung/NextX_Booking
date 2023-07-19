@@ -48,10 +48,7 @@ const CardTransaction = (props) => {
             {dataParent.voucher ? dataParent.voucher_discount + "đ" : ""}
           </p>
           <p style={{ color: "red", fontWeight: 550 }}>
-            {dataParent.voucher
-              ? dataParent.total_price - dataParent.voucher_discount
-              : dataParent.total_price}
-            đ
+            {dataParent.total_price_adddiscount.toLocaleString("en-US")}đ
           </p>
           <button className={`${changebgcolorbtn()}`}>
             {dataParent.status}

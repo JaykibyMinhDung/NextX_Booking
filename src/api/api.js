@@ -330,6 +330,20 @@ export const getCheckinPT = async () => {
   });
   return data.data;
 };
+export const postRatingCheckinPT = async (post) => {
+  // if (!tokenGYM) {
+  //   return { error: "Please login" };
+  // }
+  const { data } = await connect({
+    method: "POST",
+    url: `api/gym-loyalty/member/checkin-pt/rate`,
+    data: post,
+    // headers: {
+    //   Authorization: "Bearer " + tokenGYM.token,
+    // },
+  });
+  return data.message;
+};
 
 export const getTimeTables = async (id) => {
   // const tokenGYM = await getToken();

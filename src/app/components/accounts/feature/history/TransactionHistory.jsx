@@ -29,7 +29,12 @@ const TransactionHistory = () => {
           subject={e.price_name}
           voucher={e.voucher ? e.voucher.name : null}
           voucher_discount={e.voucher ? e.voucher.total_discount : null}
-          total_price={e.table_price.total_price}
+          total_price={e.table_price.total_price.toLocaleString("en-US")}
+          total_price_adddiscount={
+            e.voucher
+              ? e.table_price.total_price - e.voucher.total_discount
+              : e.table_price.total_price
+          }
           nameMember={e.member_name}
           status={e.status}
           date={e.created_at}

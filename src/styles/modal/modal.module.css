@@ -26,6 +26,9 @@
   z-index: 200;
   animation: slide-up 300ms ease-out forwards;
 }
+.modal input:focus {
+  outline: none;
+}
 /* Chỉnh popup */
 .layout_modal {
   display: flex;

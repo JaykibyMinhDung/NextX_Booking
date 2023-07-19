@@ -8,7 +8,7 @@ export const token = atom({
 });
 export const isLogin = atom({
   key: "auth_login",
-  default: isStoredJwt(),
+  default: false,
 });
 export const Logout = atom({
   key: "auth_logout",

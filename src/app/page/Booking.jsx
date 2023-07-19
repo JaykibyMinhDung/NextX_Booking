@@ -46,7 +46,10 @@ const Booking = () => {
   // const totalDataFormBooking = (data2) => {
   // };
   const SubmitHandlePayment = (start_time, full_time) => {
-    console.log(totalDataFormBooking);
+    // console.log(totalDataFormBooking);
+    if (Number(start_time.slice(0, 2)) < CurrentHours) {
+      return;
+    }
     // console.log(totalDataFormBooking);
     setChangeBgColorState(start_time);
     navigate("/booking/resgiterbooking", { state: full_time });

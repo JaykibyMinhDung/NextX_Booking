@@ -8,6 +8,10 @@ import { GET_PT } from "../../../../constants/queryKeys";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { BookingPTPayment } from "../../../../store/recoil/store";
+// import { FaRegStar } from "react-icons/fa";
+// import { FaStar } from "react-icons/fa";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
 
 const Personaltrainer = () => {
   const { data, isLoading } = useQuery([GET_PT], () => getPersonalTrainer());
@@ -28,7 +32,10 @@ const Personaltrainer = () => {
       <TitlePage title={"PT"} icon={null} />
       <Search location={true} />
       <div className="box">
-        <p style={{ marginLeft: "1rem" }}>3 PT</p>
+        <p style={{ marginLeft: "1rem" }}>
+          {" "}
+          <span className="font-semibold text-green-500">{data.length}</span> PT
+        </p>
         {!data && (
           <img
             src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
@@ -47,23 +54,15 @@ const Personaltrainer = () => {
                 <div>
                   <h2 style={{ fontWeight: 700 }}>{e.full_name}</h2>
                   <p>{e.branch_name}</p>
-                  <ul className="stars">
-                    <li>
-                      <i className="fa fa-star"></i>
-                    </li>
-                    <li>
-                      <i className="fa fa-star"></i>
-                    </li>
-                    <li>
-                      <i className="fa fa-star"></i>
-                    </li>
-                    <li>
-                      <i className="fa fa-star"></i>
-                    </li>
-                    <li>
-                      <i className="fa fa-star-o" aria-hidden="true"></i>
-                    </li>
-                  </ul>
+                  <Box>
+                    <Rating
+                      name="simple-controlled"
+                      defaultValue={2.5}
+                      precision={0.5}
+                      value={e.pt_rating}
+                      readOnly
+                    />
+                  </Box>
                   {/* <p>{e.pt_rating ? e.pt_rating : 0} sao</p> */}
                   <p>(64 reviews)</p>
                 </div>

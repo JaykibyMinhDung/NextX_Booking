@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 import { FaHistory } from "react-icons/fa";
@@ -14,6 +14,12 @@ import { isLogin } from "../../../../store/recoil/authenticate";
 import "./feature.css";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
+import PopupNotification from "../../../../styles/modalnotification/ModalNotification";
+import SignOutWeb from "./logout/logout";
+import NewVersion from "./updateversion/NewVersion";
+import Popup from "../../../../styles/modal/Modal";
+import DeleteAccount from "./deleteaccount/DeleteAccount";
+import ChangePassword from "./changepw/ChangePassword";
 
 const arrListFeature = [
   {
@@ -69,23 +75,43 @@ const arrListFeature = [
 const Feature = () => {
   // const parentData = props;
   const navigate = useNavigate();
+  const [modalPopup, setmodalPopup] = useState(null);
+  const [showPopUp, setShowPopUp] = useState(null);
+  // const [ContentModal, setContentModal] = useState(null);
   const setStateGetOut = useSetRecoilState(isLogin);
+  const closeModalHandle = () => {
+    setmodalPopup(null);
+  };
+  const closePopupHandle = () => {
+    setShowPopUp(null);
+  };
+  const LogOutHandle = () => {
+    setStateGetOut(false);
+    localStorage.removeItem("tenant_packs");
+    localStorage.removeItem("me");
+    setTimeout(() => {
+      console.log("cancel");
+      return navigate("/homelogin");
+    }, 1000);
+  };
   const featureClickHandle = (text) => {
     if (text === "Đăng xuất") {
-      setStateGetOut(false);
-      localStorage.removeItem("tenant_packs");
-      localStorage.removeItem("me");
-      setTimeout(() => {
-        console.log("cancel");
-        return navigate("/homelogin");
-      }, 1000);
-      // return ;
+      return setmodalPopup(text);
     }
     if (text === "Lịch sử checkin") {
-      navigate("/account/checkinpt");
+      return navigate("/account/checkinpt");
     }
     if (text === "Lịch sử giao dịch") {
-      navigate("/account/transaction");
+      return navigate("/account/transaction");
+    }
+    if (text === "Phiên bản") {
+      return setmodalPopup(text);
+    }
+    if (text === "Đổi mật khẩu") {
+      return setShowPopUp(text);
+    }
+    if (text === "Xóa tài khoản") {
+      return setShowPopUp(text);
     }
   };
   return (
@@ -96,13 +122,35 @@ const Feature = () => {
             onClick={() => featureClickHandle(e.text)}
             className="feature__form"
           >
-            {e.icon}
-            <h3 style={{ marginLeft: e.isExpand ? "" : "2rem" }}>{e.text}</h3>
+            <div className="flex items-center justify-between">
+              {e.icon}
+              <h3 style={{ marginLeft: e.isExpand ? "1rem" : "1rem" }}>
+                {e.text}
+              </h3>
+            </div>
             {e.isExpand ? <FaAngleRight /> : <ButtonChange />}
           </div>
           <hr />
         </div>
       ))}
+      {modalPopup && (
+        <PopupNotification onClose={closeModalHandle}>
+          {modalPopup === "Đăng xuất" ? (
+            <SignOutWeb logout={LogOutHandle} onClose={closeModalHandle} />
+          ) : (
+            <NewVersion onClose={closeModalHandle} />
+          )}
+        </PopupNotification>
+      )}
+      {showPopUp && (
+        <Popup onClose={closePopupHandle}>
+          {showPopUp === "Đổi mật khẩu" ? (
+            <ChangePassword logout={LogOutHandle} onClose={closeModalHandle} />
+          ) : (
+            <DeleteAccount onClose={closeModalHandle} />
+          )}
+        </Popup>
+      )}
     </React.Fragment>
   );
 };

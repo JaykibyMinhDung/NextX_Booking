@@ -1,7 +1,4 @@
-import {
-  useEffect,
-  //  useState
-} from "react";
+import { useEffect, useState } from "react";
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -49,12 +46,16 @@ import { Logout, isLogin } from "./store/recoil/authenticate";
 import FormResgisterBooking from "./app/components/Schedule/FormResgisterBooking";
 import CheckinPTHistory from "./app/components/accounts/feature/history/CheckinPTHistory";
 import TransactionHistory from "./app/components/accounts/feature/history/TransactionHistory";
+import Login2 from "./authentication/login/Login2";
+import Forget from "./authentication/forgetPW/Forget";
+import Resgister2 from "./authentication/register/Resgister2";
 // import { useForm } from "react-hook-form";
 // import { useNavigate } from "react-router-dom";
 
 function App() {
   // const getStateLogOut = useRecoilValue(Logout);
   // const [isAuth, setisAuth] = useState(false);
+  const [activeErr, setActiveErr] = useState(false);
   const [isAuth, setIsAuth] = useRecoilState(isLogin);
   // const [isLoading, setisLoading] = useState(false);
   // const navigate = useNavigate();
@@ -65,10 +66,15 @@ function App() {
   //   localStorage.removeItem("tenant_packs");
   //   setisAuth(null);
   // };
-  const LoginHandle = async (authData) => {
-    // event.preventDefault();
+  const LoginHandle = async (event, authData) => {
+    event.preventDefault();
     // setisLoading(true);
     const values = authData;
+    console.log(values);
+    if (!values.username && !values.password) {
+      setActiveErr(true);
+      return null;
+    }
     values.tenant_code = "demox";
     // console.log(values);
     getToken(values)
@@ -111,55 +117,62 @@ function App() {
       <BrowserRouter>
         {/* {isAuth || authRoute ? ( */}
         <Routes>
-          {/* {isAuth ? ( */}
-          <>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Home />} />
-
-            {/* header */}
-            <Route path="/notification" element={<Notification />} />
-
-            {/* menu article */}
-            <Route path="/membership" element={<Membership />} />
-            <Route path="/membership/:branch" element={<BranchMember />} />
-            <Route path="/membership/:branch/payment" element={<Payment />} />
-            <Route path="/extend" element={<Extend />} />
-            <Route path="/reserve" element={<Reserve />} />
-            <Route path="/feedback" element={<Feedback />} />
-            <Route path="/personaltrainer" element={<Personaltrainer />} />
-            <Route path="/branch" element={<Branch />} />
-            <Route path="/inbody" element={<Inbody />} />
-            <Route path="/preference" element={<Preference />} />
-            <Route path="/contract" element={<Contract />} />
-            <Route path="/contract/:id" element={<DetailContracts />} />
-            <Route
-              path="/booking/resgiterbooking"
-              element={<FormResgisterBooking />}
-            />
-            <Route path="/account/checkinpt" element={<CheckinPTHistory />} />
-            <Route
-              path="/account/transaction"
-              element={<TransactionHistory />}
-            />
-
-            {/* footer menu */}
-            <Route path="/class" element={<Class />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/log" element={<History />} />
-            <Route path="/account" element={<User />} />
-            <Route path="/style" element={<ButtonChange />} />
-          </>
-          {/* ) : ( */}
-          {/* // </Routes>
-            // <Routes> */}
-          <>
-            {/* Authentication */}
-            {/* <Route path="/homelogin" element={<HomeLogin />} />
+          {isAuth ? (
+            <>
               <Route path="*" element={<NotFound />} />
-              <Route path="/" element={<Login LoginHandle={LoginHandle} />} />
-              <Route path="/register" element={<Register />} /> */}
-          </>
-          {/* )} */}
+              <Route path="/" element={<Home />} />
+
+              {/* header */}
+              <Route path="/notification" element={<Notification />} />
+
+              {/* menu article */}
+              <Route path="/membership" element={<Membership />} />
+              <Route path="/membership/:branch" element={<BranchMember />} />
+              <Route path="/membership/:branch/payment" element={<Payment />} />
+              <Route path="/extend" element={<Extend />} />
+              <Route path="/reserve" element={<Reserve />} />
+              <Route path="/feedback" element={<Feedback />} />
+              <Route path="/personaltrainer" element={<Personaltrainer />} />
+              <Route path="/branch" element={<Branch />} />
+              <Route path="/inbody" element={<Inbody />} />
+              <Route path="/preference" element={<Preference />} />
+              <Route path="/contract" element={<Contract />} />
+              <Route path="/contract/:id" element={<DetailContracts />} />
+              <Route
+                path="/booking/resgiterbooking"
+                element={<FormResgisterBooking />}
+              />
+              <Route path="/account/checkinpt" element={<CheckinPTHistory />} />
+              <Route
+                path="/account/transaction"
+                element={<TransactionHistory />}
+              />
+
+              {/* footer menu */}
+              <Route path="/class" element={<Class />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/log" element={<History />} />
+              <Route path="/account" element={<User />} />
+              <Route path="/style" element={<ButtonChange />} />
+            </>
+          ) : (
+            //  </Routes>
+            //  <Routes>
+            <>
+              {/* Authentication */}
+              <Route path="/homelogin" element={<HomeLogin />} />
+              <Route path="*" element={<NotFound />} />
+              {/* <Route path="/" element={<Login LoginHandle={LoginHandle} />} /> */}
+              <Route
+                path="/"
+                element={
+                  <Login2 LoginHandle={LoginHandle} active={activeErr} />
+                }
+              />
+              <Route path="/register" element={<Resgister2 />} />
+              <Route path="/forgetpassword" element={<Forget />} />
+            </>
+          )}
         </Routes>
         {/* test */}
       </BrowserRouter>

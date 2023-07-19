@@ -1,0 +1,34 @@
+div.starsPT {
+  width: 100px;
+  display: inline-block;
+}
+input.starPT {
+  display: none;
+}
+label.starPT {
+  float: right;
+  padding: 2px;
+  font-size: 14px;
+  /* color: #444; */
+  color: #3d3;
+  transition: all 0.2s;
+}
+input.starPT:checked ~ label.starPT::before {
+  content: "\f005";
+  color: #fd4 !important;
+  transition: all 0.25s;
+}
+input.starPT-5:checked ~ label.starPT::before {
+  color: #fe7 !important;
+  text-shadow: 0 0 20px #952;
+}
+input.starPT-1:checked ~ label.starPT::before {
+  color: #f62 !important;
+}
+input.starPT:hover {
+  transform: rorate(-15deg) scale(1.3);
+}
+label.starPT::before {
+  content: "\F006";
+  font-family: FontAwesome;
+}
