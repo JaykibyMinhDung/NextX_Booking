@@ -82,6 +82,7 @@ const CheckinPTHistory = () => {
                       defaultValue={2.5}
                       precision={0.5}
                       value={e.rate ? e.rate.rate_number1 : 0}
+                      size="small"
                       readOnly
                     />
                   </div>
@@ -91,6 +92,7 @@ const CheckinPTHistory = () => {
                       defaultValue={2.5}
                       precision={0.5}
                       value={e.rate ? e.rate.rate_number : 0}
+                      size="small"
                       readOnly
                     />
                   </div>

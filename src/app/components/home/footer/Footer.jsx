@@ -15,7 +15,7 @@ const NavFooter = [
     href: "/class",
   },
   {
-    icon: <i className="fas fa-calend    "></i>,
+    icon: <i className="fas fa-calendar    "></i>,
     title: "Booking",
     href: "/booking",
   },
@@ -48,8 +48,10 @@ const Footer = () => {
           </div>
           {NavFooter.map((e) => (
             <div className="footer__group" key={e.title}>
-              {e.icon}
-              <NavLink to={e.href}>{e.title}</NavLink>
+              <NavLink to={e.href}>
+                {e.icon}
+                <p>{e.title}</p>
+              </NavLink>
             </div>
           ))}
         </div>

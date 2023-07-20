@@ -60,6 +60,7 @@ const Personaltrainer = () => {
                       defaultValue={2.5}
                       precision={0.5}
                       value={e.pt_rating}
+                      size="small"
                       readOnly
                     />
                   </Box>

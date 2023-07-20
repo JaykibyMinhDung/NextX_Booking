@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 const Login2 = (props) => {
   const navigate = useNavigate();
   const SubmitHandle = props;
-  const NavigateRegister = () => {
-    navigate("/register");
-  };
+  // const NavigateRegister = () => {
+  //   navigate("/register");
+  // };
   const NavigateForgetPW = () => {
     navigate("/forgetpassword");
   };
@@ -23,7 +23,7 @@ const Login2 = (props) => {
     <div className="mx-4 my-2">
       <div className="flex items-center">
         <div onClick={() => navigate("/homelogin")}>
-          <FaArrowLeft />
+          <FaArrowLeft className="text-base" />
         </div>
         <img className="ml-8" width={130} src={logo} alt="" />
       </div>
@@ -34,13 +34,14 @@ const Login2 = (props) => {
       <div className="">
         <div className="flex justify-between items-center my-4 border-b-2">
           <input
-            className=" w-full focus:outline-none"
+            className=" w-full p-2 focus:outline-none"
             type="text"
             id="Số điện thoại/email"
             placeholder="Số điện thoại/email"
             {...register("username", { required: true })}
             name="username"
             autoComplete="none"
+            required
           />
           <p>X</p>
         </div>
@@ -52,12 +53,13 @@ const Login2 = (props) => {
         {errors.content && <span>This field is required</span>}
         <div className="flex justify-between items-center my-4 border-b-2">
           <input
-            className=" w-full focus:outline-none"
+            className=" w-full p-2 focus:outline-none"
             type="password"
             id="Mật khẩu"
             placeholder="Mật khẩu"
             name="password"
             {...register("password", { required: true })}
+            required
           />
           <FaRegEye />
         </div>
@@ -69,9 +71,9 @@ const Login2 = (props) => {
         {errors.content && <span>This field is required</span>}
       </div>
       <div className="flex justify-between ">
-        <button onClick={NavigateRegister} className="text-green-500">
+        {/* <button onClick={NavigateRegister} className="text-green-500">
           Đăng kí ngay
-        </button>
+        </button> */}
         <button onClick={NavigateForgetPW} className="text-blue-500">
           Quên mật khẩu
         </button>

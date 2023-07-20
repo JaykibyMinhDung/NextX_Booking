@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -49,6 +50,7 @@ import TransactionHistory from "./app/components/accounts/feature/history/Transa
 import Login2 from "./authentication/login/Login2";
 import Forget from "./authentication/forgetPW/Forget";
 import Resgister2 from "./authentication/register/Resgister2";
+import CodeVertify from "./authentication/register/vertification/CodeVertify";
 // import { useForm } from "react-hook-form";
 // import { useNavigate } from "react-router-dom";
 
@@ -81,7 +83,11 @@ function App() {
       .then((results) => {
         // return localStorage.setItem("tenant_packs", JSON.stringify(results));
         setIsAuth(results);
-        // console.log(results);
+        console.log(results);
+        if (!results) {
+          setActiveErr(true);
+          return null;
+        }
       })
       .then(() => {
         setStateGetOut(true);
@@ -91,7 +97,10 @@ function App() {
       // .then(() => {
       //   setTimeout(() => navigate("/homelogin"), 3000);
       // })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        setActiveErr(true);
+        console.log("Quý khách đã gặp lỗi trong quá trình nhập dữ liệu");
+      });
   };
   useEffect(() => {
     async function getUser() {
@@ -170,6 +179,7 @@ function App() {
                 }
               />
               <Route path="/register" element={<Resgister2 />} />
+              <Route path="/vertifycation" element={<CodeVertify />} />
               <Route path="/forgetpassword" element={<Forget />} />
             </>
           )}

@@ -31,10 +31,15 @@ const Contract = () => {
     <div>
       <TitlePage title={"Hợp đồng"} />
       <div className={style.contracts__header}>
-        <p>{data.length} hợp đồng</p>
+        <p>
+          <span className="text-green-500 font-bold text-base">
+            {data.length}
+          </span>{" "}
+          hợp đồng
+        </p>
         <div className={style.contracts__totalPrice}>
           <span>
-            Đã trả: <b>{totalPrice}đ</b>
+            Đã trả: <b>{totalPrice.toLocaleString()}đ</b>
           </span>
           <button>
             <FaChevronDown />

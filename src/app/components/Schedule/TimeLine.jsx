@@ -1,6 +1,9 @@
 // import React from "react";
 import "./timeline.css";
 import defaultImage from "../../../assets/avatar.jpg";
+import diretory from "../../../assets/bullets.png";
+import locationDefault from "../../../assets/location-pin.png";
+import canlenderr from "../../../assets/calendar.png";
 import { useEffect, useState } from "react";
 import Popup from "../../../styles/modal/Modal";
 import OptionBookingPT from "./OptionBookingPT";
@@ -76,6 +79,7 @@ const TimeLine = (props) => {
     takeValueBookingContract,
     takeValueBookingPersonaltrainer,
   ]);
+  console.log(takeValueBookingBranch);
   return (
     <div className="timeline mt-16">
       <div className="containers left">
@@ -83,14 +87,12 @@ const TimeLine = (props) => {
           <h2>1. Chọn chi nhánh</h2>
           <div
             onClick={() => showModalHandle("branch")}
-            className="flex items-center whitespace-nowrap w-full mt-4"
+            className="flex items-center whitespace-nowrap w-full mt-2"
           >
-            <img
-              style={{ color: "currentcolor", borderRadius: "50%" }}
-              src={defaultImage}
-              width={40}
-              alt=""
-            />
+            <div className="text-current flex items-center justify-center rounded-full bg-white w-9 h-9">
+              <img src={locationDefault} width={22} alt="" />
+            </div>
+
             <p className="ml-4">
               {takeValueBookingBranch ? takeValueBookingBranch : "(Trống)"}
             </p>
@@ -99,17 +101,14 @@ const TimeLine = (props) => {
       </div>
       <div className="containers right">
         <div className="content">
-          <h2>2.Chọn hợp đồng</h2>
+          <h2>2. Chọn hợp đồng</h2>
           <div
             onClick={() => showModalHandle("contract")}
-            className="flex items-center whitespace-nowrap w-full  mt-4"
+            className="flex items-center whitespace-nowrap w-full mt-2 "
           >
-            <img
-              style={{ color: "currentcolor", borderRadius: "50%" }}
-              src={defaultImage}
-              width={40}
-              alt=""
-            />
+            <div className="text-current flex items-center justify-center rounded-full bg-white w-9 h-9">
+              <img src={diretory} width={20} alt="" />
+            </div>
             <p className="ml-4">
               {takeValueBookingContract ? takeValueBookingContract : "(Trống)"}
             </p>
@@ -121,7 +120,7 @@ const TimeLine = (props) => {
           <h2>3. Chọn PT</h2>
           <div
             onClick={() => showModalHandle("PersonalTrainer")}
-            className="flex items-center whitespace-nowrap w-full  mt-4"
+            className="flex items-center whitespace-nowrap w-full mt-2  "
           >
             <img
               style={{ color: "currentcolor", borderRadius: "50%" }}
@@ -140,8 +139,11 @@ const TimeLine = (props) => {
       <div className="containers right">
         <div onClick={() => showModalHandle("Schedule")} className="content">
           <h2>4. Chọn lịch tập PT</h2>
-          <div className="flex items-center whitespace-nowrap w-full  mt-4">
-            <em className="text-base font-semibold text-yellow-100">{today}</em>
+          <div className="flex items-center whitespace-nowrap w-full mt-2 ">
+            <div className="text-current flex items-center justify-center rounded-full bg-white w-9 h-9">
+              <img src={canlenderr} width={20} alt="" />
+            </div>
+            <p className="text-sm ml-4 font-medium text-white">{today}</p>
           </div>
         </div>
       </div>

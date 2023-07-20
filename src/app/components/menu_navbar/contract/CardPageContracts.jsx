@@ -35,7 +35,7 @@ const CardPageContracts = (props) => {
           </div>
           <div style={{ textAlign: "center", marginRight: "0.5rem" }}>
             <p style={{ color: "blue", fontWeight: 550 }}>
-              {dataParent.price}đ
+              {dataParent.price.toLocaleString()}đ
             </p>
             <button className={style.btn__contracts}>
               {dataParent.expire}

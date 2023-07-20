@@ -64,7 +64,7 @@ const Booking = () => {
       <TimeLine setForm={setTotalDataFormBooking} />
       <div
         // onClick={totalDataFormBooking}
-        className={`flex justify-between mx-5 mt-3 bg-green-600 rounded-2xl`}
+        className={`flex justify-between mx-5 mt-3 bg-[#3b9254ff] rounded-2xl`}
       >
         <div
           className={` ${
@@ -94,7 +94,7 @@ const Booking = () => {
           <button onClick={() => SwitchHoursWorkout(17, 23)}>Buổi tối</button>
         </div>
       </div>
-      <div className=" flex flex-wrap  adr-385:ml-10 ml-6 mt-3">
+      <div className=" flex flex-wrap adr-385:ml-5 ml-10 mt-3">
         {stateHoursSwitch.map((e, index) => (
           <div
             key={index}
@@ -104,8 +104,8 @@ const Booking = () => {
                 ? "bg-gray-400"
                 : changeBgColorState === e.start_time
                 ? "bg-red-400"
-                : "bg-green-600"
-            } text-white text-center m-2 rounded-lg p-1`}
+                : "bg-[#3b9254ff]"
+            } text-white text-center m-1 rounded-lg p-1`}
           >
             <p>{e.start_time}</p>
             {/* <p>{"hello"}</p> */}

@@ -8,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 const Resgister2 = (props) => {
   const navigate = useNavigate();
   const SubmitHandle = props;
-  const NavigateRegister = () => {
-    navigate("/");
-  };
-  const NavigateForgetPW = () => {
-    navigate("/");
-  };
+  // const NavigateRegister = () => {
+  //   navigate("/");
+  // };
+  // const NavigateForgetPW = () => {
+  //   navigate("/");
+  // };
   const {
     register,
     getValues,
@@ -23,7 +23,7 @@ const Resgister2 = (props) => {
     <div className="mx-4 my-2">
       <div className="flex items-center">
         <div onClick={() => navigate("/")}>
-          <FaArrowLeft />
+          <FaArrowLeft className="text-base" />
         </div>
         <div className="text-center ml-10 font-bold text-xl">
           <p>Đăng kí</p>
@@ -38,7 +38,7 @@ const Resgister2 = (props) => {
             className=" w-full focus:outline-none"
             type="email"
             id="Số điện thoại/email"
-            placeholder="Số điện thoại/email"
+            placeholder="Email"
             {...register("username", { required: true })}
             name="username"
             autoComplete="none"
@@ -53,9 +53,9 @@ const Resgister2 = (props) => {
       <div className="text-center mt-4">
         <button
           className="text-center w-5/6 p-2 my-2 text-white bg-[#3B9254FF] rounded-3xl"
-          onClick={(event) => SubmitHandle.LoginHandle(event, getValues())}
+          onClick={(event) => navigate("/vertifycation")}
         >
-          Đăng nhập
+          Gửi mã code đến Email
         </button>
       </div>
     </div>

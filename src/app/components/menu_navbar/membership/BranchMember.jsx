@@ -122,7 +122,7 @@ const BranchMember = () => {
                 className={"mb-10 font-semibold"}
                 style={{ fontSize: "40px", letterSpacing: "1px" }}
               >
-                {items.total_price}
+                {items.total_price.toLocaleString()}
               </p>
             </div>
             <button
@@ -175,7 +175,7 @@ const BranchMember = () => {
                 }
                 // style={{ fontSize: "24px" }}
               >
-                {e.total_price}
+                {e.total_price.toLocaleString()}
               </p>
             </div>
             <button

@@ -28,7 +28,7 @@ const Extend = () => {
           <p>
             Đã trả:{" "}
             <span className="text-red-500">
-              {data.meta.summation.paymented}
+              {data.meta.summation.paymented.toLocaleString()}
             </span>
           </p>
         </div>
@@ -58,7 +58,7 @@ const Extend = () => {
                     </div>
                     <div style={{ textAlign: "center", marginRight: "0.5rem" }}>
                       <p style={{ color: "blue", fontWeight: 550 }}>
-                        {data.meta.summation.paymented}đ
+                        {data.meta.summation.paymented.toLocaleString()}đ
                       </p>
                       <button className={style.btn__contracts}>
                         {e.is_active ? "Đã kích hoạt" : "Chưa kích hoạt"}

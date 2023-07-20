@@ -52,7 +52,7 @@ const Payment = () => {
           <div className="m-4 card_payment">
             <div className="flex justify-between">
               <p>Gói: {filterData.name}</p>
-              <p> {filterData.total_price}</p>
+              <p> {filterData.total_price.toLocaleString()}</p>
             </div>
             <div className="flex justify-between">
               <p>Ưu đãi: </p>
@@ -79,7 +79,7 @@ const Payment = () => {
             </div>
             <div className="flex justify-between">
               <p>Tổng tiền: </p>
-              <p>{TotalBill}</p>
+              <p>{TotalBill.toLocaleString()}</p>
             </div>
           </div>
           <p className="m-4 font-semibold">Phương thức thanh toán</p>

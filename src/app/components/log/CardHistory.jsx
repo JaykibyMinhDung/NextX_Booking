@@ -15,7 +15,6 @@ const CardHistory = (props) => {
               ? dataParent.data.employee_avatar
               : avatarDefau
           }
-          width={60}
           alt="error"
         />
       </div>
@@ -58,13 +57,13 @@ const CardHistory = (props) => {
           className={"card__footer--history text-sm"}
           style={{ marginLeft: "1rem" }}
         >
-          <div className="flex items-center mt-1">
+          <div className="flex items-center galaxyFold-280:text-xs adr-300:text-sm mt-1">
             <FaCalendarCheck className="mb-1" />
             <p className="ml-2" style={{ color: "green", fontWeight: 700 }}>
               {dataParent.data.date_time}
             </p>
           </div>
-          <div className="flex items-center mt-1">
+          <div className="flex items-center galaxyFold-280:text-xs adr-300:text-sm mt-1">
             <FaClock className="" />
             <p className="ml-2" style={{ color: "red", fontWeight: 700 }}>
               {dataParent.data.start_time} - {dataParent.data.end_time}

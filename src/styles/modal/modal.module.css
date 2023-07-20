@@ -9,7 +9,9 @@
   z-index: 60;
   background-color: rgba(0, 0, 0, 0.75);
 }
-
+textarea {
+  height: 14vh;
+}
 .modal {
   position: fixed;
   bottom: 0%;
@@ -70,13 +72,19 @@
 
 @media (max-height: 740px) {
   .modal {
-    height: 85vh;
+    height: 55vh;
   }
 }
 
 @media (min-height: 750px) and (max-height: 790px) {
   .modal {
     height: 76vh;
+  }
+}
+
+@media (min-height: 460px) and (max-height: 680px) {
+  .modal {
+    height: 70vh;
   }
 }
 

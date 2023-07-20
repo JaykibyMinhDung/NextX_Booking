@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const titleMenu = [
   {
-    title: "Memebership",
+    title: "Members",
     logo: <FaTicketAlt />,
     color: "red",
     href: "/membership",

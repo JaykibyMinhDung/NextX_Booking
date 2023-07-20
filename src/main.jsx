@@ -21,7 +21,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
       <RecoilRoot>
         <Suspense fallback={<Loading />}>
+          {/* <div style={{ marginLeft: "50rem", marginRight: "48rem" }}>
+            <div className="bg-black pl-96">sdaf</div> */}
           <App />
+          {/* <div className="bg-black pr-96">vdsv</div>
+          </div> */}
         </Suspense>
       </RecoilRoot>
     </React.StrictMode>

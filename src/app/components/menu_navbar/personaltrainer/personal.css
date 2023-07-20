@@ -26,8 +26,8 @@
   width: 100%;
 }
 .personal__card--infor img {
-  width: 25%;
-  height: 56px;
+  width: 21%;
+  height: 46px;
   border-radius: 50%;
   margin-right: 1rem;
   margin-left: 1rem;
@@ -35,18 +35,25 @@
 
 @media (max-width: 390px) {
   .personal__card--infor img {
-    width: 28%;
-    height: 60px;
+    width: 21%;
+    height: 45px;
   }
 }
 
+/* @media (max-width: 390px) {
+  .personal__card--infor img {
+    width: 28%;
+    height: 60px;
+  }
+} */
+
 @media (max-height: 750px) {
   .personal__card--infor img {
-    width: 35%;
-    height: 68px;
+    width: 21%;
+    height: 40px;
   }
 }
-@media (max-width: 290px) {
+@media (max-width: 292px) {
   .box {
     margin-top: 3.5rem;
     border-top: 10px solid rgba(241, 241, 241, 0.849);
@@ -65,9 +72,9 @@
     font-weight: 550;
   }
   .personal__card--infor img {
-    width: 30%;
-    height: 50px;
-    margin-right: 0.2rem;
+    width: 20%;
+    height: 35px;
+    margin-right: 0.3rem;
     margin-left: 0.2rem;
   }
   .personal__card {

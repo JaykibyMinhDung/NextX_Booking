@@ -42,7 +42,7 @@ const FooterPayment = (props) => {
       <footer>
         <div className="flex justify-between items-center text-center mx-4 my-7">
           <p className="font-semibold">Thành tiền</p>
-          <p>{data.total_price}đ</p>
+          <p>{data.total_price.toLocaleString()}đ</p>
         </div>
         <div className="flex justify-center items-center">
           <button

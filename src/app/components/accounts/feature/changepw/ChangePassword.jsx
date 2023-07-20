@@ -35,6 +35,7 @@ const ChangePassword = () => {
           value={changeInputOldPW}
           onChange={inputPasswordOld}
           type={showPassword ? "text" : `password`}
+          placeholder="Mật khẩu cũ"
         />
         <button onClick={changeStateShowPW}>
           {showPassword ? <FaEye /> : <FaEyeSlash />}
@@ -46,6 +47,7 @@ const ChangePassword = () => {
           value={changeInputNewPW}
           onChange={inputPasswordNew}
           type={showPassword ? "text" : `password`}
+          placeholder="Mật khẩu mới"
         />
         <button onClick={changeStateShowPW}>
           {showPassword ? <FaEye /> : <FaEyeSlash />}

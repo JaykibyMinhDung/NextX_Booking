@@ -127,12 +127,12 @@ const DetailContracts = () => {
         <hr />
         <div className="flex justify-between m-4">
           <p>Thanh toán: </p>
-          <p>{data.total_order}</p>
+          <p>{data.total_order.toLocaleString()}</p>
         </div>
         <hr />
         <div className="flex justify-between m-4">
           <p>Giá trị hợp đồng: </p>
-          <p>{data.total_money_payment}</p>
+          <p>{data.total_money_payment.toLocaleString()}</p>
         </div>
         <hr />
         <div className="flex justify-between m-4">

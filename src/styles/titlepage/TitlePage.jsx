@@ -40,9 +40,13 @@ const TitlePage = (props) => {
         <div>
           <p
             className={
-              dataParent.title.length < 14 && dataParent.title.length > 4
+              dataParent.title.length < 14 && dataParent.title.length > 10
                 ? "ml-12"
-                : dataParent.title.length < 4 && "ml-16"
+                : dataParent.title.length < 11 && dataParent.title.length > 7
+                ? "ml-5"
+                : dataParent.title.length < 8 && dataParent.title.length > 4
+                ? "ml-9"
+                : dataParent.title.length < 4 && "ml-14"
               // ? "ml-10"
               // : ""
             }
