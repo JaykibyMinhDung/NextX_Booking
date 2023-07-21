@@ -21,6 +21,7 @@ export const GET_EXTRASERVICE = "ServiceBooking";
 export const POST_BOOKINGPERSONALTRAINER = "Bookingtrainer";
 export const GET_CHECKINPT = "CheckinPT";
 export const POST_CHECKINPTHISTORY = "HistoryPostRating";
+export const POST_DELETEACCOUNT = "deleteuser";
 
 // Booking PT
 

@@ -80,6 +80,10 @@ export const getIdPT = atom({
   key: "iDPT",
   default: "",
 });
+export const OptionDate = atom({
+  key: "DateBooking",
+  default: "",
+});
 
 // State membership
 export const ResetLoading = atom({
@@ -89,4 +93,11 @@ export const ResetLoading = atom({
 export const ResetState = atom({
   key: "ResetState",
   default: null,
+});
+
+// account
+
+export const DeleteAccountUser = atom({
+  key: "Delete",
+  default: "",
 });

@@ -6,8 +6,8 @@ import TimeLine from "../components/Schedule/TimeLine";
 import Footer from "../components/home/footer/Footer";
 import { getBookingPTScheduleHours } from "../../api/api";
 // import { GET_SCHEDULEHOURS } from "../../constants/queryKeys";
-import { useRecoilState } from "recoil";
-import { ChanngeBackGroundColor } from "../../store/recoil/store";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { ChanngeBackGroundColor, OptionDate } from "../../store/recoil/store";
 import {
   ChanngeBackGroundColorButtonDay,
   getFormBookingPT,
@@ -23,6 +23,7 @@ const Booking = () => {
   const formatmonth = Number(today.getMonth()) + 1;
   // const CurrentDay =
   //   today.getFullYear() + "-" + formatmonth + "-" + today.getDate();
+  const DateOptionBooking = useRecoilValue(OptionDate);
   const [stateHoursSwitch, setStateHoursSwitch] = useState([]);
   const [changeBgColorState, setChangeBgColorState] = useRecoilState(
     ChanngeBackGroundColor
@@ -57,10 +58,13 @@ const Booking = () => {
     //   Number(start_time.slice(2, 4)) + Number(start_time.slice(0, 2)) <
     //     CurrentMinute + CurrentHours
     // );
-    if (Number(start_time.slice(0, 2)) < CurrentHours) {
+    if (
+      Number(start_time.slice(0, 2)) < CurrentHours &&
+      today.toLocaleDateString("en-GB").slice(0, 2) ===
+        DateOptionBooking.slice(0, 2)
+    ) {
       return;
     }
-    // console.log(totalDataFormBooking);
     setChangeBgColorState(start_time);
     navigate("/booking/resgiterbooking", { state: full_time });
   };
@@ -110,7 +114,9 @@ const Booking = () => {
             key={index}
             onClick={() => SubmitHandlePayment(e.start_time, e.date_time)}
             className={`w-16 ${
-              Number(e.start_time.slice(0, 2)) < CurrentHours
+              Number(e.start_time.slice(0, 2)) < CurrentHours &&
+              today.toLocaleDateString("en-GB").slice(0, 2) ===
+                DateOptionBooking.slice(0, 2)
                 ? "bg-gray-400"
                 : changeBgColorState === e.start_time
                 ? "bg-red-400"

@@ -1,10 +1,13 @@
 // import React from "react";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useSetRecoilState } from "recoil";
+import { DeleteAccountUser } from "../../../../../store/recoil/store";
 
 const DeleteAccount = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [changeInput, setChangeInput] = useState(null);
+  const PasswordToDelete = useSetRecoilState(DeleteAccountUser);
   const inputPassword = (event) => {
     event.preventDefault();
     setChangeInput(event.target.value);
@@ -19,7 +22,7 @@ const DeleteAccount = () => {
     }
   };
   const SubmitPasswordHandle = () => {
-    return console.log(changeInput);
+    PasswordToDelete(changeInput);
   };
   return (
     <div>

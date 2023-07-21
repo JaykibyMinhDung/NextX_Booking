@@ -13,13 +13,15 @@ import { isLogin } from "../../../../store/recoil/authenticate";
 
 import "./feature.css";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import PopupNotification from "../../../../styles/modalnotification/ModalNotification";
 import SignOutWeb from "./logout/logout";
 import NewVersion from "./updateversion/NewVersion";
 import Popup from "../../../../styles/modal/Modal";
 import DeleteAccount from "./deleteaccount/DeleteAccount";
 import ChangePassword from "./changepw/ChangePassword";
+import { postDeleteAccount } from "../../../../api/api";
+import { DeleteAccountUser } from "../../../../store/recoil/store";
 
 const arrListFeature = [
   {
@@ -79,6 +81,7 @@ const Feature = () => {
   const [showPopUp, setShowPopUp] = useState(null);
   // const [ContentModal, setContentModal] = useState(null);
   const setStateGetOut = useSetRecoilState(isLogin);
+  const getStateDeleteAccount = useRecoilValue(DeleteAccountUser);
   const closeModalHandle = () => {
     setmodalPopup(null);
   };
@@ -111,6 +114,7 @@ const Feature = () => {
       return setShowPopUp(text);
     }
     if (text === "Xóa tài khoản") {
+      postDeleteAccount(getStateDeleteAccount);
       return setShowPopUp(text);
     }
   };

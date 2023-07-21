@@ -11,6 +11,7 @@ import {
   getExtraServiceBooking,
   getIdPT,
   getIdBranch,
+  OptionDate,
 } from "../../store/recoil/store";
 
 const CardLine = (props) => {
@@ -27,6 +28,7 @@ const CardLine = (props) => {
   // Booking gym id
   const setValueBranchId = useSetRecoilState(getIdBranch);
   const setValuePTid = useSetRecoilState(getIdPT);
+  const setValueDateBookingOption = useSetRecoilState(OptionDate);
 
   const NavigateDataBooking = () => {
     if (dataParent.data === "Chi nhánh") {
@@ -41,6 +43,10 @@ const CardLine = (props) => {
     if (dataParent.data === "name") {
       setValueBookingPersonaltrainer(dataParent.text);
       setValuePTid(dataParent.fulldata);
+      return dataParent.onClose();
+    }
+    if (dataParent.data === "Date") {
+      setValueDateBookingOption(dataParent.fulldata);
       return dataParent.onClose();
     }
     if (dataParent.title === "preference") {

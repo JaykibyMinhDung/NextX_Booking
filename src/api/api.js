@@ -500,3 +500,12 @@ export const postRegisterMember = async (post) => {
   });
   return data.data;
 };
+
+export const postDeleteAccount = async (post) => {
+  const { data } = await connect({
+    method: "POST",
+    url: `api/gym-loyalty/member/delete-account`,
+    data: { password: post },
+  });
+  return data.message;
+};

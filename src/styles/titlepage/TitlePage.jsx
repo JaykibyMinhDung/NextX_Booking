@@ -24,6 +24,7 @@ const TitlePage = (props) => {
     resetBillClass("");
     resetBillMembership("");
     resetBookingPersonaltrainer("");
+    // dataParent.test = ;
     resetLoading(true);
     if (!dataParent.navigateBack) {
       navigate("/");

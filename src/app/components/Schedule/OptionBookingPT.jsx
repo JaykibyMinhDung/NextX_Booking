@@ -18,7 +18,8 @@ const OptionBookingPT = (props) => {
                 ? e.tableprices_name
                 : e.full_name
                 ? e.full_name
-                : new Date(e.date_time).toLocaleDateString("en-GB")
+                : e
+              // new Date(e.date_time).toLocaleDateString("en-GB")
             }
             data={
               e.name
@@ -27,7 +28,7 @@ const OptionBookingPT = (props) => {
                 ? "PT"
                 : e.full_name
                 ? "name"
-                : e.date_time
+                : "Date"
             }
             fulldata={e}
             onClose={option.onClose}

@@ -20,7 +20,10 @@ import {
   DataPopupBookingPersolnaltrainer,
   getIdPT,
   getIdBranch,
+  OptionDate,
 } from "../../../store/recoil/store";
+
+import moment from "moment/moment";
 
 const TimeLine = (props) => {
   const dataParent = props;
@@ -37,6 +40,7 @@ const TimeLine = (props) => {
 
   const takeValueFullDataBranch = useRecoilValue(getIdBranch);
   const takeValueFullDataPT = useRecoilValue(getIdPT);
+  const takeValueFullDataDateOption = useRecoilValue(OptionDate);
   // console.log(takeValueBookingPersonaltrainer);
   const month = Number(new Date().getMonth()) + 1;
   const today =
@@ -57,6 +61,36 @@ const TimeLine = (props) => {
   //     postDate
   //   )
   // );
+  const ham = [];
+  const ham2 = [];
+  for (let i = 0; i < 7; i++) {
+    // const element = array[i];
+    let test = moment(postDate).add(i, "day").format("DD-MM-YYYY");
+    ham.push(test);
+  }
+  for (let i = 0; i < 7; i++) {
+    // const element = array[i];
+    let test = moment(postDate).add(i, "day").format("YYYY-MM-DD");
+    ham2.push(test);
+  }
+  // function formatDate(date) {
+  //   var d = new Date(date),
+  //     month = "" + (d.getMonth() + 1),
+  //     day = "" + d.getDate(),
+  //     year = d.getFullYear();
+
+  //   if (month.length < 2) month = "0" + month;
+  //   if (day.length < 2) day = "0" + day;
+
+  //   return [year, month, day].join("-");
+  // }
+  const formatDate = () => {
+    return ham2.find(
+      (e) => e.slice(8, 10) === takeValueFullDataDateOption.slice(0, 2)
+    );
+  };
+  // console.log(formatDate());
+
   const data4 = useMutation({
     mutationFn: (newSchedule) => getBookingPTScheduleHours(newSchedule),
     onSuccess: async (data2) => {
@@ -80,7 +114,7 @@ const TimeLine = (props) => {
       return setChooseOptionBookingPT(data3.data);
     }
     if (ensign === "Schedule") {
-      return setChooseOptionBookingPT(takeDataCanlendar);
+      return setChooseOptionBookingPT(ham);
     }
   };
   const hiddenModalHandle = () => {
@@ -92,7 +126,7 @@ const TimeLine = (props) => {
     data4.mutate({
       branch_id: takeValueFullDataBranch.id,
       employee_id: takeValueFullDataPT.employee_id,
-      date_time: postDate,
+      date_time: takeValueFullDataDateOption ? formatDate() : postDate,
     });
     // dataParent.setForm({
     //   branch: takeValueBookingBranch ? takeValueBookingBranch : null,
@@ -174,7 +208,11 @@ const TimeLine = (props) => {
             <div className="text-current flex items-center justify-center rounded-full bg-white w-9 h-9">
               <img src={canlenderr} width={20} alt="" />
             </div>
-            <p className="text-sm ml-4 font-medium text-white">{today}</p>
+            <p className="text-sm ml-4 font-medium text-white">
+              {takeValueFullDataDateOption
+                ? takeValueFullDataDateOption
+                : today}
+            </p>
           </div>
         </div>
       </div>

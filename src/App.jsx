@@ -58,6 +58,7 @@ function App() {
   // const getStateLogOut = useRecoilValue(Logout);
   // const [isAuth, setisAuth] = useState(false);
   const [activeErr, setActiveErr] = useState(false);
+  const [PWError, setPWErroe] = useState("");
   const [isAuth, setIsAuth] = useRecoilState(isLogin);
   // const [isLoading, setisLoading] = useState(false);
   // const navigate = useNavigate();
@@ -72,7 +73,7 @@ function App() {
     event.preventDefault();
     // setisLoading(true);
     const values = authData;
-    console.log(values);
+    // console.log(values);
     if (!values.username && !values.password) {
       setActiveErr(true);
       return null;
@@ -84,8 +85,9 @@ function App() {
         // return localStorage.setItem("tenant_packs", JSON.stringify(results));
         setIsAuth(results);
         console.log(results);
-        if (!results) {
+        if (results === null) {
           setActiveErr(true);
+          setPWErroe("password");
           return null;
         }
       })
@@ -175,7 +177,11 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <Login2 LoginHandle={LoginHandle} active={activeErr} />
+                  <Login2
+                    LoginHandle={LoginHandle}
+                    active={activeErr}
+                    WrongPass={PWError}
+                  />
                 }
               />
               <Route path="/register" element={<Resgister2 />} />

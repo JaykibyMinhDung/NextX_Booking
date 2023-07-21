@@ -31,7 +31,7 @@ const BranchMember = () => {
   const resetLoading = useRecoilValue(ResetLoading);
   // const ResgiterMember = () => {
 
-  const { data } = useQuery([GET_BRANCH], () =>
+  const { data, isFetching } = useQuery([GET_BRANCH], () =>
     getBranch({
       branch_id: null,
       order_type: MembershipBookingPersonaltrainer
@@ -46,11 +46,13 @@ const BranchMember = () => {
     })
   );
   // }
-  // if (isLoading) {
+
+  // }
+  // if (isFetching) {
   //   return <div>loading...</div>;
   // }
 
-  console.log(MembershipBookingClass);
+  // console.log(MembershipBookingClass);
   const filterData =
     MembershipBookingClass || MembershipBookingPersonaltrainer
       ? data.data.filter(
@@ -82,7 +84,7 @@ const BranchMember = () => {
   // console.log(data.data); // tất cả dữ liệu của các nhánh
   // console.log(filterData); // lấy dữ liệu đúng với nhánh
 
-  if (!filterData && resetLoading) {
+  if (resetLoading && isFetching) {
     console.log("loading");
     return (
       <div>
@@ -102,6 +104,7 @@ const BranchMember = () => {
             : MembershipBookingPersonaltrainer.branch_name
         }`}
         icon={null}
+        test={filterData}
         navigateBack={"/membership"}
       />
       <div className="text-center font-bold mb-4 mt-16 text-base">

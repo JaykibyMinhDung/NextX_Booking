@@ -3,22 +3,39 @@ import logo from "../../assets/nextXlogo.png";
 import { FaArrowLeft, FaRegEye } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Login2 = (props) => {
   const navigate = useNavigate();
   const SubmitHandle = props;
+  const [showPW, setShowPW] = useState(false);
   // const NavigateRegister = () => {
   //   navigate("/register");
   // };
   const NavigateForgetPW = () => {
     navigate("/forgetpassword");
   };
+  const ChangeShowPassword = () => {
+    if (showPW) {
+      return setShowPW(false);
+    } else {
+      return setShowPW(true);
+    }
+  };
   const {
     register,
     getValues,
+    setError,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    setError("username", {
+      type: "manual",
+      message: "Dont Forget Your Username Should Be Cool!",
+    });
+  }, [setError]);
   return (
     <div className="mx-4 my-2">
       <div className="flex items-center">
@@ -35,7 +52,7 @@ const Login2 = (props) => {
         <div className="flex justify-between items-center my-4 border-b-2">
           <input
             className=" w-full p-2 focus:outline-none"
-            type="text"
+            type="email"
             id="Số điện thoại/email"
             placeholder="Số điện thoại/email"
             {...register("username", { required: true })}
@@ -54,18 +71,25 @@ const Login2 = (props) => {
         <div className="flex justify-between items-center my-4 border-b-2">
           <input
             className=" w-full p-2 focus:outline-none"
-            type="password"
+            type={showPW ? "text" : "password"}
             id="Mật khẩu"
             placeholder="Mật khẩu"
             name="password"
             {...register("password", { required: true })}
             required
           />
-          <FaRegEye />
+          <div onClick={() => ChangeShowPassword()}>
+            <FaRegEye />
+          </div>
         </div>
         {!getValues().username && SubmitHandle.active && (
           <span className="text-red-500 mb-4">
             * Mật khẩu không được để trống
+          </span>
+        )}
+        {SubmitHandle.WrongPass === "password" && (
+          <span className="text-red-500 mb-4">
+            * Mật khẩu và email chưa đúng
           </span>
         )}
         {errors.content && <span>This field is required</span>}
@@ -74,7 +98,7 @@ const Login2 = (props) => {
         {/* <button onClick={NavigateRegister} className="text-green-500">
           Đăng kí ngay
         </button> */}
-        <button onClick={NavigateForgetPW} className="text-blue-500">
+        <button onClick={NavigateForgetPW} className="text-blue-500 mt-3">
           Quên mật khẩu
         </button>
       </div>
