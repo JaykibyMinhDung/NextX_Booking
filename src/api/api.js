@@ -444,21 +444,19 @@ export const getBookingPTServiceExtra = async () => {
   return data.data;
 };
 
-export const getBookingPTScheduleHours = async (
-  employee_id,
-  branch_id,
-  date_time
-) => {
+export const getBookingPTScheduleHours = async (post) => {
   // const tokenGYM = await getToken();
   // if (!tokenGYM) {
   //   return { error: "Please login" };
   // }
+  const { employee_id, branch_id, date_time } = post;
+  console.log(employee_id, branch_id, date_time);
   const { data } = await connect({
     method: "GET",
-    url: `/api/gym-loyalty/member/scheduler-pt${
-      employee_id ? "?employee_id=" + employee_id : ""
-    }${branch_id ? "&branch_id=" + branch_id : ""}${
-      date_time ? "&date_time=" + date_time : ""
+    url: `/api/gym-loyalty/member/scheduler-pt?${
+      employee_id ? "employee_id=" + employee_id + "&" : ""
+    }${branch_id ? "branch_id=" + branch_id + "&" : ""}${
+      date_time ? "date_time=" + date_time : ""
     }`,
     // headers: {
     //   Authorization: "Bearer " + tokenGYM.token,

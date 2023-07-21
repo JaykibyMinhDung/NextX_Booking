@@ -10,7 +10,7 @@ import OptionBookingPT from "./OptionBookingPT";
 import { getBookingPTBranch } from "../../../api/api";
 import { getBookingPTContract } from "../../../api/api";
 import { getBookingPTListPT } from "../../../api/api";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { DataPopupBookingPT } from "../../../store/recoil/store";
 import { getBookingPTScheduleHours } from "../../../api/api";
@@ -18,11 +18,14 @@ import {
   DataPopupBookingBranch,
   DataPopupBookingContract,
   DataPopupBookingPersolnaltrainer,
+  getIdPT,
+  getIdBranch,
 } from "../../../store/recoil/store";
 
 const TimeLine = (props) => {
   const dataParent = props;
   const [showPopup, setShowPopup] = useState(false);
+  const [takeDataCanlendar, settakeDataCanlendar] = useState([]);
   const [chooseOptionBookingPT, setChooseOptionBookingPT] =
     useRecoilState(DataPopupBookingPT);
 
@@ -31,19 +34,39 @@ const TimeLine = (props) => {
   const takeValueBookingPersonaltrainer = useRecoilValue(
     DataPopupBookingPersolnaltrainer
   );
+
+  const takeValueFullDataBranch = useRecoilValue(getIdBranch);
+  const takeValueFullDataPT = useRecoilValue(getIdPT);
   // console.log(takeValueBookingPersonaltrainer);
   const month = Number(new Date().getMonth()) + 1;
   const today =
     new Date().getDate() + "-" + month + "-" + new Date().getFullYear();
   const postDate =
     new Date().getFullYear() + "-" + month + "-" + new Date().getDate();
+  // const postChangeDate =
+  //   new Date().getFullYear() + "-" + month + "-" + new Date().getDate();
   const data1 = useQuery(["test1"], () => getBookingPTBranch());
   // const data1 = getBookingPTBranch();
   const data2 = useQuery(["test2"], () => getBookingPTContract());
   const data3 = useQuery(["test3"], () => getBookingPTListPT());
-  const data4 = useQuery(["test4"], () =>
-    getBookingPTScheduleHours(26359, 2518, postDate)
-  );
+
+  // const data4 = useMutation(["test4"], () =>
+  //   getBookingPTScheduleHours(
+  //     takeValueFullDataBranch.id,
+  //     takeValueFullDataPT.employee_id,
+  //     postDate
+  //   )
+  // );
+  const data4 = useMutation({
+    mutationFn: (newSchedule) => getBookingPTScheduleHours(newSchedule),
+    onSuccess: async (data2) => {
+      settakeDataCanlendar(data2);
+      dataParent.setForm(data2);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
   const showModalHandle = (ensign) => {
     document.body.style.overflow = "hidden";
     setShowPopup(true);
@@ -57,7 +80,7 @@ const TimeLine = (props) => {
       return setChooseOptionBookingPT(data3.data);
     }
     if (ensign === "Schedule") {
-      return setChooseOptionBookingPT(data4.data);
+      return setChooseOptionBookingPT(takeDataCanlendar);
     }
   };
   const hiddenModalHandle = () => {
@@ -66,20 +89,28 @@ const TimeLine = (props) => {
     return setShowPopup(false);
   };
   useEffect(() => {
-    console.log(takeValueBookingPersonaltrainer);
-    dataParent.setForm({
-      branch: takeValueBookingBranch ? takeValueBookingBranch : null,
-      contract: takeValueBookingContract ? takeValueBookingContract : null,
-      PersonalTrainers: takeValueBookingPersonaltrainer
-        ? takeValueBookingPersonaltrainer
-        : null,
+    data4.mutate({
+      branch_id: takeValueFullDataBranch.id,
+      employee_id: takeValueFullDataPT.employee_id,
+      date_time: postDate,
     });
+    // dataParent.setForm({
+    //   branch: takeValueBookingBranch ? takeValueBookingBranch : null,
+    //   contract: takeValueBookingContract ? takeValueBookingContract : null,
+    //   PersonalTrainers: takeValueBookingPersonaltrainer
+    //     ? takeValueBookingPersonaltrainer
+    //     : null,
+    // });
   }, [
     takeValueBookingBranch,
     takeValueBookingContract,
     takeValueBookingPersonaltrainer,
+    // data4,
+    postDate,
+    takeValueFullDataBranch,
+    takeValueFullDataPT,
   ]);
-  console.log(takeValueBookingBranch);
+
   return (
     <div className="timeline mt-16">
       <div className="containers left">

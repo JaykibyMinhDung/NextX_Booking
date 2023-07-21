@@ -7,6 +7,7 @@ import {
   receiveMembership,
   DataPaymentPreference,
   BookingPTPayment,
+  ResetLoading,
 } from "../../store/recoil/store";
 
 const TitlePage = (props) => {
@@ -17,11 +18,13 @@ const TitlePage = (props) => {
   const resetBillMembership = useSetRecoilState(BookingClassPayment);
   const resetReference = useSetRecoilState(DataPaymentPreference);
   const resetBookingPersonaltrainer = useSetRecoilState(BookingPTPayment);
+  const resetLoading = useSetRecoilState(ResetLoading);
   const backHome = () => {
     resetReference("");
     resetBillClass("");
     resetBillMembership("");
     resetBookingPersonaltrainer("");
+    resetLoading(true);
     if (!dataParent.navigateBack) {
       navigate("/");
     } else {
@@ -40,8 +43,10 @@ const TitlePage = (props) => {
         <div>
           <p
             className={
-              dataParent.title.length < 14 && dataParent.title.length > 10
+              dataParent.title.length < 14 && dataParent.title.length > 12
                 ? "ml-12"
+                : dataParent.title.length < 13 && dataParent.title.length > 10
+                ? "ml-7"
                 : dataParent.title.length < 11 && dataParent.title.length > 7
                 ? "ml-5"
                 : dataParent.title.length < 8 && dataParent.title.length > 4

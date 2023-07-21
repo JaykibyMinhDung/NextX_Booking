@@ -31,11 +31,9 @@ const NotFound = () => {
           technical fix!
         </p>
       </div>
-      <img
-        src={logo}
-        className="ml-20 galaxyFold-280:w-32 adr-385:w-72 adr-385:m-0 w-48"
-        alt=""
-      />
+      <div className="grid place-content-center">
+        <img src={logo} alt="" />
+      </div>
       {/* width={280} */}
     </>
   );

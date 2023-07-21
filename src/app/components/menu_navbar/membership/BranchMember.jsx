@@ -9,13 +9,14 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useQuery } from "react-query";
 import { GET_BRANCH } from "../../../../constants/queryKeys";
 import { getBranch } from "../../../../api/api";
-
+import Loading from "../../../../spinner/Loading";
 import {
   BookingClassPayment,
   BookingPTPayment,
   receiveAllmembership,
   receiveMembership,
   titleBranchStore,
+  ResetLoading,
 } from "../../../../store/recoil/store";
 
 const BranchMember = () => {
@@ -27,9 +28,10 @@ const BranchMember = () => {
   const MembershipResgister = useSetRecoilState(receiveMembership);
   const MembershipBookingClass = useRecoilValue(BookingClassPayment);
   const MembershipBookingPersonaltrainer = useRecoilValue(BookingPTPayment);
+  const resetLoading = useRecoilValue(ResetLoading);
   // const ResgiterMember = () => {
 
-  const { data, isLoading } = useQuery([GET_BRANCH], () =>
+  const { data } = useQuery([GET_BRANCH], () =>
     getBranch({
       branch_id: null,
       order_type: MembershipBookingPersonaltrainer
@@ -44,9 +46,9 @@ const BranchMember = () => {
     })
   );
   // }
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>loading...</div>;
+  // }
 
   console.log(MembershipBookingClass);
   const filterData =
@@ -79,6 +81,15 @@ const BranchMember = () => {
   };
   // console.log(data.data); // tất cả dữ liệu của các nhánh
   // console.log(filterData); // lấy dữ liệu đúng với nhánh
+
+  if (!filterData && resetLoading) {
+    console.log("loading");
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-100 h-screen">

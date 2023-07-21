@@ -1,11 +1,11 @@
 // import React from "react";
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect, useState } from "react";
+// import { useQuery } from "react-query";
 import TitlePage from "../../styles/titlepage/TitlePage";
 import TimeLine from "../components/Schedule/TimeLine";
 import Footer from "../components/home/footer/Footer";
 import { getBookingPTScheduleHours } from "../../api/api";
-import { GET_SCHEDULEHOURS } from "../../constants/queryKeys";
+// import { GET_SCHEDULEHOURS } from "../../constants/queryKeys";
 import { useRecoilState } from "recoil";
 import { ChanngeBackGroundColor } from "../../store/recoil/store";
 import {
@@ -18,10 +18,11 @@ import { useNavigate } from "react-router-dom";
 const Booking = () => {
   const today = new Date();
   const navigate = useNavigate();
-  const CurrentHours = today.getHours();
+  const CurrentHours = Number(today.getHours());
+  // const CurrentMinute = today.getMinutes();
   const formatmonth = Number(today.getMonth()) + 1;
-  const CurrentDay =
-    today.getFullYear() + "-" + formatmonth + "-" + today.getDate();
+  // const CurrentDay =
+  //   today.getFullYear() + "-" + formatmonth + "-" + today.getDate();
   const [stateHoursSwitch, setStateHoursSwitch] = useState([]);
   const [changeBgColorState, setChangeBgColorState] = useRecoilState(
     ChanngeBackGroundColor
@@ -30,13 +31,13 @@ const Booking = () => {
     useRecoilState(getFormBookingPT);
   const [changeBgColorStateSwitch, setChangeBgColorStateSwitch] =
     useRecoilState(ChanngeBackGroundColorButtonDay);
-  const { data, isLoading } = useQuery([GET_SCHEDULEHOURS], () =>
-    getBookingPTScheduleHours(26359, 2518, CurrentDay)
-  );
+  // const { data, isLoading } = useQuery([GET_SCHEDULEHOURS], () =>
+  //   getBookingPTScheduleHours(totalDataFormBooking)
+  // );
   // let a = [];
   const SwitchHoursWorkout = (startDate, endDate) => {
     setChangeBgColorStateSwitch(startDate);
-    const filterData = data.filter(
+    const filterData = totalDataFormBooking.filter(
       (e) =>
         Number(e.start_time.slice(0, 2)) > startDate &&
         Number(e.start_time.slice(0, 2)) < endDate
@@ -45,8 +46,17 @@ const Booking = () => {
   };
   // const totalDataFormBooking = (data2) => {
   // };
+  console.log(totalDataFormBooking);
+  useEffect(() => {
+    if (getFormBookingPT) {
+      getBookingPTScheduleHours(getFormBookingPT);
+    }
+  }, [totalDataFormBooking]);
   const SubmitHandlePayment = (start_time, full_time) => {
-    // console.log(totalDataFormBooking);
+    // console.log(
+    //   Number(start_time.slice(2, 4)) + Number(start_time.slice(0, 2)) <
+    //     CurrentMinute + CurrentHours
+    // );
     if (Number(start_time.slice(0, 2)) < CurrentHours) {
       return;
     }
@@ -54,9 +64,9 @@ const Booking = () => {
     setChangeBgColorState(start_time);
     navigate("/booking/resgiterbooking", { state: full_time });
   };
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>loading...</div>;
+  // }
   // console.log(data);
   return (
     <div>
@@ -73,7 +83,7 @@ const Booking = () => {
               : "text-white p-2 ml-2"
           }`}
         >
-          <button onClick={() => SwitchHoursWorkout(0, 11)}>Buổi sáng</button>
+          <button onClick={() => SwitchHoursWorkout(0, 12)}>Buổi sáng</button>
         </div>
         <div
           className={` ${
@@ -82,7 +92,7 @@ const Booking = () => {
               : "text-white p-2"
           }`}
         >
-          <button onClick={() => SwitchHoursWorkout(11, 17)}>Buổi chiều</button>
+          <button onClick={() => SwitchHoursWorkout(11, 18)}>Buổi chiều</button>
         </div>
         <div
           className={` ${

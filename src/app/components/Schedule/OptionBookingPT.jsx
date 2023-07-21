@@ -4,32 +4,38 @@ import CardLine from "../../../styles/cardTimeLine/CardLine";
 const OptionBookingPT = (props) => {
   const option = props;
   // console.log(option.chooseOption);
+
   return (
     <div>
-      {option.chooseOption.map((e, index) => (
-        <CardLine
-          key={index}
-          text={
-            e.name
-              ? e.name
-              : e.tableprices_name
-              ? e.tableprices_name
-              : e.full_name
-              ? e.full_name
-              : e.date_time
-          }
-          data={
-            e.name
-              ? "Chi nhánh"
-              : e.tableprices_name
-              ? "PT"
-              : e.full_name
-              ? "name"
-              : e.date_time
-          }
-          onClose={option.onClose}
-        />
-      ))}
+      {option.chooseOption ? (
+        option.chooseOption.map((e, index) => (
+          <CardLine
+            key={index}
+            text={
+              e.name
+                ? e.name
+                : e.tableprices_name
+                ? e.tableprices_name
+                : e.full_name
+                ? e.full_name
+                : new Date(e.date_time).toLocaleDateString("en-GB")
+            }
+            data={
+              e.name
+                ? "Chi nhánh"
+                : e.tableprices_name
+                ? "PT"
+                : e.full_name
+                ? "name"
+                : e.date_time
+            }
+            fulldata={e}
+            onClose={option.onClose}
+          />
+        ))
+      ) : (
+        <div className="text-center">Chưa có dữ liệu</div>
+      )}
     </div>
   );
 };

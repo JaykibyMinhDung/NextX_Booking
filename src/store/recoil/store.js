@@ -60,9 +60,33 @@ export const DataPaymentVoucher = atom({
 });
 export const getFormBookingPT = atom({
   key: "FormResgiterBooking",
-  default: null,
+  default: {
+    branch_id: "",
+    employee_id: "",
+    date_time: "",
+  },
 });
 export const getExtraServiceBooking = atom({
   key: "ExtraBooking",
+  default: null,
+});
+
+// Booking GYym
+export const getIdBranch = atom({
+  key: "IdBranch",
+  default: "",
+});
+export const getIdPT = atom({
+  key: "iDPT",
+  default: "",
+});
+
+// State membership
+export const ResetLoading = atom({
+  key: "ResetLoading",
+  default: false,
+});
+export const ResetState = atom({
+  key: "ResetState",
   default: null,
 });

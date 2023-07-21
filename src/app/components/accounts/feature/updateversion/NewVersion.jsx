@@ -11,7 +11,7 @@ const NewVersion = (props) => {
         <p className="text-base">Hiện tại đây là phiên bản mới nhất!</p>
       </div>
       <div className="text-center mt-1">
-        <button onClick={dataParent.onClose} className=" text-xl">
+        <button onClick={dataParent.onClose} className=" text-base">
           Xác nhận
         </button>
       </div>
