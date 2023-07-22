@@ -10,11 +10,16 @@ const Login2 = (props) => {
   const navigate = useNavigate();
   const SubmitHandle = props;
   const [showPW, setShowPW] = useState(false);
+  const [stateinput, setStateInput] = useState(false);
   // const NavigateRegister = () => {
   //   navigate("/register");
   // };
   const NavigateForgetPW = () => {
     navigate("/forgetpassword");
+  };
+  const ChangeStateError = () => {
+    setValue("password", "");
+    setValue("username", "");
   };
   const ChangeShowPassword = () => {
     if (showPW) {
@@ -26,16 +31,17 @@ const Login2 = (props) => {
   const {
     register,
     getValues,
-    setError,
+    setValue,
     formState: { errors },
   } = useForm();
 
+  console.log(getValues());
   useEffect(() => {
-    setError("username", {
-      type: "manual",
-      message: "Dont Forget Your Username Should Be Cool!",
-    });
-  }, [setError]);
+    if (stateinput) {
+      ChangeStateError();
+      setStateInput(false);
+    }
+  }, [stateinput]);
   return (
     <div className="mx-4 my-2">
       <div className="flex items-center">
@@ -44,9 +50,11 @@ const Login2 = (props) => {
         </div>
         <img className="ml-8" width={130} src={logo} alt="" />
       </div>
-      <div className="my-6">
+      <div className="mx-2 my-6">
         <h2 className="font-bold text-2xl ">Điền thông tin đăng nhập</h2>
-        <p>Số điện thoại hoặc email dùng để đăng nhập tài khoản NextX </p>
+        <p className="text-sm">
+          Số điện thoại hoặc email dùng để đăng nhập tài khoản NextX{" "}
+        </p>
       </div>
       <div className="">
         <div className="flex justify-between items-center my-4 border-b-2">
@@ -60,7 +68,13 @@ const Login2 = (props) => {
             autoComplete="none"
             required
           />
-          <p>X</p>
+          <p
+            onClick={() => {
+              setStateInput(true);
+            }}
+          >
+            X
+          </p>
         </div>
         {!getValues().username && SubmitHandle.active && (
           <span className="text-red-500">
@@ -82,14 +96,19 @@ const Login2 = (props) => {
             <FaRegEye />
           </div>
         </div>
-        {!getValues().username && SubmitHandle.active && (
+        {!getValues().username &&
+          SubmitHandle.active &&
+          SubmitHandle.WrongPass === "" && (
+            <span className="text-red-500 mb-4">
+              * Mật khẩu không được để trống
+            </span>
+          )}
+        {SubmitHandle.WrongPass && (
           <span className="text-red-500 mb-4">
-            * Mật khẩu không được để trống
-          </span>
-        )}
-        {SubmitHandle.WrongPass === "password" && (
-          <span className="text-red-500 mb-4">
-            * Mật khẩu và email chưa đúng
+            *
+            {!getValues().password
+              ? " Mật khẩu không được để trống"
+              : SubmitHandle.WrongPass}
           </span>
         )}
         {errors.content && <span>This field is required</span>}

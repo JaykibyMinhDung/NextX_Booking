@@ -89,13 +89,13 @@ const Feature = () => {
     setShowPopUp(null);
   };
   const LogOutHandle = () => {
-    setStateGetOut(false);
+    setStateGetOut(null);
     localStorage.removeItem("tenant_packs");
     localStorage.removeItem("me");
     setTimeout(() => {
       console.log("cancel");
       return navigate("/homelogin");
-    }, 1000);
+    }, 500);
   };
   const featureClickHandle = (text) => {
     if (text === "Đăng xuất") {

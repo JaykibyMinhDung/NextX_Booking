@@ -8,7 +8,7 @@ export const token = atom({
 });
 export const isLogin = atom({
   key: "auth_login",
-  default: false,
+  default: "",
 });
 export const Logout = atom({
   key: "auth_logout",

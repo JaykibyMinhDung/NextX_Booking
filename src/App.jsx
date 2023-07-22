@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
-
+// import TestStyle from "../tests/TestStyle";
+// import Login from "./authentication/login/Login";
+// import Register from "./authentication/register/Register";
+// import Booking from "./app/page/Booking"
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
+// import { useForm } from "react-hook-form";
+// import { useNavigate } from "react-router-dom";
+
+import { useEffect, useState } from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // css
 import "./App.css";
@@ -28,11 +35,7 @@ import History from "./app/page/History";
 import User from "./app/page/User";
 import NotFound from "./errors/404";
 import BranchMember from "./app/components/menu_navbar/membership/BranchMember";
-// import TestStyle from "../tests/TestStyle";
 import ButtonChange from "./styles/ButtonChange/ButtonChange";
-import Login from "./authentication/login/Login";
-import Register from "./authentication/register/Register";
-// import Booking from "./app/page/Booking"
 import HomeLogin from "./authentication/home/HomeLogin";
 
 import { getToken } from "./api/api";
@@ -51,54 +54,51 @@ import Login2 from "./authentication/login/Login2";
 import Forget from "./authentication/forgetPW/Forget";
 import Resgister2 from "./authentication/register/Resgister2";
 import CodeVertify from "./authentication/register/vertification/CodeVertify";
-// import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
 
 function App() {
   // const getStateLogOut = useRecoilValue(Logout);
   // const [isAuth, setisAuth] = useState(false);
-  const [activeErr, setActiveErr] = useState(false);
-  const [PWError, setPWErroe] = useState("");
-  const [isAuth, setIsAuth] = useRecoilState(isLogin);
   // const [isLoading, setisLoading] = useState(false);
   // const navigate = useNavigate();
 
+  const [activeErr, setActiveErr] = useState(false);
+  const [PWError, setPWErroe] = useState("");
+  const [isAuth, setIsAuth] = useRecoilState(isLogin);
   const setStateGetOut = useSetRecoilState(Logout);
+
   // const authRoute = JSON.parse(localStorage.getItem("tenant_packs"));
   // const logout = () => {
   //   localStorage.removeItem("tenant_packs");
   //   setisAuth(null);
   // };
+
   const LoginHandle = async (event, authData) => {
-    event.preventDefault();
     // setisLoading(true);
-    const values = authData;
     // console.log(values);
+    event.preventDefault();
+    const values = authData;
     if (!values.username && !values.password) {
       setActiveErr(true);
       return null;
     }
     values.tenant_code = "demox";
-    // console.log(values);
     getToken(values)
       .then((results) => {
         // return localStorage.setItem("tenant_packs", JSON.stringify(results));
-        setIsAuth(results);
-        console.log(results);
-        if (results === null) {
-          setActiveErr(true);
-          setPWErroe("password");
+        // console.log(results);
+        if (results.status_code === 1) {
+          // setActiveErr(true);
+          setPWErroe(results.message);
           return null;
         }
+
+        setIsAuth(results);
       })
       .then(() => {
         setStateGetOut(true);
         // setIsAuth(JSON.parse(localStorage.getItem("tenant_packs")));
         // setisLoading(false);
       })
-      // .then(() => {
-      //   setTimeout(() => navigate("/homelogin"), 3000);
-      // })
       .catch(() => {
         setActiveErr(true);
         console.log("Quý khách đã gặp lỗi trong quá trình nhập dữ liệu");
@@ -109,26 +109,15 @@ function App() {
       const result = await getToken();
       setIsAuth(result);
     }
+    console.log(isAuth);
     getUser();
-    // if (authRoute) {
-    //   return setIsAuth(true);
-    // }
-    // // Cái này cũng đang không lâys được dư liệu từ local, kiểm tra lại
-    // if (!authRoute) {
-    //   return setIsAuth(null);
-    // }
   }, [setIsAuth]);
-  // console.log(isAuth);
-
-  // if (isLoading) {
-  //   return <div className="text-center font-semibold text-3xl">loading...</div>;
-  // }
   return (
     <>
       <BrowserRouter>
         {/* {isAuth || authRoute ? ( */}
         <Routes>
-          {isAuth ? (
+          {isAuth?.status_code !== 1 && isAuth ? (
             <>
               <Route path="*" element={<NotFound />} />
               <Route path="/" element={<Home />} />
@@ -167,8 +156,6 @@ function App() {
               <Route path="/style" element={<ButtonChange />} />
             </>
           ) : (
-            //  </Routes>
-            //  <Routes>
             <>
               {/* Authentication */}
               <Route path="/homelogin" element={<HomeLogin />} />

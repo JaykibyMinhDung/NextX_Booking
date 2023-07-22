@@ -12,12 +12,6 @@ const password = "1a2s3dA!@#";
 
 // const passwordToken = "123456";
 
-// export const me = async () => {
-//   return isStoredJwt()
-//     ? (await get(createUrl("/api/me")).catch(() => null))?.data // nếu true trả về dữ liệu server gửi về
-//     : null; // Nếu trống không chạy hàm me
-// };
-
 // login
 export const getToken = async (values) => {
   const { data } = await connect({
@@ -26,21 +20,12 @@ export const getToken = async (values) => {
     data: values,
   }).catch((err) => console.log(err));
   if (data?.data.length < 1) {
-    return null;
+    return data?.meta;
   }
   const results = (await data?.data) ? setStoredJwt(data.data?.token) : null;
+  // const token = (await results) === undefined ? data?.data : data?.meta;
   const token = (await results) === undefined ? data?.data : null;
   setUsers(data?.data.user);
-  // console.log(token);
-  // const navigateHome = await token ? location.assign("/") : null
-  // if (data) {
-  //   return ;
-  // }
-  // if (!data) {
-  //  return null
-  // }
-  // return alert("Could not login");
-  // localStorage.setItem("tenant_packs", data);
   return token;
 };
 
@@ -55,20 +40,6 @@ export const getBanner = async () => {
   });
   return data.data;
 };
-
-// if (!localStorage.getItem("tenant_packs")) {
-
-// }
-
-// Đăng xuất được 1 lần và không chuyển hướng khi đăng xuát được. Cần fix lại
-// const test = () => {
-//   setTimeout(() => {
-// const tokenData = JSON.parse(localStorage.getItem("tenant_packs"));
-// const tokenGYM = tokenData ? tokenData.data : "";
-// console.log(tokenData);
-//     return tokenGYM;
-//   }, 2000);
-// };
 
 // GET API
 
