@@ -2,17 +2,19 @@
   "app": {
     "title": "My App",
     "headerTitle": "My App",
-    "headerColor": "#1843EF",
+    "headerColor": "#1fef42",
     "textColor": "white",
     "statusBarColor": "#1843EF",
     "leftButton": "back",
     "statusBar": "normal",
     "actionBarHidden": false,
     "hideAndroidBottomNavigationBar": false,
-    "hideIOSSafeAreaBottom": false
+    "hideIOSSafeAreaBottom": false,
+    "selfControlLoading": false
   },
   "debug": false,
-  "listCSS": [],
-  "listSyncJS": [],
-  "listAsyncJS": []
+  "listCSS": ["assets/index-786e3a9b.css"],
+  "listSyncJS": ["assets/index.b70a257c.module.js"],
+  "listAsyncJS": [],
+  "template": {}
 }

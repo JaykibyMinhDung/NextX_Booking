@@ -113,10 +113,11 @@ function App() {
     getUser();
   }, [setIsAuth]);
   return (
+    // basename={`/zapps/${window.APP_ID}`}" baseURL="/zapps/[ZALO_MINI_APP_ID]"
     <>
-      <BrowserRouter>
-        {/* {isAuth || authRoute ? ( */}
-        <Routes>
+      <BrowserRouter >
+        {/* basepath="/zapps/[434835250971250077]"*/}
+        <Routes >
           {isAuth?.status_code !== 1 && isAuth ? (
             <>
               <Route path="*" element={<NotFound />} />

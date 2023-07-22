@@ -1,6 +1,17 @@
+// import fetch from "node-fetch"
+
+// export default {
+//   plugins: {
+//     tailwindcss: {},
+//     autoprefixer: {},
+//   },
+// };
+
+import tailwind from "tailwindcss";
+import autoprefixer from "autoprefixer";
+
+import tailwindConfig from "./tailwind.config.js";
+
 export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
+  plugins: [tailwind(tailwindConfig), autoprefixer],
 };

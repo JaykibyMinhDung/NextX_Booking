@@ -60,3 +60,15 @@ date + '/' + month + '/' + year
 có thể lấy slice để cắt từng phần từ và sắp xếp được
 
 Có một thư viện dùng để lấy rating và trình rating ra màn hình, thay đổi theo việc di chuột để đánh giá được, rating MUI
+
+<!-- Xu hướng UI ở trong app này của mình, sử dụng:
+ - Opacity: 80 - 90%
+ - Border-radius: 10px - 15px hoặc full
+ - gradient-backgrond color: (backgrond image) cái này set từ trắng đến màu đậm để tạo độ bóng và dộ nỏi cho shape
+ - Box-shadow: Dùng để tạo hiệu ứng shape nổi, cảm giác 3D
+ - display grid: Dùng để căn chỉnh theo response
+ - thuộc tính calc() css, dùng để responsive cứng giữa các màn
+ - Dùng cả phần trăm và pixel: pixel sẽ giúp không bị méo hình, còn phần trăm sẽ bị méo hình theo màn
+
+
+ -->

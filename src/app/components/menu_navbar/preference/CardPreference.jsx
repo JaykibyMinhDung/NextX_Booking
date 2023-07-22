@@ -11,7 +11,10 @@ const CardPreference = (props) => {
       <div className="relative w-2/5 ml-4">
         <h2 className="font-bold">{dataParent.nameCode}</h2>
         <p>{dataParent.KM}</p>
-        <button className="btn__prefer font-semibold"> Thu thập</button>
+        <button className="btn__prefer font-semibold" disabled>
+          {" "}
+          Đã thu thập
+        </button>
       </div>
     </div>
   );

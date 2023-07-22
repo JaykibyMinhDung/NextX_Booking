@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import TitlePage from "../../../../styles/titlepage/TitlePage";
-import Popup from "../../../../styles/modal/Modal";
-import FormFeedBack from "./FormFeedBack";
 import "./feedback.css";
 import { FaPlusCircle } from "react-icons/fa";
 import { useQuery } from "react-query";
+import TitlePage from "../../../../styles/titlepage/TitlePage";
+import Popup from "../../../../styles/modal/Modal";
+import FormFeedBack from "./FormFeedBack";
 import { GET_FEEDBACK } from "../../../../constants/queryKeys";
 import { getFeedback } from "../../../../api/api";
 import CardPage from "../../../../styles/cardPage/CardPage";

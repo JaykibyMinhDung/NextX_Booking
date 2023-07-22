@@ -6,6 +6,9 @@ import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Loading from "./spinner/Loading.jsx";
 
+// z
+// import "./setPublicPath.js";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -16,7 +19,7 @@ const queryClient = new QueryClient({
   },
 });
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("app")).render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
       <RecoilRoot>
