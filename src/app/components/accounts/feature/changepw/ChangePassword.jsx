@@ -24,7 +24,7 @@ const ChangePassword = () => {
     setChangeInputNewPW(event.target.value);
   };
   const SubmitPasswordHandle = () => {
-    return console.log(changeInputOldPW, changeInputNewPW);
+    // return console.log(changeInputOldPW, changeInputNewPW);
   };
   return (
     <div>

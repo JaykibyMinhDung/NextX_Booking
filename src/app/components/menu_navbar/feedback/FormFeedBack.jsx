@@ -15,7 +15,7 @@ const FormFeedBack = (props) => {
   const feedbackhandle = async () => {
     const values = getValues();
     values.category_id = null;
-    console.log(values);
+    // console.log(values);
     postFeedback(values)
       .then((results) => console.log(results.message))
       .then(() => {

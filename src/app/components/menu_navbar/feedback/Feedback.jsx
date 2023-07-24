@@ -12,7 +12,7 @@ import CardPage from "../../../../styles/cardPage/CardPage";
 const Feedback = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { data, isLoading } = useQuery([GET_FEEDBACK], () => getFeedback());
-  console.log(data);
+  // console.log(data);
   const showModalHandle = () => {
     document.body.style.overflow = "hidden";
     return setShowPopup(true);

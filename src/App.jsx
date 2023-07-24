@@ -109,15 +109,15 @@ function App() {
       const result = await getToken();
       setIsAuth(result);
     }
-    console.log(isAuth);
+    // console.log(isAuth);
     getUser();
   }, [setIsAuth]);
   return (
     // basename={`/zapps/${window.APP_ID}`}" baseURL="/zapps/[ZALO_MINI_APP_ID]"
     <>
-      <BrowserRouter >
+      <BrowserRouter>
         {/* basepath="/zapps/[434835250971250077]"*/}
-        <Routes >
+        <Routes>
           {isAuth?.status_code !== 1 && isAuth ? (
             <>
               <Route path="*" element={<NotFound />} />
@@ -159,8 +159,8 @@ function App() {
           ) : (
             <>
               {/* Authentication */}
-              <Route path="/homelogin" element={<HomeLogin />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<HomeLogin />} />
+              {/* <Route path="*" element={<NotFound />} /> */}
               {/* <Route path="/" element={<Login LoginHandle={LoginHandle} />} /> */}
               <Route
                 path="/"

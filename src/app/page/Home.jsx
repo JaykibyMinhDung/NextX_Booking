@@ -13,12 +13,22 @@ import { getContract } from "../../api/api";
 
 // css
 import "swiper/css";
+import Loading from "../../spinner/Loading";
 
 const Home = () => {
-  const { isLoading, data } = useQuery([GET_CONTRACT], () => getContract());
+  const { isFetching, data, isError } = useQuery([GET_CONTRACT], () =>
+    getContract()
+  );
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (isFetching) {
+    return <Loading />;
+  }
+  if (isError) {
+    return (
+      <div className="text-center">
+        <p>Thoát app và khởi động lại app</p>
+      </div>
+    );
   }
   // console.log(data);
   return (

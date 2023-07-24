@@ -3,16 +3,17 @@
 import { useQuery } from "react-query";
 import { getCheckin } from "../../../../../api/api";
 import { GET_CHECKIN } from "../../../../../constants/queryKeys";
+import Loading from "../../../../../spinner/Loading";
 
 const Checkin = (props) => {
   const id = props;
-  const { data, isLoading } = useQuery([GET_CHECKIN], () =>
+  const { data, isFetching } = useQuery([GET_CHECKIN], () =>
     getCheckin(id.idCheckin)
   );
-  if (isLoading) {
-    return <div>loading...</div>;
+  if (isFetching) {
+    return <Loading />;
   }
-  console.log(data);
+  // console.log(data);
   // const word = ;
   return (
     <div className="">

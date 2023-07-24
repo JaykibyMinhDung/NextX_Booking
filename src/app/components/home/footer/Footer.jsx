@@ -1,31 +1,38 @@
 // import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 // import Calender from "../../../../assets/calender_interface_seo_icon.svg";
+import {
+  FaHome,
+  FaUsers,
+  FaCalendarCheck,
+  FaHistory,
+  FaUser,
+} from "react-icons/fa";
 import "./footer.css";
 
 const NavFooter = [
   {
-    icon: <i className="fa fa-home" aria-hidden="true"></i>,
+    icon: <FaHome />,
     title: "Trang chủ",
     href: "/",
   },
   {
-    icon: <i className="fas fa-users-class    "></i>,
+    icon: <FaUsers />,
     title: "Lớp học",
     href: "/class",
   },
   {
-    icon: <i className="fas fa-calendar    "></i>,
+    icon: <FaCalendarCheck />,
     title: "Booking",
     href: "/booking",
   },
   {
-    icon: <i className="fas fa-history    "></i>,
+    icon: <FaHistory />,
     title: "Lịch sử",
     href: "/log",
   },
   {
-    icon: <i className="fa fa-user" aria-hidden="true"></i>,
+    icon: <FaUser />,
     title: "Tài khoản",
     href: "/account",
   },
@@ -43,13 +50,18 @@ const Footer = () => {
               className="footer__icon--boking"
             >
               {/* <img src={Calender} alt="" width={30} /> */}
-              <i className="fa fa-calendar" aria-hidden="true"></i>
+              <FaCalendarCheck />
             </div>
           </div>
           {NavFooter.map((e) => (
             <div className="footer__group" key={e.title}>
-              <NavLink to={e.href}>
-                {e.icon}
+              <NavLink
+                to={e.href}
+                className={({ isActive }) => (isActive ? "bg-green-700" : "")}
+              >
+                <div className="flex items-center justify-center mb-1">
+                  {e.icon}
+                </div>
                 <p>{e.title}</p>
               </NavLink>
             </div>

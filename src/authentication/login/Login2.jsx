@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
 
 const Login2 = (props) => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Login2 = (props) => {
     formState: { errors },
   } = useForm();
 
-  console.log(getValues());
+  // console.log(getValues());
   useEffect(() => {
     if (stateinput) {
       ChangeStateError();
@@ -73,7 +74,7 @@ const Login2 = (props) => {
               setStateInput(true);
             }}
           >
-            X
+            <FaUserCircle />
           </p>
         </div>
         {!getValues().username && SubmitHandle.active && (

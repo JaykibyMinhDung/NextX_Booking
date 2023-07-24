@@ -10,17 +10,28 @@ import { GET_CLASS } from "../../constants/queryKeys";
 import { getClass } from "../../api/api";
 import { useRecoilValue } from "recoil";
 import { updatedDateClass } from "../../store/recoil/store";
+import Loading from "../../spinner/Loading";
+import NotFound from "../../errors/404";
 
 const Class = () => {
   const dateClass = useRecoilValue(updatedDateClass);
-  const { data, isLoading } = useQuery([GET_CLASS], () => getClass(dateClass));
-  if (isLoading) {
-    return <div>Loading...</div>;
+  const { data, isFetching, isError } = useQuery([GET_CLASS], () =>
+    getClass(dateClass)
+  );
+  if (isFetching) {
+    return <Loading />;
   }
-  console.log(data);
+  if (isError) {
+    <NotFound />;
+  }
+
+  // console.log(data);
   return (
     <div>
-      <TitlePage title={"Lớp học"} icon={null} />
+      <TitlePage
+        title={"Lớp học"}
+        // icon={null}
+      />
       <div className="flex items-center justify-between mx-4 mt-16 mb-3 bg-slate-100 p-3 rounded-2xl">
         <div className="flex items-center">
           <FaMapMarkerAlt />

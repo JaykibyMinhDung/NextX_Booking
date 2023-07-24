@@ -12,7 +12,7 @@ import avatarDefau from "../../../../assets/avatar.jpg";
 const Extend = () => {
   const { data } = useQuery([GET_EXTEND], () => getExtend());
   const DetailExtendHandle = () => {
-    console.log(data);
+    console.log("detail");
   };
   const response = data.data;
   return (

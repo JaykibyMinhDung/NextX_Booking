@@ -1,20 +1,20 @@
 {
   "app": {
-    "title": "My App",
-    "headerTitle": "My App",
-    "headerColor": "#1fef42",
+    "title": "Gymmaster Loyalty App",
+    "headerTitle": "Gymmaster Loyalty App",
+    "headerColor": "#3b9254ff",
     "textColor": "white",
-    "statusBarColor": "#1843EF",
+    "statusBarColor": "#3b9254ff",
     "leftButton": "back",
     "statusBar": "normal",
     "actionBarHidden": false,
-    "hideAndroidBottomNavigationBar": false,
-    "hideIOSSafeAreaBottom": false,
+    "hideAndroidBottomNavigationBar": true,
+    "hideIOSSafeAreaBottom": true,
     "selfControlLoading": false
   },
   "debug": false,
-  "listCSS": ["assets/index-786e3a9b.css"],
-  "listSyncJS": ["assets/index.b70a257c.module.js"],
+  "listCSS": ["assets/index-b910b812.css"],
+  "listSyncJS": ["assets/index.18143c30.module.js"],
   "listAsyncJS": [],
   "template": {}
 }

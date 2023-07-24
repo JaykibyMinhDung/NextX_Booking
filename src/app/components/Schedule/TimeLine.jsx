@@ -44,9 +44,9 @@ const TimeLine = (props) => {
   // console.log(takeValueBookingPersonaltrainer);
   const month = Number(new Date().getMonth()) + 1;
   const today =
-    new Date().getDate() + "-" + month + "-" + new Date().getFullYear();
+    new Date().getDate() + "/" + month + "/" + new Date().getFullYear();
   const postDate =
-    new Date().getFullYear() + "-" + month + "-" + new Date().getDate();
+    new Date().getFullYear() + "/" + month + "/" + new Date().getDate();
   // const postChangeDate =
   //   new Date().getFullYear() + "-" + month + "-" + new Date().getDate();
   const data1 = useQuery(["test1"], () => getBookingPTBranch());
@@ -65,12 +65,12 @@ const TimeLine = (props) => {
   const ham2 = [];
   for (let i = 0; i < 7; i++) {
     // const element = array[i];
-    let test = moment(postDate).add(i, "day").format("DD-MM-YYYY");
+    let test = moment(postDate).add(i, "day").format("DD/MM/YYYY");
     ham.push(test);
   }
   for (let i = 0; i < 7; i++) {
     // const element = array[i];
-    let test = moment(postDate).add(i, "day").format("YYYY-MM-DD");
+    let test = moment(postDate).add(i, "day").format("YYYY/MM/DD");
     ham2.push(test);
   }
   // function formatDate(date) {
@@ -122,6 +122,14 @@ const TimeLine = (props) => {
 
     return setShowPopup(false);
   };
+  const LeftContainerActive = (isActive) =>
+    isActive
+      ? "after:bg-[#3b9254ff] containers animate-flow-circle left"
+      : "after:bg-[#F5F5F5] containers left";
+  const RightContainerActive = (isActive) =>
+    isActive
+      ? "after:bg-[#3b9254ff] containers animate-flow-circle right"
+      : "after:bg-[#F5F5F5] containers right";
   useEffect(() => {
     data4.mutate({
       branch_id: takeValueFullDataBranch.id,
@@ -146,8 +154,16 @@ const TimeLine = (props) => {
   ]);
 
   return (
-    <div className="timeline mt-16">
-      <div className="containers left">
+    <div
+      className={
+        takeValueBookingBranch &&
+        takeValueBookingContract &&
+        takeValueBookingPersonaltrainer
+          ? `timeline after:bg-[#03C988] transition mt-16`
+          : "timeline after:bg-[#F5F5F5] mt-16"
+      }
+    >
+      <div className={LeftContainerActive(takeValueBookingBranch)}>
         <div className="content">
           <h2>1. Chọn chi nhánh</h2>
           <div
@@ -164,7 +180,7 @@ const TimeLine = (props) => {
           </div>
         </div>
       </div>
-      <div className="containers right">
+      <div className={RightContainerActive(takeValueBookingContract)}>
         <div className="content">
           <h2>2. Chọn hợp đồng</h2>
           <div
@@ -180,7 +196,7 @@ const TimeLine = (props) => {
           </div>
         </div>
       </div>
-      <div className="containers left">
+      <div className={LeftContainerActive(takeValueBookingPersonaltrainer)}>
         <div className="content">
           <h2>3. Chọn PT</h2>
           <div
@@ -201,7 +217,7 @@ const TimeLine = (props) => {
           </div>
         </div>
       </div>
-      <div className="containers right">
+      <div className={RightContainerActive(takeValueFullDataDateOption)}>
         <div onClick={() => showModalHandle("Schedule")} className="content">
           <h2>4. Chọn lịch tập PT</h2>
           <div className="flex items-center whitespace-nowrap w-full mt-2 ">

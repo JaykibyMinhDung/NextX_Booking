@@ -421,7 +421,7 @@ export const getBookingPTScheduleHours = async (post) => {
   //   return { error: "Please login" };
   // }
   const { employee_id, branch_id, date_time } = post;
-  console.log(employee_id, branch_id, date_time);
+  // console.log(employee_id, branch_id, date_time);
   const { data } = await connect({
     method: "GET",
     url: `/api/gym-loyalty/member/scheduler-pt?${
@@ -456,17 +456,9 @@ export const postBookingPersonalTrainer = async (form) => {
 };
 
 export const postRegisterMember = async (post) => {
-  // const tokenGYM = await getToken();
-  // if (!tokenGYM) {
-  //   return { error: "Please login" };
-  // }
   const { data } = await connect({
     method: "POST",
-    // url: "/api/gym-loyalty/member/register-order",
     url: `api/gym-loyalty/member/register-order`,
-    // headers: {
-    //   Authorization: "Bearer " + tokenGYM.token,
-    // },
     data: post,
   });
   return data.data;
@@ -478,5 +470,5 @@ export const postDeleteAccount = async (post) => {
     url: `api/gym-loyalty/member/delete-account`,
     data: { password: post },
   });
-  return data.message;
+  return data;
 };

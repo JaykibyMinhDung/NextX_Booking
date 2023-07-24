@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./feature.css";
+import { useNavigate } from "react-router-dom";
+
 import { FaAngleRight } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 import { FaHistory } from "react-icons/fa";
@@ -11,8 +16,6 @@ import { FaHourglassHalf } from "react-icons/fa";
 import ButtonChange from "../../../../styles/ButtonChange/ButtonChange";
 import { isLogin } from "../../../../store/recoil/authenticate";
 
-import "./feature.css";
-import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import PopupNotification from "../../../../styles/modalnotification/ModalNotification";
 import SignOutWeb from "./logout/logout";
@@ -93,7 +96,6 @@ const Feature = () => {
     localStorage.removeItem("tenant_packs");
     localStorage.removeItem("me");
     setTimeout(() => {
-      console.log("cancel");
       return navigate("/homelogin");
     }, 500);
   };
@@ -114,7 +116,21 @@ const Feature = () => {
       return setShowPopUp(text);
     }
     if (text === "Xóa tài khoản") {
-      postDeleteAccount(getStateDeleteAccount);
+      // console.log("cancel");
+      postDeleteAccount(getStateDeleteAccount)
+        .then((results) => {
+          toast.error(results.meta.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        })
+        .catch((err) => console.log(err));
       return setShowPopUp(text);
     }
   };
@@ -155,6 +171,18 @@ const Feature = () => {
           )}
         </Popup>
       )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </React.Fragment>
   );
 };

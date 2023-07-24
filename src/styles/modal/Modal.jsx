@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 // import PortalReactDOM from "react-dom";
 import classes from "./modal.module.css";
 
@@ -26,11 +26,8 @@ const Popup = (props) => {
   const dataparents = props;
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(
-        <Backdrop onClose={dataparents.onClose} />,
-        portalElement
-      )}
-      {ReactDOM.createPortal(
+      {createPortal(<Backdrop onClose={dataparents.onClose} />, portalElement)}
+      {createPortal(
         <ModalOverlay>{dataparents.children}</ModalOverlay>,
         portalElement
         // {props.children}

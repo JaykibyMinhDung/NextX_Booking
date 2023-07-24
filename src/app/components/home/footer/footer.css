@@ -40,12 +40,15 @@ footer {
   border-radius: 50%;
   border: 0px;
 }
-.footer__icon--boking i {
+.footer__icon--boking svg {
   width: 100%;
   color: rgb(255, 255, 255);
   font-size: x-large;
 }
 .footer__group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   text-align: center;
   margin-left: 0rem;
@@ -56,7 +59,7 @@ footer {
   font-size: small;
   width: 100%;
 }
-.footer__group a i {
+.footer__group a svg {
   display: block;
   font-size: 140%;
 }
@@ -172,7 +175,7 @@ footer {
   .footer__group {
     margin-left: 0rem;
     margin-right: 0rem;
-    font-size: small;
+    font-size: x-small;
   }
   .footer__navlink {
     width: 100%;
@@ -194,7 +197,7 @@ footer {
   .footer__icon--boking i {
     width: 100%;
     color: rgb(255, 255, 255);
-    font-size: x-large;
+    font-size: medium;
   }
   .footer__group {
     width: 100%;
@@ -204,7 +207,7 @@ footer {
   }
   .footer__group a {
     display: block;
-    font-size: small;
+    font-size: x-small;
     width: 100%;
   }
 }

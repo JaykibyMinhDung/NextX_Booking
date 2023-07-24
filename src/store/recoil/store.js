@@ -94,6 +94,10 @@ export const ResetState = atom({
   key: "ResetState",
   default: null,
 });
+export const PaymentDate = atom({
+  key: "ResgisterBookingPT",
+  default: "",
+});
 
 // account
 

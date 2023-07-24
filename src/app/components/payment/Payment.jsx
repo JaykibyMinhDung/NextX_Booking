@@ -1,15 +1,16 @@
 // import React from 'react'
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import "./pay.css";
 import TitlePage from "../../../styles/titlepage/TitlePage";
 import imageCash from "../../../assets/21.jpg";
 // import { useLocation } from "react-router-dom";
 import FooterPayment from "./FooterPayment";
-import { useRecoilValue } from "recoil";
 import {
   BookingClassPayment,
   receiveMembership,
   DataPaymentPreference,
 } from "../../../store/recoil/store";
-import { useState } from "react";
 import Popup from "../../../styles/modal/Modal";
 import CardLine from "../../../styles/cardTimeLine/CardLine";
 
@@ -35,7 +36,7 @@ const Payment = () => {
   const getReference = () => {
     showModalHandle();
   };
-  console.log(BookingClass);
+  // console.log(filterData);
   // const valueMembership = useRecoilValue(receiveMembership)
   return (
     <div className="mt-16">
@@ -49,8 +50,8 @@ const Payment = () => {
           <div className="m-4">
             <p className="font-semibold">Đơn thanh toán</p>
           </div>
-          <div className="m-4 card_payment">
-            <div className="flex justify-between">
+          <div className="m-3 payment__card">
+            <div className="flex justify-between ">
               <p>Gói: {filterData.name}</p>
               <p> {filterData.total_price.toLocaleString()}</p>
             </div>
@@ -72,7 +73,7 @@ const Payment = () => {
               </p>
             </div>
           </div>
-          <div className="m-4">
+          <div className="m-3 payment__card">
             <div className="flex justify-between">
               <p>Giảm giá: </p>
               <p>{filterData.gym_vouchers.length}</p>
@@ -82,8 +83,8 @@ const Payment = () => {
               <p>{TotalBill.toLocaleString()}</p>
             </div>
           </div>
-          <p className="m-4 font-semibold">Phương thức thanh toán</p>
-          <div className="flex items-center m-4">
+          <p className="mx-4 my-6 font-semibold">Phương thức thanh toán</p>
+          <div className="flex items-center m-3 payment__card">
             <img src={imageCash} width={50} alt="" />
             <p>Thanh toán tại quầy</p>
           </div>
@@ -105,7 +106,7 @@ const Payment = () => {
                   <CardLine
                     key={e.id}
                     text={e.code}
-                    data={e.gym_vouchers}
+                    data={e}
                     title={"preference"}
                     discount={e.total_discount}
                     onClose={hiddenModalHandle}

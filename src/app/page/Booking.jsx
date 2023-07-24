@@ -47,7 +47,7 @@ const Booking = () => {
   };
   // const totalDataFormBooking = (data2) => {
   // };
-  console.log(totalDataFormBooking);
+  // console.log(totalDataFormBooking);
   useEffect(() => {
     if (getFormBookingPT) {
       getBookingPTScheduleHours(getFormBookingPT);
@@ -78,13 +78,13 @@ const Booking = () => {
       <TimeLine setForm={setTotalDataFormBooking} />
       <div
         // onClick={totalDataFormBooking}
-        className={`flex justify-between mx-5 mt-3 bg-[#3b9254ff] rounded-2xl`}
+        className={`flex justify-between mx-5 mt-3 bg-[#3b9254ff] rounded-md`}
       >
         <div
           className={` ${
             changeBgColorStateSwitch === 0
-              ? "flex items-center text-white rounded-2xl ml-2 p-2 bg-green-800"
-              : "text-white p-2 ml-2"
+              ? "flex items-center text-white rounded-md ml-2 my-1 p-1 my-1 bg-green-800"
+              : "text-white p-1 my-1 ml-2"
           }`}
         >
           <button onClick={() => SwitchHoursWorkout(0, 12)}>Buổi sáng</button>
@@ -92,8 +92,8 @@ const Booking = () => {
         <div
           className={` ${
             changeBgColorStateSwitch === 11
-              ? " flex items-center text-white rounded-2xl p-2 bg-green-800"
-              : "text-white p-2"
+              ? " flex items-center text-white rounded-md p-1 my-1 bg-green-800"
+              : "text-white p-1 my-1"
           }`}
         >
           <button onClick={() => SwitchHoursWorkout(11, 18)}>Buổi chiều</button>
@@ -101,8 +101,8 @@ const Booking = () => {
         <div
           className={` ${
             changeBgColorStateSwitch === 17
-              ? "flex items-center text-white rounded-2xl mr-2 p-2 bg-green-800"
-              : "text-white p-2 mr-2"
+              ? "flex items-center text-white rounded-md mr-2 p-1 my-1 bg-green-800"
+              : "text-white p-1 my-1 mr-2"
           }`}
         >
           <button onClick={() => SwitchHoursWorkout(17, 23)}>Buổi tối</button>

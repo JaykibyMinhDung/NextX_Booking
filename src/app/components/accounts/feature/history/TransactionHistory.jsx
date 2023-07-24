@@ -8,7 +8,7 @@ import CardTransaction from "../../../../../styles/cardtransition/CardTransition
 
 const TransactionHistory = () => {
   const { data } = useQuery([GET_HISTORY], () => getHistory());
-  console.log(data);
+  // console.log(data);
   return (
     <React.Fragment>
       <TitlePage

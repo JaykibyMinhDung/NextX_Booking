@@ -10,11 +10,13 @@
   content: "";
   position: absolute;
   width: 2px;
-  background-color: rgb(160, 199, 160);
+  /* background-color: rgb(160, 199, 160); */
+  background-color: rgb(236, 236, 236);
   top: 0;
   bottom: 0;
   left: 50%;
   margin-left: -3px;
+  transition: all 1s ease-in;
 }
 
 /* Containers around content */
@@ -33,7 +35,8 @@
   width: 25px;
   height: 25px;
   right: -17px;
-  background-color: #3b9254ff;
+  /* background-color: #3b9254ff; */
+  /* background-color: rgb(236, 236, 236); */
   border: 4px solid #ffffff;
   top: 15px;
   border-radius: 50%;
@@ -53,6 +56,8 @@
 /* Add arrows to the left containers (pointing right) */
 .left::before {
   content: " ";
+
+  /* css style circle */
   height: 0;
   position: absolute;
   top: 22px;
@@ -123,7 +128,15 @@
   /* Make sure all circles are at the same spot */
   .left::after,
   .right::after {
-    left: 17px;
+    /* font-family: FontAwesome;
+    font-size: larger;
+    content: "\f058";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle; */
+
+    /* style initial */
+    left: 16px;
   }
 
   /* Make all right containerss behave like the left ones */
@@ -138,7 +151,7 @@
     left: 31px;
   }
   .content {
-    padding: 10px 30px;
+    padding: 5px 30px;
   }
   /* Full-width containerss */
   .containers {
@@ -163,7 +176,7 @@
   /* Make sure all circles are at the same spot */
   .left::after,
   .right::after {
-    left: 17px;
+    left: 16px;
   }
 
   /* Make all right containerss behave like the left ones */

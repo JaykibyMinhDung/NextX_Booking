@@ -5,15 +5,20 @@ import CardHistory from "../components/log/CardHistory";
 import { useQuery } from "react-query";
 import { getLogContractBooking } from "../../api/api";
 import { GET_HISTORYBOOKING } from "../../constants/queryKeys";
+import Loading from "../../spinner/Loading";
+import NotFound from "../../errors/404";
 
 const History = () => {
-  const { data, isLoading } = useQuery([GET_HISTORYBOOKING], () =>
+  const { data, isFetching, isError } = useQuery([GET_HISTORYBOOKING], () =>
     getLogContractBooking()
   );
-  if (isLoading) {
-    return <div>loading...</div>;
+  if (isFetching) {
+    return <Loading />;
   }
-  console.log(data);
+  if (isError) {
+    <NotFound />;
+  }
+  // console.log(data);
   return (
     <div>
       <TitlePage title={"Lịch sử"} />

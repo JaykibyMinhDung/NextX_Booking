@@ -163,7 +163,7 @@ const DetailContracts = () => {
       return backgroundInforClient();
     }
     if (active === "Lịch sử checkin") {
-      console.log(data.order_id, "checkin");
+      // console.log(data.order_id, "checkin");
       return <Checkin idCheckin={data.order_id} />;
     }
     if (active === "Lịch sử gói tập") {

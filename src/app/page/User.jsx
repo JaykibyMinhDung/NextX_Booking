@@ -7,7 +7,7 @@ import Footer from "../components/home/footer/Footer";
 const User = () => {
   return (
     <div>
-      <TitlePage title={"Thông tin tài khoản"} icon={null} />
+      <TitlePage title={"Thông tin tài khoản"} />
       <Setting />
       <Feature />
       <Footer />

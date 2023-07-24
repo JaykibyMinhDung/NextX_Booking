@@ -4,6 +4,15 @@ export default {
   content: ["./src/**/*.{jsx,ts,js}"],
   theme: {
     extend: {
+      animation: {
+        "flow-circle": "effectCreateActive 3s linear",
+      },
+      keyframes: {
+        effectCreateActive: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.1)" },
+        },
+      },
       spacing: {
         "10%": "10%",
         "12%": "12%",

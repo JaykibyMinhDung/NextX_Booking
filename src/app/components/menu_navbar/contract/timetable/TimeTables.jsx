@@ -3,15 +3,17 @@ import { FaCheck } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { GET_TIMETABLES } from "../../../../../constants/queryKeys";
 import { getTimeTables } from "../../../../../api/api";
+import Loading from "../../../../../spinner/Loading";
 
 const TimeTables = (props) => {
   const order_id = props;
-  const { data, isLoading } = useQuery([GET_TIMETABLES], () =>
+  const { data, isFetching } = useQuery([GET_TIMETABLES], () =>
     getTimeTables(order_id.id)
   );
-  if (isLoading) {
-    return <div>loading...</div>;
+  if (isFetching) {
+    return <Loading />;
   }
+  // console.log(data);
   return (
     <div>
       <div

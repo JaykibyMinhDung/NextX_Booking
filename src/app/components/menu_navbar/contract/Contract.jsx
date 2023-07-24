@@ -8,14 +8,15 @@ import CardPageContracts from "./CardPageContracts";
 import { FaChevronDown } from "react-icons/fa";
 import style from "./contract.module.css";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../../../spinner/Loading";
 
 const Contract = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useQuery([GET_CONTRACT], () => getContract());
-  if (isLoading) {
-    return <div>loading...</div>;
+  const { data, isFetching } = useQuery([GET_CONTRACT], () => getContract());
+  if (isFetching) {
+    return <Loading />;
   }
-  console.log(data);
+  // console.log(data);
   const dividedPrice = data.map((e) => Number(e.total_money_payment));
   const totalPrice = dividedPrice.reduce(
     (prePrice, afterPrice) => Number(prePrice) + Number(afterPrice),

@@ -52,6 +52,7 @@ const CardLine = (props) => {
     if (dataParent.title === "preference") {
       setValueDiscount(dataParent.discount);
       setValueVoucher(dataParent.data);
+      console.log(dataParent.data);
       return dataParent.onClose();
     }
     if (dataParent.title === "ExtraServiceBooking") {
