@@ -14,8 +14,10 @@ import { getContract } from "../../api/api";
 // css
 import "swiper/css";
 import Loading from "../../spinner/Loading";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const { isFetching, data, isError } = useQuery([GET_CONTRACT], () =>
     getContract()
   );
@@ -46,6 +48,7 @@ const Home = () => {
         ))}
       </Swiper>
       <Navbar />
+      <button onClick={() => navigate("/testmodal")}>test</button>
       <Advertising />
       <Footer />
     </React.Fragment>

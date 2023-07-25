@@ -10,6 +10,7 @@ import {
   BookingClassPayment,
   receiveMembership,
   DataPaymentPreference,
+  BookingPTPayment,
 } from "../../../store/recoil/store";
 import Popup from "../../../styles/modal/Modal";
 import CardLine from "../../../styles/cardTimeLine/CardLine";
@@ -17,6 +18,7 @@ import CardLine from "../../../styles/cardTimeLine/CardLine";
 const Payment = () => {
   // const location = useLocation();
   const [showPopup, setShowPopup] = useState(false);
+  const BookingPersolnalTrainner = useRecoilValue(BookingPTPayment);
   const BookingClass = useRecoilValue(BookingClassPayment);
   const filterData = useRecoilValue(receiveMembership);
   const getValueDiscount = useRecoilValue(DataPaymentPreference);
@@ -36,14 +38,20 @@ const Payment = () => {
   const getReference = () => {
     showModalHandle();
   };
-  // console.log(filterData);
+  console.log(BookingPersolnalTrainner);
   // const valueMembership = useRecoilValue(receiveMembership)
   return (
     <div className="mt-16">
       <TitlePage
         title={"Thanh toán"}
         icon={null}
-        navigateBack={`${filterData ? `/membership` : "/class"}`}
+        navigateBack={`${
+          BookingClass
+            ? "/class"
+            : BookingPersolnalTrainner
+            ? `/personaltrainer`
+            : `/membership`
+        }`}
       />
       {filterData && (
         <>

@@ -1,4 +1,4 @@
-// import TestStyle from "../tests/TestStyle";
+import TestStyle from "../tests/TestStyle";
 // import Login from "./authentication/login/Login";
 // import Register from "./authentication/register/Register";
 // import Booking from "./app/page/Booking"
@@ -159,6 +159,7 @@ function App() {
               <Route path="/log" element={<History />} />
               <Route path="/account" element={<User />} />
               <Route path="/style" element={<ButtonChange />} />
+              <Route path="/testmodal" element={<TestStyle />} />
             </>
           ) : (
             <>

@@ -105,7 +105,13 @@ const BranchMember = () => {
         }`}
         icon={null}
         test={filterData}
-        navigateBack={"/membership"}
+        navigateBack={
+          MembershipBookingClass
+            ? `/class`
+            : MembershipBookingPersonaltrainer
+            ? `/personaltrainer`
+            : `/membership`
+        }
       />
       <div className="text-center font-bold mb-4 mt-16 text-base">
         GÓI THÀNH VIÊN
