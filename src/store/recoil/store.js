@@ -80,6 +80,10 @@ export const getIdPT = atom({
   key: "iDPT",
   default: "",
 });
+export const getIdContract = atom({
+  key: "contractsinfor",
+  default: "",
+});
 export const OptionDate = atom({
   key: "DateBooking",
   default: "",

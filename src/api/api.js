@@ -390,9 +390,9 @@ export const getBookingPTListPT = async (idOrder, idBranch) => {
   // }
   const { data } = await connect({
     method: "GET",
-    url: `/api/gym-loyalty/member/list-pt-order${
-      idOrder ? "?order_id=" + idOrder : ""
-    } ${idBranch ? "&branch_id=" + idBranch : ""}`,
+    url: `/api/gym-loyalty/member/list-pt-order?${
+      idOrder ? "order_id=" + idOrder + "&" : ""
+    } ${idBranch ? "branch_id=" + idBranch : ""}`,
     // headers: {
     //   Authorization: "Bearer " + tokenGYM.token,
     // },
@@ -452,7 +452,7 @@ export const postBookingPersonalTrainer = async (form) => {
     // },
     data: form,
   });
-  return data.message;
+  return data;
 };
 
 export const postRegisterMember = async (post) => {
@@ -461,7 +461,7 @@ export const postRegisterMember = async (post) => {
     url: `api/gym-loyalty/member/register-order`,
     data: post,
   });
-  return data.data;
+  return data;
 };
 
 export const postDeleteAccount = async (post) => {
@@ -469,6 +469,58 @@ export const postDeleteAccount = async (post) => {
     method: "POST",
     url: `api/gym-loyalty/member/delete-account`,
     data: { password: post },
+  });
+  return data;
+};
+
+// Delete api
+
+export const deleteBookingYoga = async (id) => {
+  const { data } = await connect({
+    method: "DELTE",
+    url: `/api/gym-loyalty/member/booking-class/${id}`,
+  });
+  return data;
+};
+
+export const deleteBookingPT = async (id) => {
+  const { data } = await connect({
+    method: "DELETE",
+    url: `/api/gym-loyalty/member/booking-pt/${id}`,
+  });
+  return data;
+};
+
+export const postBookingYoga = async (post) => {
+  const { data } = await connect({
+    method: "POST",
+    url: `/api/gym-loyalty/member/booking-class`,
+    data: post,
+  });
+  return data;
+};
+
+// export const postBookingPTCalendar = async (post) => {
+//   const { data } = await connect({
+//     method: "POST",
+//     url: `/api/gym-loyalty/member/appointment`,
+//     data: post,
+//   });
+//   return data;
+// };
+
+export const getDetailBookingYoga = async (id) => {
+  const { data } = await connect({
+    method: "GET",
+    url: `/api/gym-loyalty/member/booking-class/${id}`,
+  });
+  return data;
+};
+
+export const getDetailBooking = async (id) => {
+  const { data } = await connect({
+    method: "GET",
+    url: `/api/gym-loyalty/member/booking-pt/${id}`,
   });
   return data;
 };

@@ -5,10 +5,29 @@ import { getHistory } from "../../../../../api/api";
 import TitlePage from "../../../../../styles/titlepage/TitlePage";
 import Search from "../../../../../styles/search/Search";
 import CardTransaction from "../../../../../styles/cardtransition/CardTransition";
+import Loading from "../../../../../spinner/Loading";
+import { useNavigate } from "react-router-dom";
 
 const TransactionHistory = () => {
-  const { data } = useQuery([GET_HISTORY], () => getHistory());
+  const { data, isFetching, isRefetchError } = useQuery([GET_HISTORY], () =>
+    getHistory()
+  );
+  const navigate = useNavigate();
   // console.log(data);
+
+  if (isFetching) {
+    return <Loading />;
+  }
+
+  if (isRefetchError) {
+    return (
+      <div className="text-center">
+        <h2>Đã xảy ra lỗi khi nhận dữ liệu, vui lòng reset lại trang</h2>
+        <button onClick={() => navigate("/")}>Quay về trang chủ</button>
+      </div>
+    );
+  }
+
   return (
     <React.Fragment>
       <TitlePage

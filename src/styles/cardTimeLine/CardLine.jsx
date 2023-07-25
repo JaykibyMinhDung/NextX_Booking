@@ -12,6 +12,7 @@ import {
   getIdPT,
   getIdBranch,
   OptionDate,
+  getIdContract,
 } from "../../store/recoil/store";
 
 const CardLine = (props) => {
@@ -27,6 +28,7 @@ const CardLine = (props) => {
 
   // Booking gym id
   const setValueBranchId = useSetRecoilState(getIdBranch);
+  const setValueBranchDataContract = useSetRecoilState(getIdContract);
   const setValuePTid = useSetRecoilState(getIdPT);
   const setValueDateBookingOption = useSetRecoilState(OptionDate);
 
@@ -38,6 +40,7 @@ const CardLine = (props) => {
     }
     if (dataParent.data === "PT") {
       setValueBookingContract(dataParent.text);
+      setValueBranchDataContract(dataParent.fulldata);
       return dataParent.onClose();
     }
     if (dataParent.data === "name") {

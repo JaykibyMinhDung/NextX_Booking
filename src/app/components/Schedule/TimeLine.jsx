@@ -21,6 +21,7 @@ import {
   getIdPT,
   getIdBranch,
   OptionDate,
+  getIdContract,
 } from "../../../store/recoil/store";
 
 import moment from "moment/moment";
@@ -28,7 +29,7 @@ import moment from "moment/moment";
 const TimeLine = (props) => {
   const dataParent = props;
   const [showPopup, setShowPopup] = useState(false);
-  const [takeDataCanlendar, settakeDataCanlendar] = useState([]);
+  // const [takeDataCanlendar, settakeDataCanlendar] = useState([]);
   const [chooseOptionBookingPT, setChooseOptionBookingPT] =
     useRecoilState(DataPopupBookingPT);
 
@@ -39,6 +40,7 @@ const TimeLine = (props) => {
   );
 
   const takeValueFullDataBranch = useRecoilValue(getIdBranch);
+  const takeValueFullDataContract = useRecoilValue(getIdContract);
   const takeValueFullDataPT = useRecoilValue(getIdPT);
   const takeValueFullDataDateOption = useRecoilValue(OptionDate);
   // console.log(takeValueBookingPersonaltrainer);
@@ -51,9 +53,17 @@ const TimeLine = (props) => {
   //   new Date().getFullYear() + "-" + month + "-" + new Date().getDate();
   const data1 = useQuery(["test1"], () => getBookingPTBranch());
   // const data1 = getBookingPTBranch();
-  const data2 = useQuery(["test2"], () => getBookingPTContract());
-  const data3 = useQuery(["test3"], () => getBookingPTListPT());
+  const data2 = useQuery(["test2"], () =>
+    getBookingPTContract(takeValueFullDataBranch.id)
+  );
+  const data3 = useQuery(["test3"], () =>
+    getBookingPTListPT(
+      takeValueBookingContract?.order_id || null,
+      takeValueFullDataBranch.id
+    ).catch((err) => console.log(err))
+  );
 
+  // console.log(data3);
   // const data4 = useMutation(["test4"], () =>
   //   getBookingPTScheduleHours(
   //     takeValueFullDataBranch.id,
@@ -94,7 +104,7 @@ const TimeLine = (props) => {
   const data4 = useMutation({
     mutationFn: (newSchedule) => getBookingPTScheduleHours(newSchedule),
     onSuccess: async (data2) => {
-      settakeDataCanlendar(data2);
+      // settakeDataCanlendar(data2);
       dataParent.setForm(data2);
     },
     onError: (err) => {
@@ -108,6 +118,7 @@ const TimeLine = (props) => {
       return setChooseOptionBookingPT(data1.data);
     }
     if (ensign === "contract") {
+      console.log(takeValueFullDataContract);
       return setChooseOptionBookingPT(data2.data);
     }
     if (ensign === "PersonalTrainer") {
@@ -124,11 +135,11 @@ const TimeLine = (props) => {
   };
   const LeftContainerActive = (isActive) =>
     isActive
-      ? "after:bg-[#3b9254ff] containers animate-flow-circle left"
+      ? "after:bg-[#3b9254ff] containers left"
       : "after:bg-[#F5F5F5] containers left";
   const RightContainerActive = (isActive) =>
     isActive
-      ? "after:bg-[#3b9254ff] containers animate-flow-circle right"
+      ? "after:bg-[#3b9254ff] containers right"
       : "after:bg-[#F5F5F5] containers right";
   useEffect(() => {
     data4.mutate({

@@ -2,8 +2,18 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import moment from "moment/moment";
 import { useQuery } from "react-query";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import TitlePage from "../../../styles/titlepage/TitlePage";
-import { getFormBookingPT } from "../../../store/recoil/store";
+import {
+  DataPopupBookingBranch,
+  DataPopupBookingPersolnaltrainer,
+  getFormBookingPT,
+  getIdBranch,
+  getIdContract,
+  getIdPT,
+} from "../../../store/recoil/store";
 import { useLocation, useNavigate } from "react-router-dom";
 import Popup from "../../../styles/modal/Modal";
 import { GET_EXTRASERVICE } from "../../../constants/queryKeys";
@@ -13,6 +23,7 @@ import {
 } from "../../../api/api";
 import CardLine from "../../../styles/cardTimeLine/CardLine";
 import { getExtraServiceBooking } from "../../../store/recoil/store";
+import Loading from "../../../spinner/Loading";
 
 const FormResgisterBooking = () => {
   const location = useLocation();
@@ -22,16 +33,22 @@ const FormResgisterBooking = () => {
   const [changeTime, setChangTime] = useState(30);
   const [activepopup, setActivePopup] = useState(false);
   const totalDataFormBooking = useRecoilValue(getFormBookingPT);
-  const { data, isLoading } = useQuery([GET_EXTRASERVICE], () =>
+  const { data, isFetching } = useQuery([GET_EXTRASERVICE], () =>
     getBookingPTServiceExtra()
   );
+  const namebranch = useRecoilValue(DataPopupBookingBranch);
+  const BranchBookingId = useRecoilValue(getIdBranch);
+  const OrderidBooking = useRecoilValue(getIdContract);
+  const EmployidBooking = useRecoilValue(getIdPT);
+  const nametrainner = useRecoilValue(DataPopupBookingPersolnaltrainer);
+
   if (totalDataFormBooking === null) {
     return navigate("/booking");
   }
   const hours = moment(location.state)
     .add(changeTime, "minutes")
     // .format();
-    .format("YYYY/MM/DD HH:mm:ss ");
+    .format("YYYY-MM-DD HH:mm:ss ");
   const ChangHoursHandle = (time) => {
     setChangTime(time);
   };
@@ -47,24 +64,59 @@ const FormResgisterBooking = () => {
   };
   const SubmitHandle = () => {
     postBookingPersonalTrainer({
-      Branch: totalDataFormBooking.branch, // branch id
-      TimeStart: location.state,
-      TimeEnd: hours,
-      PersonalTrainer: totalDataFormBooking.PersonalTrainers, // id
-      ExtraService: ClientOptionService ? ClientOptionService : null,
-      Notice: noticeBooking, // description
-    }).then((result) => console.log(result));
-    // console.log({
-    //   Branch: totalDataFormBooking.branch,
-    //   TimeStart: location.state,
-    //   TimeEnd: hours,
-    //   PersonalTrainer: totalDataFormBooking.PersonalTrainers,
-    //   ExtraService: ClientOptionService ? ClientOptionService : null,
-    //   Notice: noticeBooking,
-    // });
+      employee_id: EmployidBooking.employee_id,
+      order_id: OrderidBooking.order_id,
+      branch_id: BranchBookingId.id,
+      start_time: location.state,
+      end_time: hours,
+      tasks: [ClientOptionService ? ClientOptionService : null],
+      description: noticeBooking, // description
+    })
+      .then((results) => {
+        if (results.meta.status_code === 1) {
+          toast.error(results.meta.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          return false;
+        } else {
+          toast.success(results.meta.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          return true;
+        }
+      })
+      .then((acceptNavigate) => {
+        return acceptNavigate && setTimeout(() => navigate("/"), 5000);
+      })
+      .catch((err) => {
+        toast.error(err, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   };
-  if (isLoading) {
-    return <div>loading...</div>;
+  if (isFetching) {
+    return <Loading />;
   }
   return (
     <React.Fragment>
@@ -76,7 +128,7 @@ const FormResgisterBooking = () => {
           </div>
           <div className=" card_payment">
             <div className="flex justify-between">
-              <p>{totalDataFormBooking.branch}</p>
+              <p>{namebranch}</p>
             </div>
           </div>
           <div className="m-4">
@@ -120,7 +172,7 @@ const FormResgisterBooking = () => {
           </div>
           <div className=" card_payment">
             <div className="flex justify-between">
-              <p>{totalDataFormBooking.PersonalTrainers}</p>
+              <p>{nametrainner}</p>
             </div>
           </div>
           <div className="">
@@ -170,6 +222,18 @@ const FormResgisterBooking = () => {
           Đăng kí
         </button>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </React.Fragment>
   );
 };

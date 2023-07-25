@@ -45,6 +45,7 @@ const monthNumber = [
 ];
 
 const HeaderClass = () => {
+  // const postDate = ""
   const dayFormat =
     today.getDate() +
     "/" +

@@ -36,7 +36,7 @@ const BranchMember = () => {
       branch_id: null,
       order_type: MembershipBookingPersonaltrainer
         ? "1"
-        : MembershipBookingClass.category === "Yoga"
+        : MembershipBookingClass.category
         ? "2"
         : null,
       class_id: MembershipBookingClass ? MembershipBookingClass.class_id : null,

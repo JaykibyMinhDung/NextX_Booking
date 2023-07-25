@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./feature.css";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { FaAngleRight } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
@@ -16,7 +17,6 @@ import { FaHourglassHalf } from "react-icons/fa";
 import ButtonChange from "../../../../styles/ButtonChange/ButtonChange";
 import { isLogin } from "../../../../store/recoil/authenticate";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
 import PopupNotification from "../../../../styles/modalnotification/ModalNotification";
 import SignOutWeb from "./logout/logout";
 import NewVersion from "./updateversion/NewVersion";

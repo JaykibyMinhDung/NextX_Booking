@@ -1,17 +1,20 @@
 import React from "react";
-import { createPortal } from "react-dom";
+import {
+  createPortal,
+  //  render
+} from "react-dom";
 // import PortalReactDOM from "react-dom";
 import classes from "./notifications.module.css";
 
 // Tạo nền xám cho modal
-const Backdrop = (props) => {
+const Backdrop1 = (props) => {
   const dataparents = props;
   return (
     <div className={classes.backdropNotifi} onClick={dataparents.onClose} />
   );
 };
 // Gói các component bên trong sẽ tạo ra một box thông báo
-const ModalOverlay = (props) => {
+const ModalOverlay1 = (props) => {
   const dataparents = props;
   return (
     <div className={classes.modalNotifi}>
@@ -21,7 +24,7 @@ const ModalOverlay = (props) => {
 };
 
 // Truy vấn đến id chứa overlay
-const portalElementModal = document.getElementById("modal");
+// const portalElementModal =
 
 // Tạo cấu hình cho modal (ModalOverlay) và overlays
 const PopupNotification = (props) => {
@@ -29,12 +32,12 @@ const PopupNotification = (props) => {
   return (
     <React.Fragment>
       {createPortal(
-        <Backdrop onClose={dataparents.onClose} />,
-        portalElementModal
+        <Backdrop1 onClose={dataparents.onClose} />,
+        document.getElementById("modal")
       )}
       {createPortal(
-        <ModalOverlay>{dataparents.children}</ModalOverlay>,
-        portalElementModal
+        <ModalOverlay1>{dataparents.children}</ModalOverlay1>,
+        document.getElementById("modal")
         // {props.children}
       )}
     </React.Fragment>

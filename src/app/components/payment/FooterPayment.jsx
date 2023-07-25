@@ -1,5 +1,6 @@
 // import React from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import { useQuery } from "react-query";
 // import { POST_REGISTERMEMBER } from "../../../constants/queryKeys";
 import { useRecoilValue } from "recoil";
@@ -32,15 +33,63 @@ const FooterPayment = (props) => {
       begin_date_intent: date,
       description: "Đăng ký qua mini app zalo",
     })
-      .then(() => {
-        navigate("/");
+      .then((results) => {
+        if (results.meta.status_code === 1) {
+          toast.error(results.meta.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          return false;
+        } else {
+          toast.success(results.meta.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          return true;
+        }
+      })
+      .then((acceptNavigate) => {
+        return acceptNavigate && setTimeout(() => navigate("/"), 5000);
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <footer>
         <div className="flex justify-between items-center text-center mx-4 my-7">
           <p className="font-semibold">Thành tiền</p>

@@ -23,9 +23,14 @@ const History = () => {
     <div>
       <TitlePage title={"Lịch sử"} />
       <div className="mt-16">
-        {data.map((e) => (
-          <CardHistory key={e.id} data={e} />
-        ))}
+        {data ? (
+          data.map((e) => <CardHistory key={e.id} data={e} />)
+        ) : (
+          <img
+            src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
+            alt=""
+          />
+        )}
       </div>
       <Footer />
     </div>

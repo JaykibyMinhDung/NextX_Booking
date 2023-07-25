@@ -14,8 +14,9 @@ const Advertising = () => {
     return <div>Loadding...</div>;
   }
 
-  const hrefNextX = (link) => {
-    window.location.assign(link);
+  const hrefNextX = () => {
+    return;
+    // window.location.assign(link);
   };
   // console.log(data);
   return (

@@ -45,19 +45,23 @@ const Class = () => {
       {data.map((e, index) => (
         <ClassLoyal
           key={index}
+          id={e.books.id}
           hour={e.time}
-          nameclass={e.books.class_name}
           startHour={e.books.start}
           endHour={e.books.end}
-          category={e.books.category_name}
           branch={e.books.branch_name}
           branch_name={e.books.branch_name}
           branch_id={e.books.branch_id}
+          nameclass={e.books.class_name}
+          category={e.books.category_name}
           namePT={e.books.employee_name}
           numbook={e.books.num_booked}
           numTotal={e.books.num_enabled}
           class_id={e.books.class_id}
           employee_id={e.books.employee_id}
+          enabled={e.books.enabled}
+          picture={e.books.employee_avatar}
+          fulldata={e.books}
         />
       ))}
       <Footer />

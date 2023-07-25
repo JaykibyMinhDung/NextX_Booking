@@ -16,7 +16,7 @@ const Login2 = (props) => {
   //   navigate("/register");
   // };
   const NavigateForgetPW = () => {
-    navigate("/forgetpassword");
+    navigate("/");
   };
   const ChangeStateError = () => {
     setValue("password", "");

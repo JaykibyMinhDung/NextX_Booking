@@ -2,11 +2,19 @@
 import "./history.css";
 import avatarDefau from "../../../assets/avatar.jpg";
 import { FaIdCard, FaPhoneAlt, FaCalendarCheck, FaClock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const CardHistory = (props) => {
   const dataParent = props;
+  const navigate = useNavigate();
+  const NaivigateDetailHistoryHandle = () => {
+    navigate("/log/cancel", { state: dataParent.data });
+  };
   return (
-    <div onClick={dataParent.data.onClick} className={"card__framehis"}>
+    <div
+      onClick={() => NaivigateDetailHistoryHandle()}
+      className={"card__framehis"}
+    >
       <div>
         <img
           className="img_history"

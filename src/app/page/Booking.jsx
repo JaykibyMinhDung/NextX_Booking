@@ -20,7 +20,7 @@ const Booking = () => {
   const navigate = useNavigate();
   const CurrentHours = Number(today.getHours());
   // const CurrentMinute = today.getMinutes();
-  const formatmonth = Number(today.getMonth()) + 1;
+  // const formatmonth = Number(today.getMonth()) + 1;
   // const CurrentDay =
   //   today.getFullYear() + "-" + formatmonth + "-" + today.getDate();
   const DateOptionBooking = useRecoilValue(OptionDate);
@@ -47,17 +47,7 @@ const Booking = () => {
   };
   // const totalDataFormBooking = (data2) => {
   // };
-  // console.log(totalDataFormBooking);
-  useEffect(() => {
-    if (getFormBookingPT) {
-      getBookingPTScheduleHours(getFormBookingPT);
-    }
-  }, [totalDataFormBooking]);
   const SubmitHandlePayment = (start_time, full_time) => {
-    // console.log(
-    //   Number(start_time.slice(2, 4)) + Number(start_time.slice(0, 2)) <
-    //     CurrentMinute + CurrentHours
-    // );
     if (
       Number(start_time.slice(0, 2)) < CurrentHours &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
@@ -68,10 +58,11 @@ const Booking = () => {
     setChangeBgColorState(start_time);
     navigate("/booking/resgiterbooking", { state: full_time });
   };
-  // if (isLoading) {
-  //   return <div>loading...</div>;
-  // }
-  // console.log(data);
+  useEffect(() => {
+    if (getFormBookingPT) {
+      getBookingPTScheduleHours(getFormBookingPT);
+    }
+  }, [totalDataFormBooking]);
   return (
     <div>
       <TitlePage title={"Booking Gym PT"} />
@@ -83,7 +74,7 @@ const Booking = () => {
         <div
           className={` ${
             changeBgColorStateSwitch === 0
-              ? "flex items-center text-white rounded-md ml-2 my-1 p-1 my-1 bg-green-800"
+              ? "flex items-center text-white rounded-md ml-2 my-1 p-1 bg-green-800"
               : "text-white p-1 my-1 ml-2"
           }`}
         >

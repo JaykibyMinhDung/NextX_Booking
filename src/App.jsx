@@ -54,6 +54,8 @@ import Login2 from "./authentication/login/Login2";
 import Forget from "./authentication/forgetPW/Forget";
 import Resgister2 from "./authentication/register/Resgister2";
 import CodeVertify from "./authentication/register/vertification/CodeVertify";
+import DetailHistory from "./app/components/log/DetailHistory/DetailHistory";
+import DetailYoga from "./app/components/class/detailyoga/DetailYoga";
 
 function App() {
   // const getStateLogOut = useRecoilValue(Logout);
@@ -148,6 +150,8 @@ function App() {
                 path="/account/transaction"
                 element={<TransactionHistory />}
               />
+              <Route path="/log/cancel" element={<DetailHistory />} />
+              <Route path="/class/bookingclass" element={<DetailYoga />} />
 
               {/* footer menu */}
               <Route path="/class" element={<Class />} />

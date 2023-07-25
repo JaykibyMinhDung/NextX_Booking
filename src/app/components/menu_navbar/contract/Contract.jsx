@@ -47,21 +47,28 @@ const Contract = () => {
           </button>
         </div>
       </div>
-      {data.map((e) => (
-        <CardPageContracts
-          onClick={() => navigateDetail(e.prcode_text)}
-          key={e.order_id}
-          image={e.member_avatar}
-          created_at={e.begin_date}
-          subject={e.tableprices_name}
-          name={e.member_full_name}
-          branch={e.branch.name}
-          dayTrainer={e.rehearsal_status}
-          ended_at={e.end_date}
-          price={Number(e.total_money_payment)}
-          expire={e.order_status_note}
+      {!data && (
+        <img
+          src="https://www.codewithrandom.com/wp-content/uploads/2022/08/Copy-of-Copy-of-Copy-of-SVG-in-HTML-10.png"
+          alt=""
         />
-      ))}
+      )}
+      {data &&
+        data.map((e) => (
+          <CardPageContracts
+            onClick={() => navigateDetail(e.prcode_text)}
+            key={e.order_id}
+            image={e.member_avatar}
+            created_at={e.begin_date}
+            subject={e.tableprices_name}
+            name={e.member_full_name}
+            branch={e.branch.name}
+            dayTrainer={e.rehearsal_status}
+            ended_at={e.end_date}
+            price={Number(e.total_money_payment)}
+            expire={e.order_status_note}
+          />
+        ))}
     </div>
   );
 };
