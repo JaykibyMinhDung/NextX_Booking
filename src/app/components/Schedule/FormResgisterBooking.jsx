@@ -15,13 +15,13 @@ import {
   getIdPT,
 } from "../../../store/recoil/store";
 import { useLocation, useNavigate } from "react-router-dom";
-import Popup from "../../../styles/modal/Modal";
+// import Popup from "../../../styles/modal/Modal";
 import { GET_EXTRASERVICE } from "../../../constants/queryKeys";
 import {
   getBookingPTServiceExtra,
   postBookingPersonalTrainer,
 } from "../../../api/api";
-import CardLine from "../../../styles/cardTimeLine/CardLine";
+// import CardLine from "../../../styles/cardTimeLine/CardLine";
 import { getExtraServiceBooking } from "../../../store/recoil/store";
 import Loading from "../../../spinner/Loading";
 
@@ -31,7 +31,7 @@ const FormResgisterBooking = () => {
   const [noticeBooking, setNotceBooking] = useState("");
   const ClientOptionService = useRecoilValue(getExtraServiceBooking);
   const [changeTime, setChangTime] = useState(30);
-  const [activepopup, setActivePopup] = useState(false);
+  // const [activepopup, setActivePopup] = useState(false);
   const totalDataFormBooking = useRecoilValue(getFormBookingPT);
   const { data, isFetching } = useQuery([GET_EXTRASERVICE], () =>
     getBookingPTServiceExtra()
@@ -53,12 +53,13 @@ const FormResgisterBooking = () => {
     setChangTime(time);
   };
   const ShowBookingExtraService = () => {
-    setActivePopup(true);
+    navigate("/booking/optiondate/ExtrasServal", { state: data });
+    // setActivePopup(true);
     // console.log(data);
   };
-  const CloseBookingExtraService = () => {
-    setActivePopup(false);
-  };
+  // const CloseBookingExtraService = () => {
+  //   setActivePopup(false);
+  // };
   const noticle = (event) => {
     setNotceBooking(event.target.value);
   };
@@ -199,14 +200,8 @@ const FormResgisterBooking = () => {
               placeholder="Ghi chú"
             />
           </div>
-          {/* <div className="flex items-center m-4">
-            <i className="fa fa-check" aria-hidden="true"></i>
-            <p className="ml-3">
-              Tôi đã đọc, hiểu, chấp nhận và đồng ý với điều khoản và điều kiện
-            </p>
-          </div> */}
         </div>
-        {activepopup && (
+        {/* {activepopup && (
           <Popup onClose={CloseBookingExtraService}>
             {data.map((e) => (
               <CardLine
@@ -217,7 +212,7 @@ const FormResgisterBooking = () => {
               />
             ))}
           </Popup>
-        )}
+        )} */}
         <button onClick={SubmitHandle} className="btn">
           Đăng kí
         </button>

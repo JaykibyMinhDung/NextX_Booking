@@ -85,7 +85,7 @@ const BranchMember = () => {
   // console.log(filterData); // lấy dữ liệu đúng với nhánh
 
   if (resetLoading && isFetching) {
-    console.log("loading");
+    // console.log("loading");
     return (
       <div>
         <Loading />

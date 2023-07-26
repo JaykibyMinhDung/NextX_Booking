@@ -34,8 +34,8 @@ const RatingEmployee = (props) => {
     );
   };
   return (
-    <div>
-      <h3 className="text-center font-bold">Phiếu đánh giá</h3>
+    <div className="my-5 mx-4">
+      <h3 className="text-center text-2xl font-bold">Phiếu đánh giá</h3>
       <Box>
         <div className="flex justify-between my-4">
           <Typography component="legend">

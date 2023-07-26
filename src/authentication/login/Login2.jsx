@@ -1,4 +1,6 @@
 // import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import logo from "../../assets/nextXlogo.png";
 import { FaArrowLeft, FaRegEye } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -16,7 +18,12 @@ const Login2 = (props) => {
   //   navigate("/register");
   // };
   const NavigateForgetPW = () => {
-    navigate("/");
+    toast.success(
+      "Để lấy lại mật khẩu, bạn có thể thay đổi trên app, cảm ơn bạn đã yêu thích và tin dùng dịch vụ bên mình!",
+      {
+        icon: "🥰",
+      }
+    );
   };
   const ChangeStateError = () => {
     setValue("password", "");
@@ -45,6 +52,18 @@ const Login2 = (props) => {
   }, [stateinput]);
   return (
     <div className="mx-4 my-2">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="flex items-center">
         <div onClick={() => navigate("/homelogin")}>
           <FaArrowLeft className="text-base" />
@@ -74,7 +93,7 @@ const Login2 = (props) => {
               setStateInput(true);
             }}
           >
-            <FaUserCircle />
+            {/* <FaUserCircle /> */}
           </p>
         </div>
         {!getValues().username && SubmitHandle.active && (

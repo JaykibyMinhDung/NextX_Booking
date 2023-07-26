@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useQuery } from "react-query";
 import { GET_CHECKINPT } from "../../../../../constants/queryKeys";
 import { getCheckinPT } from "../../../../../api/api";
@@ -9,22 +9,25 @@ import TitlePage from "../../../../../styles/titlepage/TitlePage";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 // import Typography from "@mui/material/Typography";
-import Popup from "../../../../../styles/modal/Modal";
-import RatingEmployee from "./ratingStaff/RatingEmployee";
+// import Popup from "../../../../../styles/modal/Modal";
+// import RatingEmployee from "./ratingStaff/RatingEmployee";
+import { useNavigate } from "react-router-dom";
 
 const CheckinPTHistory = () => {
   const { data } = useQuery([GET_CHECKINPT], () => getCheckinPT());
   // console.log(data);
-  const [identify, setIdentify] = React.useState(null);
-  const [showModal, setShowmodal] = React.useState(false);
+  const navigate = useNavigate();
+  // const [identify, setIdentify] = React.useState(null);
+  // const [showModal, setShowmodal] = React.useState(false);
 
   const ShowModalHandle = (id) => {
-    setIdentify(id);
-    return setShowmodal(true);
+    navigate(`/account/checkinpt/${id}`);
+    // setIdentify(id);
+    // return setShowmodal(true);
   };
-  const HiddenModalHandle = () => {
-    return setShowmodal(false);
-  };
+  // const HiddenModalHandle = () => {
+  //   return setShowmodal(false);
+  // };
   // const text_rate = ["", "😢", "🙁", "😓", "🥰", "😍"];
   return (
     <div className="mt-16 ">
@@ -127,11 +130,11 @@ const CheckinPTHistory = () => {
             </div>
           </div>
         ))}
-        {showModal && (
+        {/* {showModal && (
           <Popup onClose={HiddenModalHandle}>
             <RatingEmployee idFeedback={identify} onClose={HiddenModalHandle} />
           </Popup>
-        )}
+        )} */}
       </div>
     </div>
   );

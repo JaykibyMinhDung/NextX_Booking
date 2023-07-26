@@ -60,19 +60,12 @@ export const getContract = async () => {
 };
 
 export const postFeedback = async (values) => {
-  // if (!tokenGYM) {
-  //   return { error: "Please login" };
-  // }
-  // const tokenGYM = await getToken();
   const { data } = await connect({
     method: "POST",
     url: "/api/gym-loyalty/member/ticket",
     data: values,
-    // headers: {
-    //   Authorization: "Bearer " + tokenGYM.token,
-    // },
   });
-  return data.message;
+  return data;
 };
 
 export const getFeedback = async () => {
@@ -416,12 +409,7 @@ export const getBookingPTServiceExtra = async () => {
 };
 
 export const getBookingPTScheduleHours = async (post) => {
-  // const tokenGYM = await getToken();
-  // if (!tokenGYM) {
-  //   return { error: "Please login" };
-  // }
   const { employee_id, branch_id, date_time } = post;
-  // console.log(employee_id, branch_id, date_time);
   const { data } = await connect({
     method: "GET",
     url: `/api/gym-loyalty/member/scheduler-pt?${
@@ -429,9 +417,6 @@ export const getBookingPTScheduleHours = async (post) => {
     }${branch_id ? "branch_id=" + branch_id + "&" : ""}${
       date_time ? "date_time=" + date_time : ""
     }`,
-    // headers: {
-    //   Authorization: "Bearer " + tokenGYM.token,
-    // },
   });
   return data.data;
 };
@@ -477,7 +462,7 @@ export const postDeleteAccount = async (post) => {
 
 export const deleteBookingYoga = async (id) => {
   const { data } = await connect({
-    method: "DELTE",
+    method: "DELETE",
     url: `/api/gym-loyalty/member/booking-class/${id}`,
   });
   return data;

@@ -56,6 +56,14 @@ import Resgister2 from "./authentication/register/Resgister2";
 import CodeVertify from "./authentication/register/vertification/CodeVertify";
 import DetailHistory from "./app/components/log/DetailHistory/DetailHistory";
 import DetailYoga from "./app/components/class/detailyoga/DetailYoga";
+import ExtrasPreference from "./app/components/payment/ExtrasPreference";
+import FormFeedBack from "./app/components/menu_navbar/feedback/FormFeedBack";
+import OptionBranch from "./app/components/Schedule/optionBooking/OptionBranch";
+import OptionContract from "./app/components/Schedule/optionBooking/OptionContract";
+import Optiontrainner from "./app/components/Schedule/optionBooking/OptionTrainner";
+import OptionDate from "./app/components/Schedule/optionBooking/OptionDate";
+import ExtrasServer from "./app/components/Schedule/ExtrasServer";
+import RatingEmployee from "./app/components/accounts/feature/history/ratingStaff/RatingEmployee";
 
 function App() {
   // const getStateLogOut = useRecoilValue(Logout);
@@ -132,9 +140,14 @@ function App() {
               <Route path="/membership" element={<Membership />} />
               <Route path="/membership/:branch" element={<BranchMember />} />
               <Route path="/membership/:branch/payment" element={<Payment />} />
+              <Route
+                path="/membership/:branch/payment/preferencepay"
+                element={<ExtrasPreference />}
+              />
               <Route path="/extend" element={<Extend />} />
               <Route path="/reserve" element={<Reserve />} />
               <Route path="/feedback" element={<Feedback />} />
+              <Route path="/feedback/formfeedback" element={<FormFeedBack />} />
               <Route path="/personaltrainer" element={<Personaltrainer />} />
               <Route path="/branch" element={<Branch />} />
               <Route path="/inbody" element={<Inbody />} />
@@ -156,8 +169,26 @@ function App() {
               {/* footer menu */}
               <Route path="/class" element={<Class />} />
               <Route path="/booking" element={<Booking />} />
+              <Route path="/booking/optionbarnch" element={<OptionBranch />} />
+              <Route
+                path="/booking/optioncontract"
+                element={<OptionContract />}
+              />
+              <Route
+                path="/booking/optiontrainner"
+                element={<Optiontrainner />}
+              />
+              <Route path="/booking/optiondate" element={<OptionDate />} />
+              <Route
+                path="/booking/optiondate/ExtrasServal"
+                element={<ExtrasServer />}
+              />
               <Route path="/log" element={<History />} />
               <Route path="/account" element={<User />} />
+              <Route
+                path="/account/checkinpt/:id"
+                element={<RatingEmployee />}
+              />
               <Route path="/style" element={<ButtonChange />} />
               <Route path="/testmodal" element={<TestStyle />} />
             </>

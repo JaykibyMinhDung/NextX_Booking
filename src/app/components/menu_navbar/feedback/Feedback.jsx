@@ -1,28 +1,32 @@
-import React, { useState } from "react";
+import React from "react"; //  { useState }
 import "./feedback.css";
 import { FaPlusCircle } from "react-icons/fa";
 import { useQuery } from "react-query";
 import TitlePage from "../../../../styles/titlepage/TitlePage";
-import Popup from "../../../../styles/modal/Modal";
-import FormFeedBack from "./FormFeedBack";
+// import Popup from "../../../../styles/modal/Modal";
+// import FormFeedBack from "./FormFeedBack";
 import { GET_FEEDBACK } from "../../../../constants/queryKeys";
 import { getFeedback } from "../../../../api/api";
 import CardPage from "../../../../styles/cardPage/CardPage";
+import Loading from "../../../../spinner/Loading";
+import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
-  const [showPopup, setShowPopup] = useState(false);
-  const { data, isLoading } = useQuery([GET_FEEDBACK], () => getFeedback());
+  // const [showPopup, setShowPopup] = useState(false);
+  const { data, isFetching } = useQuery([GET_FEEDBACK], () => getFeedback());
+  const navigate = useNavigate();
   // console.log(data);
   const showModalHandle = () => {
-    document.body.style.overflow = "hidden";
-    return setShowPopup(true);
+    navigate("/feedback/formfeedback");
+    // document.body.style.overflow = "hidden";
+    // return setShowPopup(true);
   };
-  const hiddenModalHandle = () => {
-    document.body.style.overflow = "auto";
-    return setShowPopup(false);
-  };
-  if (isLoading) {
-    return <div>loading...</div>;
+  // const hiddenModalHandle = () => {
+  //   document.body.style.overflow = "auto";
+  //   return setShowPopup(false);
+  // };
+  if (isFetching) {
+    return <Loading />;
   }
   return (
     <React.Fragment>
@@ -63,11 +67,11 @@ const Feedback = () => {
           </div>
         </>
       )}
-      {showPopup && (
+      {/* {showPopup && (
         <Popup onClose={hiddenModalHandle}>
           <FormFeedBack onClose={hiddenModalHandle} />
         </Popup>
-      )}
+      )} */}
     </React.Fragment>
   );
 };

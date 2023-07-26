@@ -69,7 +69,7 @@ const DetailYoga = () => {
     <React.Fragment>
       <div className="mt-10">
         <TitlePage title={"Đặt lớp Yoga"} navigateBack={"/class"} />
-        <div className="bg-green-600 h-30vh text-white">
+        <div className="bg-green-600 h-35vh text-white">
           <div className=" flex items-center justify-center flex-col h-48">
             <img
               className="rounded-full w-20 h-20"

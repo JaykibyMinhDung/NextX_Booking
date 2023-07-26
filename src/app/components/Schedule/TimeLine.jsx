@@ -4,15 +4,21 @@ import defaultImage from "../../../assets/avatar.jpg";
 import diretory from "../../../assets/bullets.png";
 import locationDefault from "../../../assets/location-pin.png";
 import canlenderr from "../../../assets/calendar.png";
-import { useEffect, useState } from "react";
-import Popup from "../../../styles/modal/Modal";
-import OptionBookingPT from "./OptionBookingPT";
+import {
+  useEffect,
+  // , useState
+} from "react";
+// import Popup from "../../../styles/modal/Modal";
+// import OptionBookingPT from "./OptionBookingPT";
 import { getBookingPTBranch } from "../../../api/api";
 import { getBookingPTContract } from "../../../api/api";
 import { getBookingPTListPT } from "../../../api/api";
 import { useMutation, useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { DataPopupBookingPT } from "../../../store/recoil/store";
+import {
+  // useRecoilState,
+  useRecoilValue,
+} from "recoil";
+// import { DataPopupBookingPT } from "../../../store/recoil/store";
 import { getBookingPTScheduleHours } from "../../../api/api";
 import {
   DataPopupBookingBranch,
@@ -25,13 +31,15 @@ import {
 } from "../../../store/recoil/store";
 
 import moment from "moment/moment";
+import { useNavigate } from "react-router-dom";
 
 const TimeLine = (props) => {
   const dataParent = props;
-  const [showPopup, setShowPopup] = useState(false);
+  // const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
   // const [takeDataCanlendar, settakeDataCanlendar] = useState([]);
-  const [chooseOptionBookingPT, setChooseOptionBookingPT] =
-    useRecoilState(DataPopupBookingPT);
+  // const [chooseOptionBookingPT, setChooseOptionBookingPT] =
+  //   useRecoilState(DataPopupBookingPT);
 
   const takeValueBookingBranch = useRecoilValue(DataPopupBookingBranch);
   const takeValueBookingContract = useRecoilValue(DataPopupBookingContract);
@@ -58,7 +66,7 @@ const TimeLine = (props) => {
   );
   const data3 = useQuery(["test3"], () =>
     getBookingPTListPT(
-      takeValueBookingContract?.order_id || null,
+      takeValueFullDataContract?.order_id || null,
       takeValueFullDataBranch.id
     ).catch((err) => console.log(err))
   );
@@ -112,27 +120,39 @@ const TimeLine = (props) => {
     },
   });
   const showModalHandle = (ensign) => {
-    document.body.style.overflow = "hidden";
-    setShowPopup(true);
+    // document.body.style.overflow = "hidden";
+    // setShowPopup(true);
     if (ensign === "branch") {
-      return setChooseOptionBookingPT(data1.data);
+      // setChooseOptionBookingPT(data1.data);
+      // if (chooseOptionBookingPT) {
+      navigate("/booking/optionbarnch", { state: data1.data });
+      // }
     }
     if (ensign === "contract") {
-      console.log(takeValueFullDataContract);
-      return setChooseOptionBookingPT(data2.data);
+      // console.log(takeValueFullDataContract);
+      // setChooseOptionBookingPT(data2.data);
+      // if (chooseOptionBookingPT) {
+      navigate("/booking/optioncontract", { state: data2.data });
+      // }
     }
     if (ensign === "PersonalTrainer") {
-      return setChooseOptionBookingPT(data3.data);
+      // setChooseOptionBookingPT(data3.data);
+      // if (chooseOptionBookingPT) {
+      navigate("/booking/optiontrainner", { state: data3.data });
+      // }
     }
     if (ensign === "Schedule") {
-      return setChooseOptionBookingPT(ham);
+      // setChooseOptionBookingPT(ham);
+      // if (chooseOptionBookingPT) {
+      navigate("/booking/optiondate", { state: ham });
+      // }
     }
   };
-  const hiddenModalHandle = () => {
-    document.body.style.overflow = "auto";
+  // const hiddenModalHandle = () => {
+  //   document.body.style.overflow = "auto";
 
-    return setShowPopup(false);
-  };
+  //   return setShowPopup(false);
+  // };
   const LeftContainerActive = (isActive) =>
     isActive
       ? "after:bg-[#3b9254ff] containers left"
@@ -243,41 +263,16 @@ const TimeLine = (props) => {
           </div>
         </div>
       </div>
-      {showPopup && (
+      {/* {showPopup && (
         <Popup onClose={hiddenModalHandle}>
           <OptionBookingPT
             chooseOption={chooseOptionBookingPT}
             onClose={hiddenModalHandle}
           />
         </Popup>
-      )}
+      )} */}
     </div>
   );
 };
 
 export default TimeLine;
-
-{
-  /* <div className="containers left">
-  <div className="content">
-    <h2>2011</h2>
-    <p>
-      Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-      admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
-      iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
-      primis ea eam.
-    </p>
-  </div>
-</div>
-<div className="containers right">
-  <div className="content">
-    <h2>2007</h2>
-    <p>
-      Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-      admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
-      iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
-      primis ea eam.
-    </p>
-  </div>
-</div> */
-}

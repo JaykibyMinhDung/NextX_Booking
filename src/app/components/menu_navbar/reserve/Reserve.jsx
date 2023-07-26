@@ -12,7 +12,8 @@ import avatarDefau from "../../../../assets/avatar.jpg";
 const Reserve = () => {
   const { data } = useQuery([GET_RESERVE], () => getReserve());
   const DetailReserveHandle = () => {
-    console.log("is Updating");
+    return;
+    // console.log("is Updating");
   };
   const response = data.data;
   return (

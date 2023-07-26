@@ -1,31 +1,53 @@
 // import React from "react";
+// import { toast, ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
 import TitlePage from "../../styles/titlepage/TitlePage";
 import Footer from "../components/home/footer/Footer";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
 import ClassLoyal from "../components/class/classloyal/ClassLoyal";
 import HeaderClass from "../components/class/header/HeaderClass";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { GET_CLASS } from "../../constants/queryKeys";
 import { getClass } from "../../api/api";
 import { useRecoilValue } from "recoil";
 import { updatedDateClass } from "../../store/recoil/store";
 import Loading from "../../spinner/Loading";
 import NotFound from "../../errors/404";
+import { useEffect, useState } from "react";
 
 const Class = () => {
   const dateClass = useRecoilValue(updatedDateClass);
   const { data, isFetching, isError } = useQuery([GET_CLASS], () =>
     getClass(dateClass)
   );
+  const [getDataDate, setGetDataDate] = useState(data);
+
+  const mutation = useMutation({
+    mutationFn: (newSchedule) => getClass(newSchedule),
+    onSuccess: async (data2) => {
+      setGetDataDate(data2);
+    },
+    onError: (err) => {
+      // toast.error(err);
+      return;
+    },
+  });
+
+  useEffect(() => {
+    mutation.mutate(dateClass);
+  }, [dateClass]);
+
   if (isFetching) {
     return <Loading />;
   }
+  // if (mutation.isSuccess) {
+  //   return <Loading />;
+  // }
   if (isError) {
     <NotFound />;
   }
-
-  // console.log(data);
   return (
     <div>
       <TitlePage
@@ -42,7 +64,19 @@ const Class = () => {
         </div>
       </div>
       <HeaderClass />
-      {data.map((e, index) => (
+      {/* <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      /> */}
+      {getDataDate.map((e, index) => (
         <ClassLoyal
           key={index}
           id={e.books.id}

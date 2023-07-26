@@ -1,10 +1,19 @@
 // import React from 'react'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useForm } from "react-hook-form";
 import { FaTimes } from "react-icons/fa";
 import { postFeedback } from "../../../../api/api";
+import {
+  // useLocation,
+  useNavigate,
+} from "react-router-dom";
 
-const FormFeedBack = (props) => {
-  const dataParent = props;
+const FormFeedBack = () => {
+  // const location = useLocation();
+  const navigate = useNavigate();
+  // const dataParent = location.state;
   const {
     register,
     getValues,
@@ -12,29 +21,36 @@ const FormFeedBack = (props) => {
     formState: { errors },
   } = useForm();
 
-  const feedbackhandle = async () => {
+  const feedbackhandle = async (event) => {
+    event.preventDefault();
     const values = getValues();
     values.category_id = null;
-    // console.log(values);
     postFeedback(values)
-      .then((results) => console.log(results.message))
-      .then(() => {
-        return dataParent.onClose();
+      .then((results) => {
+        if (results.message.status_code === 0) {
+          return toast.success(results.message.message);
+        }
+        throw new Error(results.message);
       })
-      .catch((err) => console.log(err));
+      .then(() => {
+        setTimeout(() => {
+          navigate("/feedback");
+        }, 3000);
+      })
+      .catch((err) => toast.error(err));
   };
 
   return (
     <>
-      <div className="modal__formFeedback">
+      <div className="modal__formFeedback mx-3">
         <h2>Góp ý khiếu nại</h2>
-        <div onClick={dataParent.onClose}>
+        <div onClick={() => navigate("/feedback")}>
           <FaTimes />
         </div>
       </div>
       <hr />
-      <div className="modal__formFeedback--main">
-        <form action="" method="post">
+      <div className="modal__formFeedback--main mx-3">
+        <form>
           {/* onSubmit={handleSubmit(handleData)} */}
           <input
             type="text"
@@ -51,6 +67,18 @@ const FormFeedBack = (props) => {
             Góp ý
           </button>
         </form>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </>
   );

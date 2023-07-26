@@ -11,7 +11,7 @@ const Header = () => {
   const naviagte = useNavigate();
   const auth = useRecoilValue(isLogin);
   const getNotification = () => {
-    naviagte("/notification");
+    naviagte("/");
   };
   return (
     <header style={{ marginBottom: "5rem" }}>
@@ -24,8 +24,8 @@ const Header = () => {
               onClick={getNotification}
               className="headers__notification--bell"
             >
-              <div className="headers__amountNotice">{5}</div>
-              <img className="headers__image--bell" src={Notification} alt="" />
+              {/* <div className="headers__amountNotice"></div> */}
+              {/* <img className="headers__image--bell" src={Notification} alt="" /> */}
             </div>
           ) : (
             <>

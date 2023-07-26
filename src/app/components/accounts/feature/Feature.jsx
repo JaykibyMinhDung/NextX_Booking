@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React from // , { useState }
+"react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./feature.css";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  // useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 
 import { FaAngleRight } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
@@ -17,14 +21,14 @@ import { FaHourglassHalf } from "react-icons/fa";
 import ButtonChange from "../../../../styles/ButtonChange/ButtonChange";
 import { isLogin } from "../../../../store/recoil/authenticate";
 
-import PopupNotification from "../../../../styles/modalnotification/ModalNotification";
-import SignOutWeb from "./logout/logout";
-import NewVersion from "./updateversion/NewVersion";
-import Popup from "../../../../styles/modal/Modal";
-import DeleteAccount from "./deleteaccount/DeleteAccount";
-import ChangePassword from "./changepw/ChangePassword";
-import { postDeleteAccount } from "../../../../api/api";
-import { DeleteAccountUser } from "../../../../store/recoil/store";
+// import PopupNotification from "../../../../styles/modalnotification/ModalNotification";
+// import SignOutWeb from "./logout/logout";
+// import NewVersion from "./updateversion/NewVersion";
+// import Popup from "../../../../styles/modal/Modal";
+// import DeleteAccount from "./deleteaccount/DeleteAccount";
+// import ChangePassword from "./changepw/ChangePassword";
+// // import { postDeleteAccount } from "../../../../api/api";
+// import { DeleteAccountUser } from "../../../../store/recoil/store";
 
 const arrListFeature = [
   {
@@ -80,16 +84,16 @@ const arrListFeature = [
 const Feature = () => {
   // const parentData = props;
   const navigate = useNavigate();
-  const [modalPopup, setmodalPopup] = useState(null);
-  const [showPopUp, setShowPopUp] = useState(null);
+  // const [modalPopup, setmodalPopup] = useState(null);
+  // const [showPopUp, setShowPopUp] = useState(null);
   // const [ContentModal, setContentModal] = useState(null);
   const setStateGetOut = useSetRecoilState(isLogin);
-  const getStateDeleteAccount = useRecoilValue(DeleteAccountUser);
+  // const getStateDeleteAccount = useRecoilValue(DeleteAccountUser);
   const closeModalHandle = () => {
-    setmodalPopup(null);
+    // setmodalPopup(null);
   };
   const closePopupHandle = () => {
-    setShowPopUp(null);
+    // setShowPopUp(null);
   };
   const LogOutHandle = () => {
     setStateGetOut(null);
@@ -101,7 +105,15 @@ const Feature = () => {
   };
   const featureClickHandle = (text) => {
     if (text === "Đăng xuất") {
-      return setmodalPopup(text);
+      return toast(() => (
+        <div>
+          <p>Bạn có chắc muốn đăng xuất?</p>
+          <button className="text-red-500 mt-2" onClick={() => LogOutHandle()}>
+            {" "}
+            Đồng ý{" "}
+          </button>
+        </div>
+      ));
     }
     if (text === "Lịch sử checkin") {
       return navigate("/account/checkinpt");
@@ -110,28 +122,65 @@ const Feature = () => {
       return navigate("/account/transaction");
     }
     if (text === "Phiên bản") {
-      return setmodalPopup(text);
+      return toast.success("Hiện tại đây là phiên bản mới nhất!", {
+        style: {
+          border: "1px solid #713200",
+          padding: "16px",
+          color: "#713200",
+        },
+        iconTheme: {
+          primary: "#713200",
+          secondary: "#FFFAEE",
+        },
+      });
     }
     if (text === "Đổi mật khẩu") {
-      return setShowPopUp(text);
+      return toast.error(
+        "Hãy chuyển sang app hoặc web để đổi mật khẩu! Chức năng này hiện đang cập nhật ở zalo",
+        {
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
+          },
+          iconTheme: {
+            primary: "#713200",
+            secondary: "#FFFAEE",
+          },
+        }
+      );
     }
     if (text === "Xóa tài khoản") {
       // console.log("cancel");
-      postDeleteAccount(getStateDeleteAccount)
-        .then((results) => {
-          toast.error(results.meta.message, {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        })
-        .catch((err) => console.log(err));
-      return setShowPopUp(text);
+      //   postDeleteAccount(getStateDeleteAccount)
+      //     .then((results) => {
+      //       toast.error(results.meta.message, {
+      //         position: "bottom-right",
+      //         autoClose: 5000,
+      //         hideProgressBar: false,
+      //         closeOnClick: true,
+      //         pauseOnHover: true,
+      //         draggable: true,
+      //         progress: undefined,
+      //         theme: "light",
+      //       });
+      //     })
+      //     .catch((err) => console.log(err));
+      //   return setShowPopUp(text);
+      return toast.error(
+        "Hãy chuyển sang app hoặc web để xóa tài khoản! Chức năng này hiện đang cập nhật",
+        {
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
+          },
+          iconTheme: {
+            primary: "#713200",
+            secondary: "#FFFAEE",
+          },
+        }
+      );
     }
   };
   return (
@@ -153,7 +202,7 @@ const Feature = () => {
           <hr />
         </div>
       ))}
-      {modalPopup && (
+      {/* {modalPopup && (
         <PopupNotification onClose={closeModalHandle}>
           {modalPopup === "Đăng xuất" ? (
             <SignOutWeb logout={LogOutHandle} onClose={closeModalHandle} />
@@ -170,7 +219,7 @@ const Feature = () => {
             <DeleteAccount onClose={closeModalHandle} />
           )}
         </Popup>
-      )}
+      )} */}
       <ToastContainer
         position="bottom-right"
         autoClose={5000}

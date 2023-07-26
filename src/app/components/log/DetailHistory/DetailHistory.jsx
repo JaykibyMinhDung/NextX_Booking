@@ -1,4 +1,6 @@
 import React from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import TitlePage from "../../../../styles/titlepage/TitlePage";
 import { useLocation } from "react-router-dom";
@@ -8,7 +10,17 @@ const DetailHistory = () => {
   const location = useLocation();
   const data = location.state;
   const DeleteBookinggymHandle = () => {
-    return deleteBookingPT(data.id);
+    return deleteBookingPT(data.id)
+      .then((results) => {
+        console.log(results);
+        if (results.meta.status_code === 0) {
+          return toast.success(results.meta.message);
+        } else {
+          toast.error(results.meta.message);
+          throw new Error(results.meta.message);
+        }
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <React.Fragment>
@@ -67,6 +79,18 @@ const DetailHistory = () => {
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </React.Fragment>
   );
 };

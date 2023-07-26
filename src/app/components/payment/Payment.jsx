@@ -12,12 +12,14 @@ import {
   DataPaymentPreference,
   BookingPTPayment,
 } from "../../../store/recoil/store";
-import Popup from "../../../styles/modal/Modal";
-import CardLine from "../../../styles/cardTimeLine/CardLine";
+import { useNavigate } from "react-router-dom";
+// import Popup from "../../../styles/modal/Modal";
+// import CardLine from "../../../styles/cardTimeLine/CardLine";
 
 const Payment = () => {
   // const location = useLocation();
-  const [showPopup, setShowPopup] = useState(false);
+  // const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
   const BookingPersolnalTrainner = useRecoilValue(BookingPTPayment);
   const BookingClass = useRecoilValue(BookingClassPayment);
   const filterData = useRecoilValue(receiveMembership);
@@ -27,18 +29,24 @@ const Payment = () => {
   const TotalBill = filterData
     ? filterData.total_price - Number(getValueDiscount)
     : 0;
-  const showModalHandle = () => {
-    document.body.style.overflow = "hidden";
-    setShowPopup(true);
+  // const showModalHandle = () => {
+  //   document.body.style.overflow = "hidden";
+  //   setShowPopup(true);
+  // };
+  // const hiddenModalHandle = () => {
+  //   document.body.style.overflow = "auto";
+  //   return setShowPopup(false);
+  // };
+  const getReference = (data) => {
+    // showModalHandle();
+    if (!data) {
+      return;
+    }
+    navigate("/membership/Chi%20nhánh%20chính/payment/preferencepay", {
+      state: data,
+    });
   };
-  const hiddenModalHandle = () => {
-    document.body.style.overflow = "auto";
-    return setShowPopup(false);
-  };
-  const getReference = () => {
-    showModalHandle();
-  };
-  console.log(BookingPersolnalTrainner);
+  // console.log(BookingPersolnalTrainner);
   // const valueMembership = useRecoilValue(receiveMembership)
   return (
     <div className="mt-16">
@@ -71,7 +79,9 @@ const Payment = () => {
                 {filterData.gym_vouchers.length > 0 ? (
                   <button
                     className="text-blue-400 italic"
-                    onClick={getReference}
+                    onClick={() =>
+                      getReference(filterData?.gym_vouchers || null)
+                    }
                   >
                     xem thêm
                   </button>
@@ -107,7 +117,7 @@ const Payment = () => {
             bookingclass={BookingClass}
             total_price={TotalBill}
           />
-          {showPopup && (
+          {/* {showPopup && (
             <Popup onClose={hiddenModalHandle}>
               {filterData.gym_vouchers &&
                 filterData.gym_vouchers.map((e) => (
@@ -121,59 +131,9 @@ const Payment = () => {
                   />
                 ))}
             </Popup>
-          )}
+          )} */}
         </>
       )}
-      {/* {BookingClass && (
-        <>
-          <div className="m-4">
-            <p className="font-semibold">Đơn thanh toán</p>
-          </div>
-          <div className="m-4 card_payment">
-            <div className="flex justify-between">
-              <p>
-                Gói{" "}
-                <span className=" text-base">{BookingClass.category} : </span>
-              </p>
-              <p> {BookingClass.total_price ? BookingClass.total_price : 0}</p>
-            </div>
-            <div className="flex justify-between">
-              <p>Ưu đãi : </p>
-              <p>
-                {BookingClass.gym_vouchers
-                  ? BookingClass.gym_vouchers.length
-                  : 0}
-              </p>
-            </div>
-          </div>
-          <div className="m-4">
-            <div className="flex justify-between">
-              <p>Giảm giá : </p>
-              <p>
-                {BookingClass.gym_vouchers
-                  ? BookingClass.gym_vouchers.length
-                  : 0}
-              </p>
-            </div>
-            <div className="flex justify-between">
-              <p>Tổng tiền: </p>
-              <p>{BookingClass.total_price ? "trống" : 0}</p>
-            </div>
-          </div>
-          <p className="m-4 font-semibold">Phương thức thanh toán</p>
-          <div className="flex items-center m-4">
-            <img src={imageCash} width={50} alt="" />
-            <p>Thanh toán tại quầy</p>
-          </div>
-          <div className="flex items-center m-4">
-            <i className="fa fa-check" aria-hidden="true"></i>
-            <p className="ml-3">
-              Tôi đã đọc, hiểu, chấp nhận và đồng ý với điều khoản và điều kiện
-            </p>
-          </div>
-          <FooterPayment data={location.state} bookingclass={BookingClass} />
-        </>
-      )} */}
     </div>
   );
 };

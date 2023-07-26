@@ -21,8 +21,8 @@ const TimeTables = (props) => {
         className="w-full my-4"
       >
         {data.branch_rehearsal.map((e, index) => (
-          <>
-            <div key={index} className="flex justify-between m-4">
+          <div key={index}>
+            <div className="flex justify-between m-4">
               <p>Chi nhánh </p>
               <p className="text-blue-600 font-semibold"> {e.branch_name}</p>
             </div>
@@ -138,7 +138,7 @@ const TimeTables = (props) => {
               )}
             </div>
             <hr />
-          </>
+          </div>
         ))}
       </div>
     </div>

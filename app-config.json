@@ -13,8 +13,8 @@
     "selfControlLoading": false
   },
   "debug": false,
-  "listCSS": ["assets/index-609c52f2.css"],
-  "listSyncJS": ["assets/index.d6c71d43.module.js"],
+  "listCSS": ["assets/index-b755e18a.css"],
+  "listSyncJS": ["assets/index.5d9311ae.module.js"],
   "listAsyncJS": [],
   "template": {}
 }

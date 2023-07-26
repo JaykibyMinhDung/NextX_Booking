@@ -4,6 +4,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { useSetRecoilState } from "recoil";
 import { updatedDateClass } from "../../../../store/recoil/store";
+import { useCallback, useEffect, useState } from "react";
 
 const today = new Date();
 let day;
@@ -43,34 +44,54 @@ const monthNumber = [
   "11",
   "12",
 ];
+const dayFormat =
+  today.getDate() +
+  "/" +
+  monthNumber[today.getMonth()] +
+  "/" +
+  today.getFullYear();
 
 const HeaderClass = () => {
-  // const postDate = ""
-  const dayFormat =
-    today.getDate() +
-    "/" +
-    monthNumber[today.getMonth()] +
-    "/" +
-    today.getFullYear();
   const updatedDate = useSetRecoilState(updatedDateClass);
-  const postDateClass =
-    today.getFullYear() +
-    "-" +
-    monthNumber[today.getMonth()] +
-    "-" +
-    today.getDate();
+  const [changeDate, setChangDate] = useState(today.getDate());
+  const [dateScreen, setDateScreen] = useState(dayFormat);
+
+  const updateDateHandle = useCallback(
+    (oldDate) => {
+      const DayError = oldDate ? oldDate : today.getDate();
+      const postDateClass =
+        today.getFullYear() +
+        "-" +
+        monthNumber[today.getMonth()] +
+        "-" +
+        DayError;
+      const postDateShow =
+        oldDate +
+        "/" +
+        monthNumber[today.getMonth()] +
+        "/" +
+        today.getFullYear();
+      setDateScreen(oldDate ? postDateShow : dayFormat);
+      return updatedDate(postDateClass);
+    },
+    [updatedDate]
+  );
+
   const HandleChangeDateBefore = () => {
-    updatedDate(postDateClass);
+    if (changeDate > 1) {
+      setChangDate(changeDate - 1);
+      return updateDateHandle(changeDate);
+    }
   };
   const HandleChangeDateAfter = () => {
-    // const postDateClass =
-    //   today.getFullYear() +
-    //   "-" +
-    //   monthNumber[today.getMonth()] +
-    //   "-" +
-    //   today.getDate()
-    updatedDate(postDateClass);
+    if (changeDate < 31) {
+      setChangDate(changeDate + 1);
+      return updateDateHandle(changeDate);
+    }
   };
+  useEffect(() => {
+    updateDateHandle();
+  }, [updateDateHandle]);
   return (
     <div className="flex items-center justify-between mx-4">
       <span onClick={HandleChangeDateBefore}>
@@ -78,7 +99,8 @@ const HeaderClass = () => {
       </span>
       <div className="flex items-center">
         <p className="mr-3">
-          {day} {dayFormat}
+          {/* {day}  */}
+          {dateScreen ? dateScreen : dayFormat}
         </p>
         <span>
           <FaCalendarAlt />

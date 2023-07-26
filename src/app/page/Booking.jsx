@@ -1,5 +1,7 @@
 // import React from "react";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import { useQuery } from "react-query";
 import TitlePage from "../../styles/titlepage/TitlePage";
 import TimeLine from "../components/Schedule/TimeLine";
@@ -19,7 +21,7 @@ const Booking = () => {
   const today = new Date();
   const navigate = useNavigate();
   const CurrentHours = Number(today.getHours());
-  // const CurrentMinute = today.getMinutes();
+  const CurrentMinute = today.getMinutes();
   // const formatmonth = Number(today.getMonth()) + 1;
   // const CurrentDay =
   //   today.getFullYear() + "-" + formatmonth + "-" + today.getDate();
@@ -37,23 +39,40 @@ const Booking = () => {
   // );
   // let a = [];
   const SwitchHoursWorkout = (startDate, endDate) => {
-    setChangeBgColorStateSwitch(startDate);
-    const filterData = totalDataFormBooking.filter(
-      (e) =>
-        Number(e.start_time.slice(0, 2)) > startDate &&
-        Number(e.start_time.slice(0, 2)) < endDate
-    );
-    setStateHoursSwitch(filterData);
+    if (totalDataFormBooking.length && DateOptionBooking) {
+      setChangeBgColorStateSwitch(startDate);
+      const filterData = totalDataFormBooking.filter(
+        (e) =>
+          Number(e.start_time.slice(0, 2)) > startDate &&
+          Number(e.start_time.slice(0, 2)) < endDate
+      );
+      setStateHoursSwitch(filterData);
+    } else {
+      toast.error("Bạn nên điền đầy đủ thông tin trước khi chọn giờ bên dưới.");
+    }
   };
   // const totalDataFormBooking = (data2) => {
   // };
   const SubmitHandlePayment = (start_time, full_time) => {
     if (
-      Number(start_time.slice(0, 2)) < CurrentHours &&
+      Number(start_time.slice(0, 2)) <= CurrentHours &&
+      Number(start_time.slice(3, 5)) < CurrentMinute &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
         DateOptionBooking.slice(0, 2)
     ) {
-      return;
+      return toast.error(
+        "Đã quá thời gian đăng kí lịch tập, xin vui lòng chuyển sang lịch khác"
+      );
+    }
+    if (
+      Number(start_time.slice(0, 2)) <= CurrentHours &&
+      1 < CurrentMinute < 30 &&
+      today.toLocaleDateString("en-GB").slice(0, 2) ===
+        DateOptionBooking.slice(0, 2)
+    ) {
+      return toast.error(
+        "Đã quá thời gian đăng kí lịch tập, xin vui lòng chuyển sang lịch khác"
+      );
     }
     setChangeBgColorState(start_time);
     navigate("/booking/resgiterbooking", { state: full_time });
@@ -62,9 +81,21 @@ const Booking = () => {
     if (getFormBookingPT) {
       getBookingPTScheduleHours(getFormBookingPT);
     }
-  }, [totalDataFormBooking]);
+  }, [totalDataFormBooking, DateOptionBooking]);
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <TitlePage title={"Booking Gym PT"} />
       <TimeLine setForm={setTotalDataFormBooking} />
       <div
@@ -105,9 +136,14 @@ const Booking = () => {
             key={index}
             onClick={() => SubmitHandlePayment(e.start_time, e.date_time)}
             className={`w-16 ${
-              Number(e.start_time.slice(0, 2)) < CurrentHours &&
-              today.toLocaleDateString("en-GB").slice(0, 2) ===
-                DateOptionBooking.slice(0, 2)
+              (Number(e.start_time.slice(3, 5)) < CurrentMinute &&
+                Number(e.start_time.slice(0, 2)) <= CurrentHours &&
+                today.toLocaleDateString("en-GB").slice(0, 2) ===
+                  DateOptionBooking.slice(0, 2)) ||
+              (1 < CurrentMinute < 30 &&
+                Number(e.start_time.slice(0, 2)) <= CurrentHours &&
+                today.toLocaleDateString("en-GB").slice(0, 2) ===
+                  DateOptionBooking.slice(0, 2))
                 ? "bg-gray-400"
                 : changeBgColorState === e.start_time
                 ? "bg-red-400"
