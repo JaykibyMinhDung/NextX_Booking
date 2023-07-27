@@ -34,7 +34,7 @@ const ClassLoyal = (props) => {
         <div>
           <p>Bạn có chắc muốn hủy lịch đăng kí?</p>
           <button
-            className="text-green-500 mt-2"
+            className="text-red-500 mt-2"
             onClick={() => deleteBookingYoga(dataParents.id)}
           >
             {" "}

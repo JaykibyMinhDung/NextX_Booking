@@ -55,7 +55,7 @@ const Booking = () => {
   // };
   const SubmitHandlePayment = (start_time, full_time) => {
     if (
-      Number(start_time.slice(0, 2)) <= CurrentHours &&
+      Number(start_time.slice(0, 2)) < CurrentHours &&
       Number(start_time.slice(3, 5)) < CurrentMinute &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
         DateOptionBooking.slice(0, 2)
@@ -65,8 +65,9 @@ const Booking = () => {
       );
     }
     if (
-      Number(start_time.slice(0, 2)) <= CurrentHours &&
-      1 < CurrentMinute < 30 &&
+      Number(start_time.slice(0, 2)) < CurrentHours &&
+      1 < CurrentMinute &&
+      CurrentMinute < 30 &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
         DateOptionBooking.slice(0, 2)
     ) {
@@ -137,11 +138,12 @@ const Booking = () => {
             onClick={() => SubmitHandlePayment(e.start_time, e.date_time)}
             className={`w-16 ${
               (Number(e.start_time.slice(3, 5)) < CurrentMinute &&
-                Number(e.start_time.slice(0, 2)) <= CurrentHours &&
+                Number(e.start_time.slice(0, 2)) < CurrentHours &&
                 today.toLocaleDateString("en-GB").slice(0, 2) ===
                   DateOptionBooking.slice(0, 2)) ||
-              (1 < CurrentMinute < 30 &&
-                Number(e.start_time.slice(0, 2)) <= CurrentHours &&
+              (1 < CurrentMinute &&
+                CurrentMinute < 30 &&
+                Number(e.start_time.slice(0, 2)) < CurrentHours &&
                 today.toLocaleDateString("en-GB").slice(0, 2) ===
                   DateOptionBooking.slice(0, 2))
                 ? "bg-gray-400"
