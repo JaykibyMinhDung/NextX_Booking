@@ -8,19 +8,26 @@
   margin-right: 1rem;
   text-align: center;
   font-size: small;
+  overflow-wrap: break-word;
 }
 .navbar__container div i {
   font-size: x-large;
 }
 .navbar__container div p {
+  width: 100%;
   font-weight: 400;
-  margin-right: 0.6rem;
+  /* margin-right: 0.6rem; */
   /* line-height: 2; */
+}
+.navbar__group {
+  width: 60px;
+  height: 60px;
 }
 .navbar__group div {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* flex-direction: column; */
   text-align: left;
   /* background-color: rgb(108 255 107); */
   color: rgb(255, 255, 255);
@@ -30,8 +37,8 @@
     rgba(255, 255, 255, 0.541),
     rgba(194, 164, 164, 0.384)
   );
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   margin-bottom: 8px;
   border-radius: 50%;
 }
@@ -41,7 +48,7 @@
   .navbar__container {
     grid-template-rows: repeat(1, minmax(0, 1fr));
     grid-template-columns: repeat(8, minmax(0, 1fr));
-    row-gap: 3rem;
+    row-gap: 4rem;
     column-gap: 5rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -54,7 +61,7 @@
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 3rem;
+    row-gap: 4rem;
     column-gap: 14rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -67,7 +74,7 @@
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 3rem;
+    row-gap: 4rem;
     column-gap: 11rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -79,7 +86,7 @@
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 3rem;
+    row-gap: 4rem;
     column-gap: 8rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -91,17 +98,32 @@
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 3rem;
+    row-gap: 4rem;
     column-gap: 4rem;
     font-size: medium;
   }
 }
 
-/* (min-width: 370) and */
-@media (max-width: 414px) {
+@media (min-width: 540px) {
   .navbar__group div {
-    width: 90%;
-    height: 90%;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .navbar__container {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 4rem;
+    column-gap: 8rem;
+    margin-left: 3.2rem !important;
+    margin-right: 3.5rem !important;
+  }
+}
+
+/* (min-width: 370) and */
+@media only screen and (max-width: 400px) and (min-height: 820px) {
+  .navbar__group div {
+    width: 100% !important;
+    height: 100% !important;
   }
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
@@ -113,10 +135,39 @@
   }
 }
 
-@media (max-width: 414px) and (max-height: 851px) {
+@media only screen and (max-width: 414px) {
+  /* .navbar__group {
+    width: 70px;
+    height: 70px;
+  } */
   .navbar__group div {
-    width: 90%;
-    height: 86%;
+    width: 100%;
+    height: 100%;
+  }
+  .navbar__container div p {
+    width: 100%;
+    text-align: center;
+  }
+  .navbar__container {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 4rem;
+    column-gap: 1.9rem;
+    margin: 1rem;
+    font-size: small;
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-height: 851px) {
+  .navbar__container div p {
+    width: 100%;
+    font-weight: 400;
+    margin-right: 0.2rem;
+    /* line-height: 2; */
+  }
+  .navbar__group div {
+    width: 100%;
+    height: 100%;
   }
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
@@ -130,20 +181,42 @@
   }
 }
 
-/* (min-width: 300px) and */
-@media (max-width: 375px) {
+@media (max-width: 353px) and (min-height: 750px) {
   .navbar__group div {
-    width: 75%;
-    height: 75%;
+    width: 100% !important;
+    height: 100% !important;
   }
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 3.2rem;
+    row-gap: 4.5rem;
     column-gap: 1rem;
     margin: 1rem;
     margin-left: 1.2rem;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
+    font-size: small;
+  }
+  .navbar__container div p {
+    margin-right: 1rem;
+    /* line-height: 2; */
+  }
+}
+
+/* (min-width: 300px) and */
+/* iphone 6, realme q3s, iphone 11 pro, se, galaxy s8+*/
+@media only screen and (max-width: 375px) {
+  .navbar__group div {
+    width: 100%;
+    height: 100%;
+  }
+  .navbar__container {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 4rem;
+    column-gap: 1rem;
+    margin: 1rem;
+    margin-left: 1.2rem;
+    margin-right: 1rem;
     font-size: small;
   }
   .navbar__container div p {
@@ -157,7 +230,7 @@
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 3rem;
+    row-gap: 4rem;
     column-gap: 1.5rem;
     margin: 1rem;
     font-size: x-small;
@@ -166,13 +239,13 @@
 
 @media (max-width: 280px) {
   .navbar__group div {
-    width: 100%;
-    height: 60%;
+    width: 80%;
+    height: 80%;
   }
   .navbar__container {
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 3rem;
+    row-gap: 4rem;
     column-gap: 1.5rem;
     margin: 1rem;
     font-size: x-small;

@@ -18,12 +18,12 @@ const History = () => {
   if (isError) {
     <NotFound />;
   }
-  // console.log(data);
+  console.log(data);
   return (
     <div>
       <TitlePage title={"Lịch sử"} />
       <div className="mt-16">
-        {data ? (
+        {data.length ? (
           data.map((e) => <CardHistory key={e.id} data={e} />)
         ) : (
           <img

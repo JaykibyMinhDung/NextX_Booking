@@ -42,6 +42,7 @@ const Footer = () => {
   const navigate = useNavigate();
   return (
     <footer>
+      {/* <img src={Calender} alt="" width={30} /> */}
       <div className="footer__fixed">
         <div className="footer__navlink">
           <div className="footer__center--booking">
@@ -49,7 +50,6 @@ const Footer = () => {
               onClick={() => navigate("/booking")}
               className="footer__icon--boking"
             >
-              {/* <img src={Calender} alt="" width={30} /> */}
               <FaCalendarCheck />
             </div>
           </div>
@@ -67,6 +67,7 @@ const Footer = () => {
             </div>
           ))}
         </div>
+        {/* <NavigationBottom /> */}
       </div>
     </footer>
   );

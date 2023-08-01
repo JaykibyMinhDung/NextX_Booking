@@ -41,7 +41,7 @@ const Advertising = () => {
                       alt=""
                     />
                     <span className="totalImage">
-                      {index + 1 + "/" + data.length}
+                      {/* {index + 1 + "/" + data.length} */}
                     </span>
                   </div>
                 ))

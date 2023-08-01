@@ -15,14 +15,23 @@ const Setting = () => {
           src={User.picture ? User.picture : defaultImg}
           alt=""
         />
-        <div>
-          <div className="flex items-center">
+        <div
+        // className="w-56"
+        >
+          <div className="flex items-center break-words overflow-x-hidden">
             <FaIdCard />
             <p className="font-bold ml-4">{User.name}</p>
           </div>
           <div className="flex items-center">
             <FaEnvelope />
-            <p className="ml-4">
+            <p
+              className="ml-4 "
+              style={{
+                msTextOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+              }}
+            >
               {User.email ? User.email : <em>Chưa có email</em>}
             </p>
           </div>

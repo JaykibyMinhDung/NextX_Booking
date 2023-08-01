@@ -53,7 +53,9 @@ const Booking = () => {
   };
   // const totalDataFormBooking = (data2) => {
   // };
-  const SubmitHandlePayment = (start_time, full_time) => {
+  const SubmitHandlePayment = (start_time, end_time, full_time) => {
+    console.log(end_time);
+    // &&  Number(start_time.slice(0, 2)) === CurrentHours
     if (
       Number(start_time.slice(0, 2)) < CurrentHours &&
       Number(start_time.slice(3, 5)) < CurrentMinute &&
@@ -65,9 +67,17 @@ const Booking = () => {
       );
     }
     if (
+      Number(start_time.slice(0, 2)) == CurrentHours &&
+      Number(end_time.slice(3, 5)) > CurrentMinute
+    ) {
+      return toast.error(
+        "Đã quá thời gian đăng kí lịch tập, xin vui lòng chuyển sang lịch khác"
+      );
+    }
+    if (
       Number(start_time.slice(0, 2)) < CurrentHours &&
       1 < CurrentMinute &&
-      CurrentMinute < 30 &&
+      CurrentMinute < 31 &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
         DateOptionBooking.slice(0, 2)
     ) {
@@ -77,6 +87,33 @@ const Booking = () => {
     }
     setChangeBgColorState(start_time);
     navigate("/booking/resgiterbooking", { state: full_time });
+  };
+  const controlerTimeBooking = (start_time, end_time) => {
+    if (
+      Number(start_time.slice(3, 5)) < CurrentMinute &&
+      Number(start_time.slice(0, 2)) < CurrentHours &&
+      today.toLocaleDateString("en-GB").slice(0, 2) ===
+        DateOptionBooking.slice(0, 2)
+    ) {
+      return true;
+    }
+    if (
+      1 < CurrentMinute &&
+      CurrentMinute < 31 &&
+      Number(start_time.slice(0, 2)) < CurrentHours &&
+      today.toLocaleDateString("en-GB").slice(0, 2) ===
+        DateOptionBooking.slice(0, 2)
+    ) {
+      return true;
+    }
+    if (
+      Number(start_time.slice(0, 2)) == CurrentHours &&
+      Number(end_time.slice(3, 5)) >= CurrentMinute
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
   useEffect(() => {
     if (getFormBookingPT) {
@@ -135,17 +172,11 @@ const Booking = () => {
         {stateHoursSwitch.map((e, index) => (
           <div
             key={index}
-            onClick={() => SubmitHandlePayment(e.start_time, e.date_time)}
+            onClick={() =>
+              SubmitHandlePayment(e.start_time, e.end_time, e.date_time)
+            }
             className={`w-16 ${
-              (Number(e.start_time.slice(3, 5)) < CurrentMinute &&
-                Number(e.start_time.slice(0, 2)) < CurrentHours &&
-                today.toLocaleDateString("en-GB").slice(0, 2) ===
-                  DateOptionBooking.slice(0, 2)) ||
-              (1 < CurrentMinute &&
-                CurrentMinute < 30 &&
-                Number(e.start_time.slice(0, 2)) < CurrentHours &&
-                today.toLocaleDateString("en-GB").slice(0, 2) ===
-                  DateOptionBooking.slice(0, 2))
+              controlerTimeBooking(e.start_time, e.end_time, e.date_time)
                 ? "bg-gray-400"
                 : changeBgColorState === e.start_time
                 ? "bg-red-400"

@@ -175,7 +175,7 @@ const BranchMember = () => {
             <p className={filterData.length === 1 ? "text-3xl" : "font-bold"}>
               {e.name}
             </p>
-            <div>
+            <div className=" relative w-80 mb-16">
               <p
                 className={
                   filterData.length === 1 && e.total_price < 1000000
