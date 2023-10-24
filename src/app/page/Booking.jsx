@@ -54,13 +54,12 @@ const Booking = () => {
   // const totalDataFormBooking = (data2) => {
   // };
   const SubmitHandlePayment = (start_time, end_time, full_time) => {
-    console.log(end_time);
     // &&  Number(start_time.slice(0, 2)) === CurrentHours
     if (
       Number(start_time.slice(0, 2)) < CurrentHours &&
       Number(start_time.slice(3, 5)) < CurrentMinute &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
-        DateOptionBooking.slice(0, 2)
+      DateOptionBooking.slice(0, 2)
     ) {
       return toast.error(
         "Đã quá thời gian đăng kí lịch tập, xin vui lòng chuyển sang lịch khác"
@@ -79,7 +78,16 @@ const Booking = () => {
       1 < CurrentMinute &&
       CurrentMinute < 31 &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
-        DateOptionBooking.slice(0, 2)
+      DateOptionBooking.slice(0, 2)
+    ) {
+      return toast.error(
+        "Đã quá thời gian đăng kí lịch tập, xin vui lòng chuyển sang lịch khác"
+      );
+    }
+    if (
+      // Mếu giờ hiện tại bằng nhau và phút của hiện tại lớn hơn 0 nhỏ hơn 40 thì sẽ khóa cả 2 lịch
+      Number(start_time.slice(0, 2)) == CurrentHours &&
+      0 < CurrentMinute && 30 < CurrentMinute
     ) {
       return toast.error(
         "Đã quá thời gian đăng kí lịch tập, xin vui lòng chuyển sang lịch khác"
@@ -89,11 +97,12 @@ const Booking = () => {
     navigate("/booking/resgiterbooking", { state: full_time });
   };
   const controlerTimeBooking = (start_time, end_time) => {
+    // Cái này đang khống chế quá giờ tại thời điểm hiện tại
     if (
       Number(start_time.slice(3, 5)) < CurrentMinute &&
       Number(start_time.slice(0, 2)) < CurrentHours &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
-        DateOptionBooking.slice(0, 2)
+      DateOptionBooking.slice(0, 2)
     ) {
       return true;
     }
@@ -102,16 +111,27 @@ const Booking = () => {
       CurrentMinute < 31 &&
       Number(start_time.slice(0, 2)) < CurrentHours &&
       today.toLocaleDateString("en-GB").slice(0, 2) ===
-        DateOptionBooking.slice(0, 2)
+      DateOptionBooking.slice(0, 2)
     ) {
       return true;
     }
+    // Cái này đang khống chế việc quá giờ đúng, chưa có 30 phút
     if (
+      // Nếu giờ == giờ curent và phút hiện tại nhỏ hơn phút 30 
       Number(start_time.slice(0, 2)) == CurrentHours &&
       Number(end_time.slice(3, 5)) >= CurrentMinute
     ) {
       return true;
-    } else {
+    }
+    // Cái này đang khống chế việc quá phút 30 và quá cả phút thứ 00 của thời gian trước
+    if (
+      // Mếu giờ hiện tại bằng nhau và phút của hiện tại lớn hơn 0 nhỏ hơn 40 thì sẽ khóa cả 2 lịch
+      Number(start_time.slice(0, 2)) == CurrentHours &&
+      0 < CurrentMinute && 30 < CurrentMinute
+    ) {
+      return true;
+    }
+    else {
       return false;
     }
   };
@@ -141,29 +161,26 @@ const Booking = () => {
         className={`flex justify-between mx-5 mt-3 bg-[#3b9254ff] rounded-md`}
       >
         <div
-          className={` ${
-            changeBgColorStateSwitch === 0
-              ? "flex items-center text-white rounded-md ml-2 my-1 p-1 bg-green-800"
-              : "text-white p-1 my-1 ml-2"
-          }`}
+          className={` ${changeBgColorStateSwitch === 0
+            ? "flex items-center text-white rounded-md ml-2 my-1 p-1 bg-green-800"
+            : "text-white p-1 my-1 ml-2"
+            }`}
         >
           <button onClick={() => SwitchHoursWorkout(0, 12)}>Buổi sáng</button>
         </div>
         <div
-          className={` ${
-            changeBgColorStateSwitch === 11
-              ? " flex items-center text-white rounded-md p-1 my-1 bg-green-800"
-              : "text-white p-1 my-1"
-          }`}
+          className={` ${changeBgColorStateSwitch === 11
+            ? " flex items-center text-white rounded-md p-1 my-1 bg-green-800"
+            : "text-white p-1 my-1"
+            }`}
         >
           <button onClick={() => SwitchHoursWorkout(11, 18)}>Buổi chiều</button>
         </div>
         <div
-          className={` ${
-            changeBgColorStateSwitch === 17
-              ? "flex items-center text-white rounded-md mr-2 p-1 my-1 bg-green-800"
-              : "text-white p-1 my-1 mr-2"
-          }`}
+          className={` ${changeBgColorStateSwitch === 17
+            ? "flex items-center text-white rounded-md mr-2 p-1 my-1 bg-green-800"
+            : "text-white p-1 my-1 mr-2"
+            }`}
         >
           <button onClick={() => SwitchHoursWorkout(17, 23)}>Buổi tối</button>
         </div>
@@ -175,13 +192,12 @@ const Booking = () => {
             onClick={() =>
               SubmitHandlePayment(e.start_time, e.end_time, e.date_time)
             }
-            className={`w-16 ${
-              controlerTimeBooking(e.start_time, e.end_time, e.date_time)
-                ? "bg-gray-400"
-                : changeBgColorState === e.start_time
+            className={`w-16 ${controlerTimeBooking(e.start_time, e.end_time, e.date_time)
+              ? "bg-gray-400"
+              : changeBgColorState === e.start_time
                 ? "bg-red-400"
                 : "bg-[#3b9254ff]"
-            } text-white text-center m-1 rounded-lg p-1`}
+              } text-white text-center m-1 rounded-lg p-1`}
           >
             <p>{e.start_time}</p>
             {/* <p>{"hello"}</p> */}

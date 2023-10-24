@@ -91,7 +91,7 @@ function App() {
       setActiveErr(true);
       return null;
     }
-    values.tenant_code = "demox";
+    values.tenant_code = "getfit";
     getToken(values)
       .then((results) => {
         // return localStorage.setItem("tenant_packs", JSON.stringify(results));

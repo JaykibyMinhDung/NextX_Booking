@@ -109,3 +109,8 @@ export const DeleteAccountUser = atom({
   key: "Delete",
   default: "",
 });
+
+export const SwitchFaceId = atom({
+  key: "FaceId",
+  default: false,
+});

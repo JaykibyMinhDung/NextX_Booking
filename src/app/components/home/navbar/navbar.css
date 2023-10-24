@@ -8,7 +8,7 @@
   margin-right: 1rem;
   text-align: center;
   font-size: small;
-  overflow-wrap: break-word;
+  /* overflow-wrap: break-word; */
 }
 .navbar__container div i {
   font-size: x-large;
@@ -221,6 +221,8 @@
   }
   .navbar__container div p {
     margin-right: 1rem;
+    width: 90%;
+    text-align: center;
     /* line-height: 2; */
   }
 }
@@ -237,7 +239,7 @@
   }
 }
 
-@media (max-width: 280px) {
+@media only screen and (max-width: 290px) {
   .navbar__group div {
     width: 80%;
     height: 80%;
@@ -249,6 +251,10 @@
     column-gap: 1.5rem;
     margin: 1rem;
     font-size: x-small;
+  }
+  .navbar__container div p {
+    width: 77%;
+    /* line-height: 2; */
   }
 }
 

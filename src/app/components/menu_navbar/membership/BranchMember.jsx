@@ -37,8 +37,8 @@ const BranchMember = () => {
       order_type: MembershipBookingPersonaltrainer
         ? "1"
         : MembershipBookingClass.category
-        ? "2"
-        : null,
+          ? "2"
+          : null,
       class_id: MembershipBookingClass ? MembershipBookingClass.class_id : null,
       employee_id: MembershipBookingPersonaltrainer
         ? MembershipBookingPersonaltrainer.code
@@ -56,15 +56,15 @@ const BranchMember = () => {
   const filterData =
     MembershipBookingClass || MembershipBookingPersonaltrainer
       ? data.data.filter(
-          (e) =>
-            e.branches[0].name === MembershipBookingClass.branch_name ||
-            MembershipBookingPersonaltrainer.branch_name
-        )
+        (e) =>
+          e.branches[0].name === MembershipBookingClass.branch_name ||
+          MembershipBookingPersonaltrainer.branch_name
+      )
       : allMembershipPackage
-      ? allMembershipPackage.filter(
+        ? allMembershipPackage.filter(
           (e) => e.branches[0].name === nameBranchMembership
         )
-      : data.data.filter((e) => e.branches[0].name === nameBranchMembership); // Lấy tất cả các gói cùng nhánh
+        : data.data.filter((e) => e.branches[0].name === nameBranchMembership); // Lấy tất cả các gói cùng nhánh
   const items = filterData.shift(); // Lọc cái đầu
 
   const CartHandle = (nameMembership) => {
@@ -72,10 +72,9 @@ const BranchMember = () => {
     // console.log(nameMembership);
     MembershipResgister(dataMembership); // Truyền dữ liệu xuống payment
     navigate(
-      `/membership/${
-        allMembershipPackage
-          ? dataMembership.branches[0].name
-          : MembershipBookingClass.branch_name
+      `/membership/${allMembershipPackage
+        ? dataMembership.branches[0].name
+        : MembershipBookingClass.branch_name
           ? MembershipBookingClass.branch_name
           : MembershipBookingPersonaltrainer.branch_name
       }/payment`
@@ -96,21 +95,20 @@ const BranchMember = () => {
   return (
     <div className="bg-gray-100 h-screen">
       <TitlePage
-        title={`${
-          allMembershipPackage
-            ? nameBranchMembership
-            : MembershipBookingClass.branch_name
+        title={`${allMembershipPackage
+          ? nameBranchMembership
+          : MembershipBookingClass.branch_name
             ? MembershipBookingClass.branch_name
             : MembershipBookingPersonaltrainer.branch_name
-        }`}
+          }`}
         icon={null}
         test={filterData}
         navigateBack={
           MembershipBookingClass
             ? `/class`
             : MembershipBookingPersonaltrainer
-            ? `/personaltrainer`
-            : `/membership`
+              ? `/personaltrainer`
+              : `/membership`
         }
       />
       <div className="text-center font-bold mb-4 mt-16 text-base">
@@ -133,7 +131,9 @@ const BranchMember = () => {
                 className={
                   items.total_price < 1000000
                     ? "branch__membership--unit6"
-                    : "branch__membership--unit"
+                    : items.total_price > 10000000
+                      ? "branch__membership--unit9"
+                      : "branch__membership--unit"
                 }
               >
                 VNĐ
@@ -175,14 +175,14 @@ const BranchMember = () => {
             <p className={filterData.length === 1 ? "text-3xl" : "font-bold"}>
               {e.name}
             </p>
-            <div className=" relative w-80 mb-16">
+            <div className=" relative w-100% mb-16">
               <p
                 className={
                   filterData.length === 1 && e.total_price < 1000000
                     ? "branch__membership--unitnormalMin6"
                     : filterData.length === 1
-                    ? "branch__membership--unitnormalMin"
-                    : "branch__membership--unitnormal"
+                      ? "branch__membership--unitnormalMin"
+                      : "branch__membership--unitnormal"
                 }
               >
                 VNĐ
@@ -193,7 +193,7 @@ const BranchMember = () => {
                     ? "mb-10 font-semibold text-green-500 branch__priceMin"
                     : "mb-10 font-semibold text-green-500 branch__price"
                 }
-                // style={{ fontSize: "24px" }}
+              // style={{ fontSize: "24px" }}
               >
                 {e.total_price.toLocaleString()}
               </p>

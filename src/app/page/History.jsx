@@ -18,7 +18,7 @@ const History = () => {
   if (isError) {
     <NotFound />;
   }
-  console.log(data);
+  // console.log(data);
   return (
     <div>
       <TitlePage title={"Lịch sử"} />

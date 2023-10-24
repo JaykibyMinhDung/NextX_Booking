@@ -1,11 +1,11 @@
 import React from // , { useState }
-"react";
+  "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./feature.css";
 import { useNavigate } from "react-router-dom";
 import {
-  // useRecoilValue,
+  useRecoilValue,
   useSetRecoilState,
 } from "recoil";
 
@@ -20,6 +20,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
 import ButtonChange from "../../../../styles/ButtonChange/ButtonChange";
 import { isLogin } from "../../../../store/recoil/authenticate";
+import { SwitchFaceId } from "../../../../store/recoil/store";
 
 // import PopupNotification from "../../../../styles/modalnotification/ModalNotification";
 // import SignOutWeb from "./logout/logout";
@@ -43,16 +44,16 @@ const arrListFeature = [
     text: "Lịch sử giao dịch",
     isExpand: true,
   },
-  {
-    id: "3a",
-    icon: <FaExpand />,
-    text: "Face ID",
-    isExpand: false,
-  },
+  // {
+  //   id: "3a",
+  //   icon: <FaExpand />,
+  //   text: "Face ID",
+  //   isExpand: false,
+  // },
   {
     id: "4a",
     icon: <FaLanguage />,
-    text: "Ngôn ngữ",
+    text: "Night mode",
     isExpand: false,
   },
   {
@@ -88,13 +89,14 @@ const Feature = () => {
   // const [showPopUp, setShowPopUp] = useState(null);
   // const [ContentModal, setContentModal] = useState(null);
   const setStateGetOut = useSetRecoilState(isLogin);
+  const receiveFaceId = useRecoilValue(SwitchFaceId)
   // const getStateDeleteAccount = useRecoilValue(DeleteAccountUser);
-  const closeModalHandle = () => {
-    // setmodalPopup(null);
-  };
-  const closePopupHandle = () => {
-    // setShowPopUp(null);
-  };
+  // const closeModalHandle = () => {
+  //   // setmodalPopup(null);
+  // };
+  // const closePopupHandle = () => {
+  //   // setShowPopUp(null);
+  // };
   const LogOutHandle = () => {
     setStateGetOut(null);
     localStorage.removeItem("tenant_packs");
@@ -114,6 +116,24 @@ const Feature = () => {
           </button>
         </div>
       ));
+    }
+
+    if (receiveFaceId === "Night mode") {
+      console.log(receiveFaceId)
+      return toast.error(
+        "Chức năng này hiện chỉ có bên app. Hãy tải app để sử dụng tối đa dịch vụ bên mình nhé!",
+        {
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
+          },
+          iconTheme: {
+            primary: "#713200",
+            secondary: "#FFFAEE",
+          },
+        }
+      );
     }
     if (text === "Lịch sử checkin") {
       return navigate("/account/checkinpt");
@@ -197,7 +217,7 @@ const Feature = () => {
                 {e.text}
               </h3>
             </div>
-            {e.isExpand ? <FaAngleRight /> : <ButtonChange />}
+            {e.isExpand ? <FaAngleRight /> : <ButtonChange title={e.text} />}
           </div>
           <hr />
         </div>
